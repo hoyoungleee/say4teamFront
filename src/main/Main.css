@@ -1,0 +1,178 @@
+.main-custom {
+  width: 100vw;
+}
+
+.mainsecondtitle {
+  height: 90px;
+  text-align: center;
+  color: black;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 110px;
+  border-top: 1px solid black;
+}
+
+.fourmain {
+  border-top: 1.5px solid black;
+  border-bottom: 1px solid black;
+}
+.fourmaintittle {
+  height: 20px;
+  color: black;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 20px;
+}
+.foursertittle {
+  color: #a3a3a3;
+  text-align: center;
+  line-height: 3px;
+  height: 20px;
+}
+.fivemain {
+  display: flex;
+  width: 100vw;
+}
+
+.fivesertwo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.fiveserone {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.sixmain {
+  border-top: 1px solid black;
+  width: 100vw;
+}
+
+.sixmaintittle {
+  color: black;
+  text-align: center;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.sixmainser {
+  color: #8f8f8f;
+  text-align: center;
+  line-height: 5px;
+  height: 5px;
+}
+
+.sixmainsersecond {
+  color: #8f8f8f;
+  text-align: center;
+  line-height: 5px;
+  height: 5px;
+}
+
+.sevenbigmain {
+  border-top: 1px solid black;
+  width: 100vw;
+}
+.sevenmain {
+  object-fit: cover;
+  width: 100vw;
+}
+
+.fivesertwo .item img {
+  width: 25vw;
+  height: 25vw;
+  object-fit: cover;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: black;
+  border: 0.1px solid black;
+}
+
+.fivetext {
+  line-height: 10px;
+  font-size: 15px;
+  padding-top: 10px;
+}
+
+.seveneighttitle {
+    margin-top: 100px;
+    width: 100vw;
+}
+
+.seventittle {
+    color: black;
+    font-weight: 600;
+    text-indent: 20px;
+    letter-spacing: -1px;
+    font-size: 30px;
+}
+
+.eightmain {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 20px;
+    gap: 20px;
+}
+
+.eighttext {
+    color: black;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.eightmain > div > img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.ninemain{
+    display: flex;
+    justify-content: center;
+}
+
+.ninebutton {
+    background-color: white;
+    margin-top: 200px;
+    font-weight: 300;
+    color: black;
+    border: 1px solid black;
+    border-radius: 0px;
+    text-align: center;
+    width: 570px;
+}
+
+.ninebutton:hover {
+    color: white;
+    background-color: black;
+}
+
+.ten {
+    margin-top: 80px;
+}
+
+.tenimg {
+    display: flex;
+    justify-content: center;
+}
+
+.ten > .tenimg > img {
+    width: 750px;
+    height: auto;
+    margin-bottom: 21px;
+}
+
+.tentext{
+    color: black;
+    line-height: 6px;
+    text-align: center;
+    font-weight: 450;
+}

@@ -1,0 +1,127 @@
+@font-face {
+    font-family: 'Cafe24Lovingu';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Lovingu.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.topheader {
+  background-color: #194d28;
+  height: 40px;
+  line-height: 40px;
+}
+
+.topheadertitle {
+  text-align: center;
+}
+
+.custom-header {
+  text-align: center;
+  background-color: #f4f4f4;
+  position: relative;
+  overflow: hidden; /* 텍스트가 넘치는 부분은 보이지 않도록 */
+}
+
+.marquee-wrapper {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  gap: 200px;
+  background-color: white;
+  border-bottom: 1px solid black;
+}
+
+.marquee {
+  display: block;
+  white-space: nowrap;
+  animation: marquee 10s linear infinite;
+}
+
+.marquee span {
+  font-size: 12px;
+  color: black;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%); /* 처음에는 화면 오른쪽 끝에 배치 */
+  }
+  100% {
+    transform: translateX(-100%); /* 끝에 도달하면 화면 왼쪽 끝으로 이동 */
+  }
+}
+
+/* .nav {
+  display: flex;
+  position: sticky;
+  top: 0px;
+  border-bottom: 1px solid black;
+} */
+
+.nav {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    border-bottom: 1px solid black;
+    height: 60px;
+  }
+  
+
+.navone {
+  display: flex;
+  color: black;
+  font-size: 15px;
+  gap: 30px;
+  margin-left: 50px;
+  align-items: center;
+}
+
+.navtwo {
+  text-align: center;
+  color: black;
+  font-size: 50px;
+  font-family: 'Cafe24Lovingu', sans-serif;
+  margin: 0px auto;
+  position: relative;
+  bottom: 55px;
+}
+
+.navthree {
+  display: flex;
+  color: black;
+  font-size: 15px;
+  gap: 30px;
+  margin-right: 50px;
+  padding-bottom: 0;
+  align-items: center;
+}
+
+
+.comp:hover::before,
+.arch:hover::before,
+.shop:hover::before,
+.stor:hover::before,
+.lang:hover::before,
+.cont:hover::before,
+.cart:hover::before,
+.logn:hover::before {
+  content: '🔴';
+  font-size: 0.6rem;
+  margin-right: 0.2rem;
+  position: relative;
+  bottom: 2px;
+}
+
+.comp:hover,
+.arch:hover,
+.shop:hover,
+.stor:hover,
+.lang:hover,
+.cont:hover,
+.cart:hover,
+.logn:hover{
+    font-weight: 700;
+    cursor: pointer;
+}

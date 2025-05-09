@@ -1,0 +1,108 @@
+.footerevery {
+  border-top: 1px solid black;
+  width: 100vw;
+  height: 200px;
+  margin-top: 200px;
+}
+
+.topblocks {
+  display: flex;
+  position: relative;
+  bottom: 0px;
+}
+
+.topone {
+  margin-left: 5px;
+}
+
+.one {
+  margin-right: 20px;
+}
+
+.footertitle {
+  font-weight: bold;
+  font-size: 1rem;
+  text-indent: 10px;
+  color: black;
+}
+
+.topbutton {
+  color: black;
+  background-color: white;
+  border-radius: 0px;
+  width: 400px;
+  margin-left: 10px;
+  border: 1px solid black;
+}
+
+.topbutton:hover {
+  color: white;
+  background-color: black;
+}
+
+.footerpage {
+  font-size: 13.5px;
+  text-indent: 10px;
+  line-height: 5px;
+  box-sizing: border-box;
+  color: black;
+}
+
+.bottomblocks {
+  display: flex;
+  text-align: right;
+  padding-right: 40px;
+  position: absolute;
+  right: 10px;
+}
+
+.secondbottonpage {
+    color: black;
+    font-size: 14px;
+}
+
+.firstbottonpage {
+    color: black;
+    display:inline-flex;
+}
+
+.companynum {
+    font-weight: 600;
+    color: black;
+}
+
+.maillink {
+    color: #1B72E7;
+}
+
+.maillink:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.icons {
+    margin: 0 40px;
+}
+
+.instagramicon {
+    margin-right: 25px;
+}
+
+
+.agrees {
+    font-weight: 500;
+}
+
+.agree {
+    margin-right: 15px;
+}
+
+.company {
+    line-height: 3px;
+}
+
+
+
+
+
+
