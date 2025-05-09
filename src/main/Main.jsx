@@ -1,3 +1,4 @@
+// main 화면입니다.
 import React from 'react';
 import './Main.css';
 import TopSlider from './TopSlider';
