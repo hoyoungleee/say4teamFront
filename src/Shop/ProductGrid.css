@@ -1,7 +1,8 @@
 .ProductListHeader {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* 4개의 컬럼으로 고정 */
+  grid-gap: 16px; /* 그리드 항목 간격 */
   grid-auto-rows: 1fr;
 }
 
@@ -34,50 +35,55 @@
   font-size: 0.67rem;
 }
 
-.box2 {
-  outline: 1px solid black;
-  grid-column: 1/2;
-  grid-row: 2/3;
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4개의 컬럼으로 고정 */
+  grid-gap: 16px;
+  padding: 20px;
+  color: black;
 }
 
-.box3 {
-  outline: 1px solid black;
-  grid-column: 2/3;
-  grid-row: 2/3;
+.product-card {
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
 }
 
-.box4 {
-  outline: 1px solid black;
-  grid-column: 3/4;
-  grid-row: 2/3;
+.product-card:hover {
+  transform: translateY(-5px);
 }
 
-.box5 {
-  outline: 1px solid black;
-  grid-column-end: 5;
-  grid-row: 2/3;
+.image-wrapper {
+  height: 200px;
+  overflow: hidden;
 }
 
-.box6 {
-    outline: 1px solid black;
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.box7 {
-    outline: 1px solid black;
+.product-details {
+  text-align: center;
+  padding: 10px 0;
 }
 
-.box8 {
-    outline: 1px solid black;
+.product-name {
+  font-size: 1rem;
+  font-weight: bold;
 }
 
-.box9{
-    outline: 1px solid black;
+.product-price {
+  font-size: 0.9rem;
+  color: #555;
 }
 
-.box10 {
-    outline: 1px solid black;
-}
-
-.box11 {
-    outline: 1px solid black;
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.5rem;
+  color: #008bcc;
 }

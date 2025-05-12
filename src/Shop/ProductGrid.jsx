@@ -1,80 +1,91 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import './ProductGrid.css';
 
 const ProductGrid = () => {
-  const [products, setProducts] = useState([]); // 상품 상태 관리
-  const [loading, setLoading] = useState(false); // 로딩 상태 관리
-  const [page, setPage] = useState(1); // 페이지 번호 관리 (1페이지부터 시작)
+  const [products, setProducts] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const observer = useRef();
 
-  // 상품 데이터 받아오기
   const fetchProducts = useCallback(async () => {
-    setLoading(true); // 데이터를 불러오기 전에 로딩 상태 설정
+    if (loading || !hasMore) return;
+
+    setLoading(true);
     try {
-      const response = await axios.get(`/api/products?page=${page}`); // 백엔드 API URL에 페이지 번호를 추가
-      setProducts((prevProducts) => [...prevProducts, ...response.data]); // 기존 상품에 새로운 상품을 추가
+      const response = await axios.get('http://localhost:8000/product-service/product/list');
+      const newProducts = response.data.result;
+      setProducts((prev) => [...prev, ...newProducts]);
+      // 예시에서는 더 로드할 수 없도록 한 번만 로딩
+      setHasMore(false);
     } catch (error) {
-      console.error('Error fetching products:', error);
-    } finally {
-      setLoading(false); // 데이터 로드 후 로딩 상태 종료
+      console.error('상품 불러오기 실패:', error);
     }
-  }, [page]);
+    setLoading(false);
+  }, [loading, hasMore]);
 
-  // 스크롤 이벤트로 더 많은 데이터를 로드하는 함수
-  const handleScroll = () => {
-    const bottom = window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight;
-    if (bottom && !loading) { // 페이지 하단에 도달했을 때
-      setPage((prevPage) => prevPage + 1); // 페이지 번호 증가
-    }
-  };
-
-  // 스크롤 이벤트 리스너 등록
   useEffect(() => {
-    fetchProducts(); // 첫 페이지 상품 데이터 로드
+    fetchProducts();
   }, [fetchProducts]);
 
-  useEffect(() => {
-    if (page > 1) {
-      fetchProducts(); // 페이지가 변경될 때마다 상품 데이터 로드
-    }
-  }, [page, fetchProducts]);
+  const lastProductRef = useCallback((node) => {
+    if (loading) return;
+    if (observer.current) observer.current.disconnect();
 
-  // 스크롤 이벤트 리스너 설정
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll); // 컴포넌트 언마운트 시 이벤트 제거
-  }, [handleScroll]);
+    observer.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && hasMore) {
+        fetchProducts();
+      }
+    });
+
+    if (node) observer.current.observe(node);
+  }, [loading, fetchProducts, hasMore]);
 
   return (
-    <div className="ProductListHeader">
-      <div className="box1">
-        <div className="leftheader">
-          <span>신상품 | </span>
-          <span>낮은가격 | </span>
-          <span>높은가격 | </span>
-        </div>
-        <div className="rightheader">
-          <span>{products.length} items</span>
+    <>
+      {/* ProductListHeader 컴포넌트 내용 포함 */}
+      <div className="ProductListHeader">
+        <div className="box1">
+          <div className="leftheader">
+            <span> 신상품 | </span>
+            <span> 낮은가격 | </span>
+            <span> 높은가격 | </span>
+          </div>
+          <div className="rightheader">
+            <span> {products.length} items</span>
+          </div>
         </div>
       </div>
 
-      {/* 상품 그리드 박스들 */}
-      {products.map((product, index) => (
-        <div key={index} className={`box${index + 2}`}>
-          <img src={product.image} alt={product.name} className="product-image" />
-          <div className="product-details">
-            <h3>{product.name}</h3>
-            <p>{product.category}</p>
-            <p>{product.price} 원</p>
-          </div>
-        </div>
-      ))}
-
-      {/* 로딩 중 표시 */}
-      {loading && <div className="loading">Loading...</div>}
-    </div>
+      <div className="product-grid">
+        {products.map((product, index) => {
+          const isLast = index === products.length - 1;
+          return (
+            <div
+              className="product-card"
+              key={product.id}
+              ref={isLast ? lastProductRef : null}
+            >
+              <div className="image-wrapper">
+                <img
+                  src={product.mainImagePath}
+                  alt={product.name}
+                  className="product-image"
+                  onMouseOver={(e) => (e.currentTarget.src = product.mainImagePath)}
+                  onMouseOut={(e) => (e.currentTarget.src = product.thumbnailPath)}
+                />
+              </div>
+              <div className="product-details">
+                <p className="product-name">{product.name}</p>
+                <p className="product-price">{product.price.toLocaleString()}원</p>
+              </div>
+            </div>
+          );
+        })}
+        {loading && <div className="loading">불러오는 중...</div>}
+      </div>
+    </>
   );
 };
 
 export default ProductGrid;
-
