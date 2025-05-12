@@ -51,13 +51,6 @@
   }
 }
 
-/* .nav {
-  display: flex;
-  position: sticky;
-  top: 0px;
-  border-bottom: 1px solid black;
-} */
-
 .nav {
     display: flex;
     position: sticky;
@@ -86,6 +79,10 @@
   margin: 0px auto;
   position: relative;
   bottom: 55px;
+}
+
+.navtwo:hover {
+  cursor: pointer;
 }
 
 .navthree {

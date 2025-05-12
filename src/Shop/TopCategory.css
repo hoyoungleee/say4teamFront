@@ -1,0 +1,166 @@
+.categoryfirstcontent {
+  display: flex;
+  justify-content: space-evenly;
+  height: 300px;
+  width: 100vw;
+}
+.topcatone {
+  background-image: url(../assets/E.jpg);
+  background-size: 100%;
+  background-position: center;
+  width: 390px;
+  height: 300px;
+  transition: background-size 0.3s ease;
+  background-repeat: no-repeat;
+}
+
+.topcatone:hover {
+  background-size: 110%;
+  cursor: pointer;
+}
+
+.topcattwo {
+  background-image: url(../assets/TEXTILES.png);
+  background-size: 100%;
+  background-position: center;
+  width: 390px;
+  height: 300px;
+  transition: background-size 0.3s ease;
+  background-repeat: no-repeat;
+}
+
+.topcattwo:hover {
+  background-size: 110%;
+  cursor: pointer;
+}
+
+.topcatone > span {
+  text-align: center;
+  line-height: 300px;
+  font-weight: 300;
+  font-size: 23px;
+}
+
+.topcattwo > span {
+  text-align: center;
+  line-height: 300px;
+  font-weight: 300;
+  font-size: 23px;
+}
+
+.topcatthree > span {
+  text-align: center;
+  line-height: 300px;
+  font-weight: 300;
+  font-size: 23px;
+}
+
+.topcatthree {
+  background-image: url(../assets/HOMEDECO.png);
+  background-size: 100%;
+  background-position: center;
+  width: 390px;
+  height: 300px;
+  transition: background-size 0.3s ease;
+  background-repeat: no-repeat;
+}
+
+.topcatthree:hover {
+  background-size: 110%;
+  cursor: pointer;
+}
+
+.caterorysecondcontent {
+  display: flex;
+  width: 100vw;
+  height: 300px;
+  justify-content:space-evenly;
+}
+
+.buttoncatone {
+  background-image: url(../assets/MIRROR.png);
+  background-size: 100%;
+  background-position: center;
+  width: 300px;
+  height: 300px;
+  transition: background-size 0.3s ease;
+  background-repeat: no-repeat;
+}
+
+.buttoncatone:hover {
+  background-size: 110%;
+  cursor: pointer;
+}
+
+.buttoncatone > span {
+  text-align: center;
+  line-height: 300px;
+  font-weight: 300;
+  font-size: 23px;
+}
+
+.buttoncattwo {
+  background-image: url(../assets/LIGHTING.jpg);
+  background-size: 100%;
+  background-position: center;
+  width: 300px;
+  height: 300px;
+  transition: background-size 0.3s ease;
+  background-repeat: no-repeat;
+}
+
+.buttoncattwo:hover {
+  background-size: 110%;
+  cursor: pointer;
+}
+
+.buttoncattwo span {
+  text-align: center;
+  line-height: 300px;
+  font-weight: 300;
+  font-size: 23px;
+}
+
+.buttoncatthree {
+  background-image: url(../assets/LIFESTYLE.jpg);
+  background-size: 100%;
+  background-position: center;
+  width: 300px;
+  height: 300px;
+  transition: background-size 0.3s ease;
+  background-repeat: no-repeat;
+}
+
+.buttoncatthree:hover {
+  background-size: 110%;
+  cursor: pointer;
+}
+
+.buttoncatthree > span {
+  text-align: center;
+  line-height: 300px;
+  font-weight: 300;
+  font-size: 23px;
+}
+
+.buttoncatfour {
+  background-image: url(../assets/GOODS.jpg);
+  background-size: 100%;
+  background-position: center;
+  width: 300px;
+  height: 300px;
+  transition: background-size 0.3s ease;
+  background-repeat: no-repeat;
+}
+
+.buttoncatfour:hover {
+  background-size: 110%;
+  cursor: pointer;
+}
+
+.buttoncatfour span {
+  text-align: center;
+  line-height: 300px;
+  font-weight: 300;
+  font-size: 23px;
+}
