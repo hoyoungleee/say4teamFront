@@ -1,0 +1,109 @@
+.join-container {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.join-title {
+  font-size: 24px;
+  margin-bottom: 40px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.join-steps {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  font-size: 16px;
+  color: #222;
+  margin-bottom: 100px;
+}
+
+.join-step {
+  font-weight: 500;
+}
+
+.join-complete-msg {
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+}
+
+.small {
+  font-size: 12px;
+}
+
+.join-form {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 20px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.terms-wrapper {
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.terms-all-agree {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #ccc;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.terms-all-agree input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+}
+
+.terms-all-agree-text {
+  line-height: 1.5;
+}
+
+.terms-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.terms-item label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.terms-item input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+}
+
+.terms-confirm {
+  margin-top: 24px;
+  background-color: black;
+  color: white;
+  width: 100%;
+  padding: 12px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle {
+  cursor: default;
+}
