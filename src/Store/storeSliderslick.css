@@ -1,0 +1,143 @@
+/* Slider */
+.slick-slider {
+  position: relative;
+
+  display: block;
+  box-sizing: border-box;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list {
+  position: relative;
+
+  display: block;
+  overflow: hidden;
+
+  margin: 0;
+  padding: 0;
+}
+.slick-list:focus {
+  outline: none;
+}
+.slick-list.dragging {
+  cursor: pointer;
+  cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+  position: relative;
+  top: 0;
+  left: 0;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.slick-track:before,
+.slick-track:after {
+  display: table;
+
+  content: '';
+}
+.slick-track:after {
+  clear: both;
+}
+.slick-loading .slick-track {
+  visibility: hidden;
+}
+
+.slick-slide {
+  display: none;
+  float: left;
+
+  height: 100%;
+  min-height: 1px;
+}
+[dir='rtl'] .slick-slide {
+  float: right;
+}
+.slick-slide img {
+  display: block;
+}
+.slick-slide.slick-loading img {
+  display: none;
+}
+.slick-slide.dragging img {
+  pointer-events: none;
+}
+.slick-initialized .slick-slide {
+  display: block;
+}
+.slick-loading .slick-slide {
+  visibility: hidden;
+}
+.slick-vertical .slick-slide {
+  display: block;
+
+  height: auto;
+
+  border: 1px solid transparent;
+}
+.slick-arrow.slick-hidden {
+  display: none;
+}
+
+.slider-container {
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 220px;
+}
+
+.slider-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* 아래에 있는 썸네일 이미지 크게 만들기 */
+.slick-dots.slick-thumb {
+  position: absolute; /* 썸네일이 슬라이더와 겹치지 않도록 간격 조정 */
+  display: flex !important;
+  justify-content: center;
+  gap: 12px;
+  top: 800px;
+}
+
+.slick-dots.slick-thumb li {
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+.slick-dots.slick-thumb li img {
+  width: 310px;
+  height: 205px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  transition: transform 0.3s ease;
+  opacity: 0.3;
+}
+
+.slick-dots.slick-thumb li.slick-active img {
+  opacity: 1;
+}

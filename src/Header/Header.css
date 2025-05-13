@@ -95,6 +95,15 @@
   align-items: center;
 }
 
+.sayt {
+  color: black;
+  line-height: 170px;
+}
+
+.sayt:hover {
+  color: black;
+}
+
 
 .comp:hover::before,
 .arch:hover::before,
@@ -121,4 +130,16 @@
 .logn:hover{
     font-weight: 700;
     cursor: pointer;
+    color: black;
+}
+
+.comp,
+.arch,
+.shop,
+.stor,
+.lang,
+.cont,
+.cart,
+.logn {
+  color: black;
 }

@@ -14,6 +14,7 @@ import img18 from '../assets/18.jpg';
 import img19 from '../assets/19.jpg';
 import img20 from '../assets/20.jpg';
 import img21 from '../assets/21.png';
+import { NavLink } from 'react-router-dom';
 
 
 const Main = () => {
@@ -119,7 +120,9 @@ const Main = () => {
         </div>
 
         <div className='ninemain'>
+          <NavLink to='/store'>
             <button className='ninebutton'>VISIT STORE</button>
+            </NavLink>
         </div>
 
         <div className='ten'>

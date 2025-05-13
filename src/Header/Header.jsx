@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.css';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -30,17 +31,17 @@ const Header = () => {
       {/* sticky 적용된 nav */}
       <div className='nav'>
         <div className='navone'>
-          <p className='comp'>COMPANY</p>
+          <NavLink to='/company' className='comp'>COMPANY</NavLink>
           <p className='arch'>ARCHIVE</p>
-          <p className='shop'>SHOP</p>
-          <p className='stor'>STORE</p>
+          <NavLink to='/shop' className='shop'>SHOP</NavLink>
+          <NavLink to='/store' className='stor'>STORE</NavLink>
         </div>
         <div className='navtwo'>
-          <p className='sayt'>Saytouche</p>
+          <NavLink to='/' className='sayt'>Saytouche</NavLink>
         </div>
         <div className='navthree'>
           <p className='lang'>LANGUAGE</p>
-          <p className='cont'>CONTACT</p>
+          <NavLink to='/contact' className='cont'>CONTACT</NavLink>
           <p className='cart'>CART</p>
           <p className='logn'>LOGIN</p>
         </div>
