@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
 
 // 외부에서 토큰을 수동으로 설정할 수 있는 함수
 let authToken =
-  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJob25nMTIzNEBuYXZlci5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc0NzEzNjE1OCwiZXhwIjoxNzQ3MTM3OTU4fQ.EI0Uoj7VXpN3m69v15L37gsehyrbu1KiVf2kfe1yqiM'; // 기본값은 빈 문자열
+  ''; // 기본값은 빈 문자열
 
 const setAuthToken = (token) => {
   authToken = token; // 외부에서 설정한 토큰을 변수에 저장
