@@ -17,7 +17,9 @@ const MyPage = () => {
     <div className='mypage-container'>
       <h2 className='mypage-title'>My Page</h2>
       <div className='mypage-grid'>
-        <div className='mypage-item'>Order list</div>
+        <div className='mypage-item' onClick={() => navigate('/OrderCheck')}>
+          Order list
+        </div>
         <div className='mypage-item'>Wishlist</div>
         <div
           className='mypage-item'

@@ -16,7 +16,8 @@ const ProfilePage = () => {
   });
 
   const navigate = useNavigate();
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, isInit } = useContext(AuthContext);
+  const { onLogout } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +38,8 @@ const ProfilePage = () => {
       })
       .then(() => {
         alert('회원 탈퇴가 완료되었습니다.');
-        localStorage.clear();
+        sessionStorage.setItem('justDeleted', 'true');
+        onLogout();
         navigate('/');
       })
       .catch((err) => {
@@ -47,7 +49,7 @@ const ProfilePage = () => {
   };
 
   const handleCancel = () => {
-    navigate('/');
+    navigate('/mypage');
   };
 
   const openPostCode = () => {
@@ -97,11 +99,16 @@ const ProfilePage = () => {
   }, []);
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (isInit && !isLoggedIn) {
+      const justDeleted = sessionStorage.getItem('justDeleted');
+      if (justDeleted) {
+        sessionStorage.removeItem('justDeleted');
+        return;
+      }
       alert('로그인한 회원만 접근 가능합니다.');
       navigate('/');
     }
-  }, [isLoggedIn]);
+  }, [isInit, isLoggedIn]);
 
   const handleUpdate = () => {
     const userId = localStorage.getItem('LOGIN_ID');
@@ -126,7 +133,7 @@ const ProfilePage = () => {
       })
       .then(() => {
         alert('회원정보가 수정되었습니다.');
-        window.location.reload();
+        navigate('/mypage');
       })
       .catch((err) => {
         console.error('수정 실패:', err);

@@ -43,7 +43,7 @@ const LoginPage = () => {
       const { token, email, id, role, phone, address } = resData.result;
 
       localStorage.setItem('ACCESS_TOKEN', token);
-      localStorage.setItem('LOGIN_ID', email);
+      localStorage.setItem('EMAIL', email);
       localStorage.setItem('LOGIN_ID', id);
       localStorage.setItem('ROLE', role);
       localStorage.setItem('PHONE', phone);
