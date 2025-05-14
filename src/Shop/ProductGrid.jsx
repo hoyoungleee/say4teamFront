@@ -1,61 +1,100 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import './ProductGrid.css';
+import { API_BASE_URL, PROD } from '../configs/host-config';
+import { throttle } from 'lodash';
 
-const ProductGrid = () => {
+const ProductGrid = ({ categoryId }) => {
+  const [sortType, setSortType] = useState('');
   const [products, setProducts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(0);
   const observer = useRef();
 
-  const fetchProducts = useCallback(async () => {
-    if (loading || !hasMore) return;
+  const fetchProducts = useCallback(
+    async (targetPage = 0, reset = false) => {
+      if (loading || (!hasMore && !reset)) return;
+      setLoading(true);
+      try {
+        const res = await axios.get(`${API_BASE_URL}${PROD}/list`, {
+          params: {
+            sort: sortType,
+            page: targetPage,
+            size: 8,
+            searchType: categoryId,
+          },
+        });
 
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        'http://localhost:8000/product-service/product/list',
-      );
-      const newProducts = response.data.result;
-      setProducts((prev) => [...prev, ...newProducts]);
-      // 예시에서는 더 로드할 수 없도록 한 번만 로딩
-      setHasMore(false);
-    } catch (error) {
-      console.error('상품 불러오기 실패:', error);
-    }
-    setLoading(false);
-  }, [loading, hasMore]);
+        const result = res.data.result;
+        if (result.length === 0) {
+          setHasMore(false);
+        }
+
+        setProducts((prev) => {
+          const combined = reset ? result : [...prev, ...result];
+          return [...new Map(combined.map((item) => [item.id, item])).values()];
+        });
+      } catch (e) {
+        console.error('상품 요청 실패:', e);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [loading, hasMore, sortType, categoryId],
+  );
 
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+    setPage(0);
+    setHasMore(true);
+    fetchProducts(0, true);
+  }, [categoryId, sortType]);
+
+  useEffect(() => {
+    if (page > 0) fetchProducts(page);
+  }, [page]);
 
   const lastProductRef = useCallback(
     (node) => {
       if (loading) return;
       if (observer.current) observer.current.disconnect();
 
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          fetchProducts();
-        }
-      });
+      observer.current = new IntersectionObserver(
+        throttle((entries) => {
+          if (entries[0].isIntersecting && hasMore) {
+            setPage((prev) => prev + 1);
+          }
+        }, 300),
+        {
+          threshold: 1.0,
+        },
+      );
 
       if (node) observer.current.observe(node);
     },
-    [loading, fetchProducts, hasMore],
+    [loading, hasMore],
   );
+
+  const handleSortChange = (newSort) => {
+    setSortType(newSort);
+  };
 
   return (
     <>
-      {/* ProductListHeader 컴포넌트 내용 포함 */}
       <div className='ProductListHeader'>
         <div className='box1'>
           <div className='leftheader'>
-            <span> 신상품 | </span>
-            <span> 낮은가격 | </span>
-            <span> 높은가격 | </span>
+            <span onClick={() => handleSortChange('productId,DESC')}>
+              신상품 |{' '}
+            </span>
+            <span onClick={() => handleSortChange('price,ASC')}>
+              낮은가격 |{' '}
+            </span>
+            <span onClick={() => handleSortChange('price,DESC')}>
+              높은가격 |{' '}
+            </span>
           </div>
+
           <div className='rightheader'>
             <span> {products.length} items</span>
           </div>
