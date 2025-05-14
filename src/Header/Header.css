@@ -1,14 +1,16 @@
 @font-face {
-    font-family: 'Cafe24Lovingu';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Lovingu.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Cafe24Lovingu';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Lovingu.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .topheader {
   background-color: #194d28;
   height: 40px;
   line-height: 40px;
+  color: white;
 }
 
 .topheadertitle {
@@ -52,15 +54,18 @@
 }
 
 .nav {
-    display: flex;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: white;
-    border-bottom: 1px solid black;
-    height: 60px;
-  }
-  
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+  border-bottom: 1px solid black;
+  height: 60px;
+}
+
+.nav a {
+  text-decoration: none;
+}
 
 .navone {
   display: flex;
@@ -104,7 +109,6 @@
   color: black;
 }
 
-
 .comp:hover::before,
 .arch:hover::before,
 .shop:hover::before,
@@ -127,10 +131,10 @@
 .lang:hover,
 .cont:hover,
 .cart:hover,
-.logn:hover{
-    font-weight: 700;
-    cursor: pointer;
-    color: black;
+.logn:hover {
+  font-weight: 700;
+  cursor: pointer;
+  color: black;
 }
 
 .comp,

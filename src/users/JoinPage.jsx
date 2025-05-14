@@ -16,11 +16,47 @@ const JoinPage = () => {
     email: '',
     termsAgree: false,
     privacyAgree: false,
+    allAgree: false,
   });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setForm({ ...form, [name]: type === 'checkbox' ? checked : value });
+
+    if (type === 'checkbox') {
+      if (name === 'allAgree') {
+        setForm((prev) => ({
+          ...prev,
+          allAgree: checked,
+          termsAgree: checked,
+          privacyAgree: checked,
+          marketingAgree: checked,
+        }));
+      } else {
+        const updated = {
+          ...form,
+          [name]: checked,
+        };
+
+        if (!checked && (name === 'termsAgree' || name === 'privacyAgree')) {
+          updated.allAgree = false;
+        }
+
+        if (
+          updated.termsAgree &&
+          updated.privacyAgree &&
+          updated.marketingAgree
+        ) {
+          updated.allAgree = true;
+        }
+
+        setForm(updated);
+      }
+    } else {
+      setForm((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -40,8 +76,8 @@ const JoinPage = () => {
         password: form.password,
         name: form.name,
         phone: `${form.phone1}-${form.phone2}-${form.phone3}`,
-        address: form.address, // 주소 필드 있다면 form.address로 바꾸세요
-        birthDate: form.birthDate, // 생년월일 폼에 따라 조정
+        address: form.address,
+        birthDate: form.birthDate,
       })
       .then((res) => {
         console.log('회원가입 성공:', res.data);
@@ -53,31 +89,6 @@ const JoinPage = () => {
       });
 
     navigate('/member/join-complete');
-  };
-
-  const [expanded, setExpanded] = useState({
-    terms: false,
-    privacy: false,
-    marketing: false,
-  });
-
-  const handleAllAgree = () => {
-    const allChecked = !(
-      form.termsAgree &&
-      form.privacyAgree &&
-      form.marketingAgree
-    );
-    setForm({
-      ...form,
-      termsAgree: allChecked,
-      privacyAgree: allChecked,
-      marketingAgree: allChecked,
-    });
-  };
-
-  const handleItemAgree = (key) => {
-    const updated = { ...form, [key]: !form[key] };
-    setForm(updated);
   };
 
   return (
@@ -93,12 +104,7 @@ const JoinPage = () => {
           <button type='button'>휴대폰인증</button>
         </div>
         <span>이메일</span>
-        <input
-          name='email'
-          // placeholder='이메일'
-          value={form.email}
-          onChange={handleChange}
-        />
+        <input name='email' value={form.email} onChange={handleChange} />
         <span>비밀번호</span>
         <span className='small'>
           (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10~16자)
@@ -106,7 +112,6 @@ const JoinPage = () => {
         <input
           type='password'
           name='password'
-          // placeholder='비밀번호'
           value={form.password}
           onChange={handleChange}
         />
@@ -114,17 +119,11 @@ const JoinPage = () => {
         <input
           type='password'
           name='confirmPassword'
-          // placeholder='비밀번호 확인'
           value={form.confirmPassword}
           onChange={handleChange}
         />
         <span>이름</span>
-        <input
-          name='name'
-          // placeholder='이름'
-          value={form.name}
-          onChange={handleChange}
-        />
+        <input name='name' value={form.name} onChange={handleChange} />
         <label>휴대전화</label>
         <div className='form-row'>
           <select name='phone1' value={form.phone1} onChange={handleChange}>
@@ -143,7 +142,12 @@ const JoinPage = () => {
         />
         <div className='terms-wrapper'>
           <label className='terms-all-agree'>
-            <input type='checkbox' id='all' />
+            <input
+              type='checkbox'
+              name='allAgree'
+              checked={form.allAgree}
+              onChange={handleChange}
+            />
             <span>
               <strong>전체 동의</strong> 이용약관 및 개인정보수집 및 이용,
               쇼핑정보 수신(선택)에 모두 동의합니다.
@@ -152,7 +156,12 @@ const JoinPage = () => {
 
           <div className='terms-item'>
             <label>
-              <input type='checkbox' id='terms' />
+              <input
+                type='checkbox'
+                name='termsAgree'
+                checked={form.termsAgree}
+                onChange={handleChange}
+              />
               <span>이용약관 동의 (필수)</span>
             </label>
             <span className='toggle'>+</span>
@@ -160,7 +169,12 @@ const JoinPage = () => {
 
           <div className='terms-item'>
             <label>
-              <input type='checkbox' id='privacy' />
+              <input
+                type='checkbox'
+                name='privacyAgree'
+                checked={form.privacyAgree}
+                onChange={handleChange}
+              />
               <span>개인정보처리방침 동의 (필수)</span>
             </label>
             <span className='toggle'>+</span>
@@ -168,13 +182,20 @@ const JoinPage = () => {
 
           <div className='terms-item'>
             <label>
-              <input type='checkbox' id='marketing' />
+              <input
+                type='checkbox'
+                name='marketingAgree'
+                checked={form.marketingAgree}
+                onChange={handleChange}
+              />
               <span>쇼핑정보 수신 동의 (선택)</span>
             </label>
             <span className='toggle'>+</span>
           </div>
 
-          <button className='terms-confirm'>확인</button>
+          <button className='terms-confirm' onClick={handleSubmit}>
+            확인
+          </button>
         </div>
       </form>
     </div>

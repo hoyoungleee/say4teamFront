@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './MyPage.css';
+import AuthContext from '../context/UserContext';
 
 const MyPage = () => {
   const navigate = useNavigate();
+  const { onLogout } = useContext(AuthContext);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('role');
-
+    onLogout();
     alert('로그아웃 되었습니다.');
     navigate('/');
   };

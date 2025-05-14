@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './ProfilePage.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import AuthContext from '../context/UserContext';
 
 const ProfilePage = () => {
   const [form, setForm] = useState({
@@ -15,6 +16,7 @@ const ProfilePage = () => {
   });
 
   const navigate = useNavigate();
+  const { isLoggedIn } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,6 +44,10 @@ const ProfilePage = () => {
         console.error('회원 탈퇴 실패:', err);
         alert('회원 탈퇴 중 오류가 발생했습니다.');
       });
+  };
+
+  const handleCancel = () => {
+    navigate('/');
   };
 
   const openPostCode = () => {
@@ -89,6 +95,13 @@ const ProfilePage = () => {
         alert('회원 정보를 불러올 수 없습니다.');
       });
   }, []);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      alert('로그인한 회원만 접근 가능합니다.');
+      navigate('/');
+    }
+  }, [isLoggedIn]);
 
   const handleUpdate = () => {
     const userId = localStorage.getItem('LOGIN_ID');
@@ -159,7 +172,7 @@ const ProfilePage = () => {
           <button className='profile-update-btn' onClick={handleUpdate}>
             회원 정보 수정하기
           </button>
-          <button type='button' className='btn-outline'>
+          <button type='button' className='btn-outline' onClick={handleCancel}>
             취소
           </button>
         </div>
