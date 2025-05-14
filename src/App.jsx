@@ -5,33 +5,50 @@ import ProfilePage from './users/ProfilePage';
 import LoginPage from './users/LoginPage';
 import JoinComplete from './users/JoinComplete';
 import './App.css';
-import MainPages from './main/MainPages';
 import SHOP from './Shop/SHOP';
 import COMPANY from './Company/COMPANY';
 import StorePage from './Store/StorePage';
 import Contact from './Contact/Contact';
-import ProductDetail from './Shop/ProductDetail';
+import CartPage from './order/CartPage';
+import Orderpages from './order/Orderpages';
+import MainPages from './main/MainPages';
+
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
 
 function App() {
   return (
-    <Routes>
-      <Route path='/' element={<Navigate to='/member/join' />} />
-      <Route path='/login' element={<LoginPage />} />
-      <Route path='/member/join' element={<JoinPage />} />
-      <Route path='/member/join-complete' element={<JoinComplete />} />
-      <Route path='/mypage' element={<MyPage />} />
-      <Route path='/mypage/profile' element={<ProfilePage />} />
-      {/* </Routes> */}
-      {/*  <BrowserRouter> */}
-      {/* <Routes> */}
-      <Route path='/' element={<MainPages />} />
-      <Route path='/shop' element={<SHOP />} />
-      <Route path='/company' element={<COMPANY />} />
-      <Route path='/store' element={<StorePage />} />
-      <Route path='/contact' element={<Contact />} />
-      <Route path='/product/detail/:id' element={<ProductDetail />} />
-    </Routes>
-    // {/* </BrowserRouter> */}
+    <>
+      <Routes>
+        {/* 헤더 푸터 필요없으면 여기 */}
+        <Route path='/member/join-complete' element={<JoinComplete />} />
+        <Route path='/' element={<MainPages />} />
+        <Route path='/shop' element={<SHOP />} />
+        <Route path='/store' element={<StorePage />} />
+        <Route path='/company' element={<COMPANY />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/cart' element={<CartPage />} />
+        <Route path='/order' element={<Orderpages />} />
+
+        {/* 헤더 푸터 필요하면 여기 */}
+        <Route
+          path='*'
+          element={
+            <>
+              <Header />
+              <Routes>
+                <Route path='/login' element={<LoginPage />} />
+                <Route path='/member/join' element={<JoinPage />} />
+                <Route path='/mypage' element={<MyPage />} />
+                <Route path='/mypage/profile' element={<ProfilePage />} />
+                <Route path='/product/detail/:id' element={<ProductDetail />} />
+              </Routes>
+              <Footer />
+            </>
+          }
+        />
+      </Routes>
+    </>
   );
 }
 
