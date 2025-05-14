@@ -56,7 +56,11 @@ const Header = () => {
           <NavLink to='/contact' className='cont'>
             CONTACT
           </NavLink>
-          <p className='cart'>CART</p>
+          <div className='navfour'>
+            <NavLink to='/cart' className='cart'>
+              CART
+            </NavLink>
+          </div>
           <nav>
             {!isInit ? null : isLoggedIn ? (
               <>
