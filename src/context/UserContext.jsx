@@ -1,3 +1,4 @@
+import { add } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
 const AuthContext = React.createContext({
@@ -21,6 +22,7 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem('USER_ID', loginData.id);
     localStorage.setItem('USER_ROLE', loginData.role);
     localStorage.setItem('USER_EMAIL', loginData.email);
+    localStorage.setItem('ADDRESS', loginData.address);
 
     // 사용자 정보 설정
     setUserInfo({
@@ -28,6 +30,7 @@ export const AuthContextProvider = (props) => {
       id: loginData.id,
       role: loginData.role,
       name: loginData.name, // 예시로 name을 추가
+      address: loginData.address,
     });
 
     setIsLoggedIn(true);
@@ -47,6 +50,7 @@ export const AuthContextProvider = (props) => {
         email: localStorage.getItem('USER_EMAIL'),
         id: localStorage.getItem('USER_ID'),
         role: localStorage.getItem('USER_ROLE'),
+        address: localStorage.getItem('ADDRESS'),
       });
     }
     setIsInit(true);

@@ -19,6 +19,7 @@ const Orderpages = () => {
   // userInfo 변경 시 자동으로 값 설정
   useEffect(() => {
     if (isInit && userInfo) {
+      console.log('userInfo.address:', userInfo.address); // 이거 추가해보세요
       setEmailAddress(userInfo.email || '');
       setAddress1(userInfo.address || '');
     }
