@@ -127,3 +127,79 @@
     transform: rotate(360deg);
   }
 }
+.product-detail-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 중앙 정렬 */
+  gap: 32px; /* 이미지 간 간격 (gap: 4 => 4 * 8px) */
+  padding: 0 16px; /* px: 2 => 2 * 8px */
+  margin-top: 80px;
+}
+
+.detail-image {
+  width: 100%;
+  max-width: 800px; /* 너무 커지지 않게 제한 */
+  height: auto; /* 비율 유지 */
+  object-fit: contain; /* 이미지가 잘리지 않게 */
+  border-radius: 8px; /* borderRadius: 2 => 2 * 4px */
+}
+.scroll-top-button {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.scroll-top-button:hover {
+  background-color: #333;
+}
+.tab {
+  cursor: pointer;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+  border-color: black;
+  font-weight: bold;
+}
+
+.shipping-returns ul {
+  margin: 0 0 1em 1em;
+  padding-left: 1em;
+  list-style-type: disc;
+}
+
+.shipping-returns p {
+  margin-top: 1em;
+  font-weight: 500;
+}
+
+.shipping-returns {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.shipping-returns p {
+  font-weight: 600;
+  margin-top: 1.6rem;
+}
+
+.shipping-returns ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
