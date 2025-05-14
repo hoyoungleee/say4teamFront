@@ -11,7 +11,7 @@ const Header = () => {
     <div className='headermain'>
       {/* 상단 알림 */}
       <div className='topheader'>
-        <p className='topheadertitle'>New Arrival: TOUCHÉ Diffuser</p>
+        <p className='topheadertitle'>New Arrival: Doodle Persian Collection</p>
       </div>
 
       {/* 움직이는 공지 */}

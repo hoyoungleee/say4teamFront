@@ -15,19 +15,19 @@ const MyPage = () => {
 
   return (
     <div className='mypage-container'>
-      <h2 className='mypage-title'>My Page</h2>
+      <h2 className='mypage-title'>MyPage</h2>
       <div className='mypage-grid'>
-        <div className='mypage-item'>Order list</div>
-        <div className='mypage-item'>Wishlist</div>
+        <div className='mypage-cell'>Order list</div>
+        <div className='mypage-cell'>Wishlist</div>
         <div
-          className='mypage-item'
+          className='mypage-cell'
           onClick={() => navigate('/mypage/profile')}
         >
           Profile
         </div>
-        <div className='mypage-item'>Coupon</div>
-        <div className='mypage-item'>Mileage</div>
-        <div className='mypage-item' onClick={handleLogout}>
+        <div className='mypage-cell'>Coupon</div>
+        <div className='mypage-cell'>Mileage</div>
+        <div className='mypage-cell' onClick={handleLogout}>
           Logout
         </div>
       </div>

@@ -1,33 +1,50 @@
 .mypage-container {
+  max-width: 900px;
+  margin: 0 auto;
   padding: 80px 20px;
   text-align: center;
-  font-family: "Noto Sans KR", sans-serif;
 }
 
 .mypage-title {
   font-size: 28px;
+  font-weight: bold;
   margin-bottom: 60px;
 }
 
 .mypage-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  justify-items: center;
+  border-color: white;
 }
 
-.mypage-item {
-  width: 160px;
-  height: 80px;
-  line-height: 80px;
-  background-color: #f9f9f9;
-  border: 1px solid #e5e5e5;
-  font-weight: 500;
+.mypage-cell {
+  padding: 50px 20px;
   font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background-color 0.2s ease;
+  position: relative;
 }
 
-.mypage-item:hover {
-  background-color: #eeeeee;
+.mypage-cell::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: -32px;
+  width: 65px;
+  height: 1px;
+  background-color: #cdcdcd;
+  transform: rotate(-50deg);
+}
+
+.mypage-cell:nth-child(1),
+.mypage-cell:nth-child(2),
+.mypage-cell:nth-child(4),
+.mypage-cell:nth-child(5) {
+}
+
+.mypage-cell:nth-child(3)::after,
+.mypage-cell:nth-child(6)::after {
+  display: none;
 }
