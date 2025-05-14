@@ -1,166 +1,126 @@
-.categoryfirstcontent {
-  display: flex;
-  justify-content: space-evenly;
-  height: 300px;
-  width: 100vw;
-}
-.topcatone {
-  background-image: url(../assets/E.jpg);
-  background-size: 100%;
-  background-position: center;
-  width: 390px;
-  height: 300px;
-  transition: background-size 0.3s ease;
-  background-repeat: no-repeat;
+.category-wrapper {
+  width: 100%;
+  padding: 2rem 0;
 }
 
-.topcatone:hover {
-  background-size: 110%;
+/* 1열: 3개 */
+.categoryfirstcontent {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 0 2rem;
+}
+
+/* 2열: 4개 */
+.caterorysecondcontent {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 2rem;
+}
+
+/* 공통 이미지 카드 스타일 */
+.topcatone,
+.topcattwo,
+.topcatthree,
+.buttoncatone,
+.buttoncattwo,
+.buttoncatthree,
+.buttoncatfour {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
   cursor: pointer;
+}
+
+/* Hover 효과 */
+.topcatone:hover,
+.topcattwo:hover,
+.topcatthree:hover,
+.buttoncatone:hover,
+.buttoncattwo:hover,
+.buttoncatthree:hover,
+.buttoncatfour:hover {
+  transform: scale(1.02);
+}
+
+/* 텍스트 공통 스타일 */
+.topcatone > span,
+.topcattwo > span,
+.topcatthree > span,
+.buttoncatone > span,
+.buttoncattwo > span,
+.buttoncatthree > span,
+.buttoncatfour > span {
+  position: absolute;
+  color: white;
+  font-size: 1.6rem;
+  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* 이미지 배경 설정 (경로 유지) */
+.topcatone {
+  background-image: url(../assets/E.jpg);
 }
 
 .topcattwo {
   background-image: url(../assets/TEXTILES.png);
-  background-size: 100%;
-  background-position: center;
-  width: 390px;
-  height: 300px;
-  transition: background-size 0.3s ease;
-  background-repeat: no-repeat;
-}
-
-.topcattwo:hover {
-  background-size: 110%;
-  cursor: pointer;
-}
-
-.topcatone > span {
-  text-align: center;
-  line-height: 300px;
-  font-weight: 300;
-  font-size: 23px;
-}
-
-.topcattwo > span {
-  text-align: center;
-  line-height: 300px;
-  font-weight: 300;
-  font-size: 23px;
-}
-
-.topcatthree > span {
-  text-align: center;
-  line-height: 300px;
-  font-weight: 300;
-  font-size: 23px;
 }
 
 .topcatthree {
   background-image: url(../assets/HOMEDECO.png);
-  background-size: 100%;
-  background-position: center;
-  width: 390px;
-  height: 300px;
-  transition: background-size 0.3s ease;
-  background-repeat: no-repeat;
-}
-
-.topcatthree:hover {
-  background-size: 110%;
-  cursor: pointer;
-}
-
-.caterorysecondcontent {
-  display: flex;
-  width: 100vw;
-  height: 300px;
-  justify-content:space-evenly;
 }
 
 .buttoncatone {
   background-image: url(../assets/MIRROR.png);
-  background-size: 100%;
-  background-position: center;
-  width: 300px;
-  height: 300px;
-  transition: background-size 0.3s ease;
-  background-repeat: no-repeat;
-}
-
-.buttoncatone:hover {
-  background-size: 110%;
-  cursor: pointer;
-}
-
-.buttoncatone > span {
-  text-align: center;
-  line-height: 300px;
-  font-weight: 300;
-  font-size: 23px;
 }
 
 .buttoncattwo {
   background-image: url(../assets/LIGHTING.jpg);
-  background-size: 100%;
-  background-position: center;
-  width: 300px;
-  height: 300px;
-  transition: background-size 0.3s ease;
-  background-repeat: no-repeat;
-}
-
-.buttoncattwo:hover {
-  background-size: 110%;
-  cursor: pointer;
-}
-
-.buttoncattwo span {
-  text-align: center;
-  line-height: 300px;
-  font-weight: 300;
-  font-size: 23px;
 }
 
 .buttoncatthree {
   background-image: url(../assets/LIFESTYLE.jpg);
-  background-size: 100%;
-  background-position: center;
-  width: 300px;
-  height: 300px;
-  transition: background-size 0.3s ease;
-  background-repeat: no-repeat;
-}
-
-.buttoncatthree:hover {
-  background-size: 110%;
-  cursor: pointer;
-}
-
-.buttoncatthree > span {
-  text-align: center;
-  line-height: 300px;
-  font-weight: 300;
-  font-size: 23px;
 }
 
 .buttoncatfour {
   background-image: url(../assets/GOODS.jpg);
-  background-size: 100%;
-  background-position: center;
-  width: 300px;
-  height: 300px;
-  transition: background-size 0.3s ease;
-  background-repeat: no-repeat;
 }
 
-.buttoncatfour:hover {
-  background-size: 110%;
-  cursor: pointer;
-}
+/* 반응형: 모바일에서 한 줄씩 배치 */
+@media (max-width: 768px) {
+  .categoryfirstcontent,
+  .caterorysecondcontent {
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-.buttoncatfour span {
-  text-align: center;
-  line-height: 300px;
-  font-weight: 300;
-  font-size: 23px;
+  .topcatone,
+  .topcattwo,
+  .topcatthree,
+  .buttoncatone,
+  .buttoncattwo,
+  .buttoncatthree,
+  .buttoncatfour {
+    aspect-ratio: 16 / 10;
+  }
+
+  .topcatone > span,
+  .topcattwo > span,
+  .topcatthree > span,
+  .buttoncatone > span,
+  .buttoncattwo > span,
+  .buttoncatthree > span,
+  .buttoncatfour > span {
+    font-size: 1.2rem;
+  }
 }

@@ -3,8 +3,8 @@ import './TopCategory.css';
 
 const TopCategory = () => {
   return (
-    <div>
-      {/* 카테고리의 1열 이미지들 클릭시 text에 따른 카테고리로 들어감*/}
+    <div className='category-wrapper'>
+      {/* 카테고리 1열 */}
       <div className='categoryfirstcontent'>
         <div className='topcatone'>
           <span>É</span>
@@ -17,10 +17,10 @@ const TopCategory = () => {
         </div>
       </div>
 
-      {/* 카테고리의 2열 이미지, 위와 기능은 동일 */}
+      {/* 카테고리 2열 */}
       <div className='caterorysecondcontent'>
         <div className='buttoncatone'>
-          <span>Mirrors</span>
+          <span>Mirror</span>
         </div>
         <div className='buttoncattwo'>
           <span>Lighting</span>
