@@ -10,6 +10,8 @@ import SHOP from './Shop/SHOP';
 import COMPANY from './Company/COMPANY';
 import StorePage from './Store/StorePage';
 import Contact from './Contact/Contact';
+import CartPage from './order/CartPage';
+import Orderpages from './order/Orderpages';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
       <Route path='/member/join-complete' element={<JoinComplete />} />
       <Route path='/mypage' element={<MyPage />} />
       <Route path='/mypage/profile' element={<ProfilePage />} />
+      <Route path='/cart' element={<CartPage />} />
+      <Route path='/order' element={<Orderpages />} />
       {/* </Routes> */}
       {/*  <BrowserRouter> */}
       {/* <Routes> */}
