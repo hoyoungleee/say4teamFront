@@ -51,13 +51,6 @@
   }
 }
 
-/* .nav {
-  display: flex;
-  position: sticky;
-  top: 0px;
-  border-bottom: 1px solid black;
-} */
-
 .nav {
     display: flex;
     position: sticky;
@@ -88,6 +81,10 @@
   bottom: 55px;
 }
 
+.navtwo:hover {
+  cursor: pointer;
+}
+
 .navthree {
   display: flex;
   color: black;
@@ -96,6 +93,15 @@
   margin-right: 50px;
   padding-bottom: 0;
   align-items: center;
+}
+
+.sayt {
+  color: black;
+  line-height: 170px;
+}
+
+.sayt:hover {
+  color: black;
 }
 
 
@@ -124,4 +130,16 @@
 .logn:hover{
     font-weight: 700;
     cursor: pointer;
+    color: black;
+}
+
+.comp,
+.arch,
+.shop,
+.stor,
+.lang,
+.cont,
+.cart,
+.logn {
+  color: black;
 }

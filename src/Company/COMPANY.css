@@ -1,0 +1,19 @@
+.companyimage img{
+    width: 100vw;
+}
+
+.companytext {
+    color: black;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 430;
+}
+
+.comtext2 {
+    margin-top: -20px;
+}
+
+.comtext3 {
+    line-height: 60px;
+}
+
