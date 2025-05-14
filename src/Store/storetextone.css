@@ -1,0 +1,53 @@
+.storemain {
+    color: black;
+    text-align: center;
+    margin-top: 300px;
+    width: 100vw;
+}
+
+.textstore {
+    display: flex;
+    justify-content: center;
+    gap: 350px;
+}
+
+.bigtitle {
+    font-size: 25px;
+    font-weight: 450;
+}
+
+.bigsertitle {
+    font-weight: 470;
+    font-size: 18px;
+}
+
+.shorttext {
+    line-height: 8px;
+    font-size: 17px;
+}
+
+.stockist {
+    margin: 100px 0px;
+    box-sizing: border-box;
+}
+
+.storelink {
+    color: #ACACAC;
+    
+}
+
+.storelink:hover {
+    color: #ACACAC;
+}
+
+.storename {
+    font-weight: 490;
+    font-size: 19px;
+    line-height: 7px;
+}
+
+.storetext {
+    color: #ACACAC; 
+    line-height: 5px;
+}
+

@@ -1,15 +1,22 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Header from './Header/Header';
-import Footer from './Footer/Footer';
-import Main from './main/Main';
+import MainPages from './main/MainPages';
+import SHOP from './Shop/SHOP';
+import COMPANY from './Company/COMPANY';
+import StorePage from './Store/StorePage';
+import Contact from './Contact/Contact';
 
 function App() {
   return (
-    <>
-      <Header />
-      <Main />
-      <Footer />
-    </>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<MainPages/>}/>
+      <Route path="/shop" element={<SHOP/>}/>
+      <Route path='/company' element={<COMPANY/>}/>
+      <Route path='/store' element={<StorePage/>}/>
+      <Route path='/contact' element={<Contact/>}/>
+    </Routes>
+    </BrowserRouter>
   );
 }
 
