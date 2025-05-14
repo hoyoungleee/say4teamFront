@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../configs/axios-config';
 import { API_BASE_URL, PROD } from '../configs/host-config';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import RecommendedProducts from './RecommendedProducts';
 
 const ProductDetail = () => {
   const [product, setProduct] = useState(null);
@@ -133,6 +134,7 @@ const ProductDetail = () => {
           />
         ))}
       </div>
+      <RecommendedProducts />
 
       {/* 맨 위로 버튼 */}
       {showScrollTop && (
