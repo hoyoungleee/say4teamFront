@@ -12,6 +12,7 @@ import Contact from './Contact/Contact';
 import CartPage from './order/CartPage';
 import Orderpages from './order/Orderpages';
 import MainPages from './main/MainPages';
+import ProductDetail from './Shop/ProductDetail';
 
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
@@ -41,6 +42,7 @@ function App() {
                 <Route path='/member/join' element={<JoinPage />} />
                 <Route path='/mypage' element={<MyPage />} />
                 <Route path='/mypage/profile' element={<ProfilePage />} />
+                <Route path='/product/detail/:id' element={<ProductDetail />} />
               </Routes>
               <Footer />
             </>
