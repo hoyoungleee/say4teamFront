@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './ProductDetail.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../configs/axios-config';
-import { API_BASE_URL, PROD } from '../configs/host-config';
+import { API_BASE_URL, PROD, CART } from '../configs/host-config';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import RecommendedProducts from './RecommendedProducts';
+import AuthContext from '../context/UserContext';
 
 const ProductDetail = () => {
+  const navigate = useNavigate();
+  const { isLoggedIn } = useContext(AuthContext);
+
   const [product, setProduct] = useState(null);
   const [activeTab, setActiveTab] = useState('DETAIL');
   const { id } = useParams();
@@ -34,6 +38,69 @@ const ProductDetail = () => {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBuyClick = async (productId) => {
+    if (!isLoggedIn) {
+      alert('회원가입이나 로그인 후 진행하세요!');
+      return;
+    }
+    try {
+      const cartItem = {
+        productId,
+        quantity: 1,
+      };
+
+      const res = await axiosInstance.post(
+        `${API_BASE_URL}${CART}/items`,
+        cartItem,
+      );
+      if (res) {
+        const carts = await axiosInstance.get(`${API_BASE_URL}${CART}/details`);
+        console.log(carts.data);
+
+        if (carts) {
+          const totalPrice = carts.data.totalPrice;
+          console.log(carts.data.items);
+          console.log(carts.data.totalPrice);
+
+          navigate('/order', {
+            state: { cartItems: carts.data.items, totalPrice },
+          }); // 상품 정보와 총 가격을 state로 전달
+        }
+      }
+    } catch (e) {
+      console.error('장바구니 넣기 실패:', e);
+      alert('장바구니 넣기 실패!');
+    }
+  };
+
+  const handleCartClick = async (productId) => {
+    if (!isLoggedIn) {
+      alert('회원가입이나 로그인 후 진행하세요!');
+      return;
+    }
+    try {
+      const cartItem = {
+        productId,
+        quantity: 1,
+      };
+
+      const res = await axiosInstance.post(
+        `${API_BASE_URL}${CART}/items`,
+        cartItem,
+      );
+      if (res) {
+        alert('장바구니 추가 성공');
+        // 성공 후 추가 작업 (ex: alert, 상태 업데이트, 이동)
+        if (window.confirm('장바구니로 이동하시겠습니까?')) {
+          navigate('/cart');
+        }
+      }
+    } catch (e) {
+      console.error('장바구니 요청 실패:', e);
+      alert('장바구니 넣기 실패!');
+    }
   };
 
   if (!product) {
@@ -117,8 +184,15 @@ const ProductDetail = () => {
           </div>
 
           <div className='product-buttons'>
-            <button className='btn buy-now'>BUY NOW</button>
-            <button className='btn add-to-cart'>ADD TO CART</button>
+            <button className='btn buy-now' onClick={() => handleBuyClick(id)}>
+              BUY NOW
+            </button>
+            <button
+              className='btn add-to-cart'
+              onClick={() => handleCartClick(id)}
+            >
+              ADD TO CART
+            </button>
           </div>
         </div>
       </div>
