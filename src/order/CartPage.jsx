@@ -1,42 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { axiosInstance } from '../configs/axios-config'; // 올바른 임포트 방식
+import { axiosInstance } from '../configs/axios-config';
 import { API_BASE_URL, CART } from '../configs/host-config';
-import './CartPage.css'; // CSS 파일 임포트
+import './CartPage.css';
 
 const CartPage = () => {
-  const [cart, setCart] = useState(null); // 장바구니 데이터 상태
-  const [loading, setLoading] = useState(true); // 로딩 상태
+  const [cart, setCart] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // 장바구니 조회 함수
   const fetchCart = async () => {
     try {
       const res = await axiosInstance.get(`${API_BASE_URL}${CART}/details`);
-      console.log('Received Cart:', res.data); // 데이터가 제대로 오는지 확인
-      setCart(res.data); // 장바구니 데이터 설정
+      console.log('Received Cart:', res.data);
+      setCart(res.data);
     } catch (err) {
-      console.error('장바구니 조회 실패:', err); // 오류 처리
+      console.error('장바구니 조회 실패:', err);
     } finally {
-      setLoading(false); // 로딩 상태 해제
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchCart(); // 컴포넌트 마운트 시 장바구니 조회
+    fetchCart();
   }, []);
 
-  // 로딩 상태가 true일 경우 'Loading...' 텍스트 출력
   if (loading) return <div>Loading...</div>;
 
-  // cart가 null이거나 cart.items가 없을 경우 처리
   if (!cart || !cart.items || cart.items.length === 0) {
-    return <div>장바구니가 비어 있습니다.</div>;
+    return (
+      <div className='cart-container empty-cart'>
+        <h2>Your Cart</h2>
+        <hr />
+        <div className='empty-message'> Your Cart is Empty!</div>
+        <hr />
+      </div>
+    );
   }
 
-  // 개별 상품 삭제
   const handleDelete = async (productId) => {
     try {
       await axiosInstance.delete(`${API_BASE_URL}${CART}/items/${productId}`);
-      // 상품 삭제 후, 상태 직접 갱신하여 UI 즉시 반영
       setCart((prevCart) => ({
         ...prevCart,
         items: prevCart.items.filter((item) => item.productId !== productId),
@@ -52,33 +54,17 @@ const CartPage = () => {
 
     const newQuantity = item.quantity + delta;
 
-    // 수량이 0 이하로 내려가면 상품을 삭제
     if (newQuantity <= 0) {
       await handleDelete(productId);
       return;
     }
 
     try {
-      // 1. 장바구니 수량 업데이트
-      await axiosInstance.post(`${API_BASE_URL}${CART}/items`, {
-        productId,
-        quantity: newQuantity,
-      });
-
-      // 2. 상품 서비스에서 재고 수량 업데이트
-      // 수량이 변경된 만큼만 재고 수량을 업데이트
-      const stockDifference = newQuantity - item.quantity; // 현재 수량과 변경된 수량 차이
-      const res = await axiosInstance.put(
-        `${API_BASE_URL}/product/updateQuantity`,
-        {
-          id: productId,
-          stockQuantity: item.stockQuantity - stockDifference, // 차이만큼 재고 업데이트
-        },
+      await axiosInstance.patch(
+        `${API_BASE_URL}${CART}/items/${productId}/quantity`,
+        { quantity: newQuantity },
       );
 
-      console.log('Stock updated', res.data); // 응답 확인
-
-      // UI 갱신: 상품 수량 변경 후 상태 업데이트
       setCart((prevCart) => ({
         ...prevCart,
         items: prevCart.items.map((cartItem) =>
@@ -89,10 +75,10 @@ const CartPage = () => {
       }));
     } catch (err) {
       console.error('수량 변경 실패:', err);
+      alert('수량 변경에 실패했습니다.');
     }
   };
 
-  // 전체 가격 계산
   const totalPrice = cart.items.reduce(
     (sum, item) => sum + item.unitPrice * item.quantity,
     0,
