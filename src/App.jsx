@@ -5,24 +5,23 @@ import ProfilePage from './users/ProfilePage';
 import LoginPage from './users/LoginPage';
 import JoinComplete from './users/JoinComplete';
 import './App.css';
-import MainPages from './main/MainPages';
 import SHOP from './Shop/SHOP';
 import COMPANY from './Company/COMPANY';
 import StorePage from './Store/StorePage';
 import Contact from './Contact/Contact';
 import CartPage from './order/CartPage';
 import Orderpages from './order/Orderpages';
+import MainPages from './main/MainPages';
 
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<SHOP />} />
+      <Route path='/' element={<MainPages />} />
       <Route path='/login' element={<LoginPage />} />
       <Route path='/member/join' element={<JoinPage />} />
       <Route path='/member/join-complete' element={<JoinComplete />} />
       <Route path='/mypage' element={<MyPage />} />
       <Route path='/mypage/profile' element={<ProfilePage />} />
-      <Route path='/' element={<MainPages />} />
       <Route path='/shop' element={<SHOP />} />
       <Route path='/company' element={<COMPANY />} />
       <Route path='/store' element={<StorePage />} />
