@@ -23,12 +23,12 @@ function App() {
         {/* 헤더 푸터 필요없으면 여기 */}
         <Route path='/member/join-complete' element={<JoinComplete />} />
         <Route path='/' element={<MainPages />} />
-        <Route path='/shop' element={<SHOP />} />
         <Route path='/store' element={<StorePage />} />
         <Route path='/company' element={<COMPANY />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/cart' element={<CartPage />} />
         <Route path='/order' element={<Orderpages />} />
+        <Route path='/shop' element={<SHOP />} />
 
         {/* 헤더 푸터 필요하면 여기 */}
         <Route
