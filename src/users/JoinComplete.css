@@ -1,0 +1,31 @@
+.join-page-container {
+  padding: 80px 20px;
+  text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.join-title {
+  font-size: 24px;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+.join-steps {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  font-size: 16px;
+  margin-bottom: 60px;
+  color: #444;
+}
+
+.join-step {
+  font-weight: 500;
+}
+
+.join-complete-msg {
+  font-size: 20px;
+  color: #333;
+  margin-top: 60px;
+  font-weight: 400;
+}

@@ -1,0 +1,33 @@
+.mypage-container {
+  padding: 80px 20px;
+  text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.mypage-title {
+  font-size: 28px;
+  margin-bottom: 60px;
+}
+
+.mypage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  justify-items: center;
+}
+
+.mypage-item {
+  width: 160px;
+  height: 80px;
+  line-height: 80px;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.mypage-item:hover {
+  background-color: #eeeeee;
+}
