@@ -1,0 +1,133 @@
+.cart-container {
+  padding: 80px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #1b1b1b;
+}
+
+.cart-container h2 {
+  font-size: 20px;
+  margin-bottom: 80px;
+  text-align: center;
+  font-weight: 400;
+  color: #1b1b1b;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #ccc;
+  padding: 30px 0;
+}
+
+.cart-img {
+  width: 140px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.cart-details {
+  flex-grow: 1;
+  padding-left: 30px;
+}
+
+.cart-details h3 {
+  font-size: 18px;
+  color: #1b1b1b; /* 텍스트 명확히 보이도록 */
+  margin-bottom: 10px;
+}
+
+.delete-link {
+  text-decoration: none;
+  color: #000;
+  font-size: 12px;
+  font-weight: normal;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer; /* 클릭 가능한 느낌을 주기 위해 포인터 커서 */
+  border: none; /* 테두리 제거 */
+}
+
+.empty-cart {
+  text-align: center;
+}
+
+.empty-message {
+  margin-top: 80px;
+  margin-bottom: 90px;
+  font-size: 1.5rem;
+  color: #777;
+}
+
+.cart-summary .price {
+  display: flex; /* 가로로 배치 */
+  align-items: center; /* 세로 가운데 정렬 */
+  gap: 230px; /* p 태그와 가격 간 간격 */
+}
+
+.cart-summary .price p {
+  margin: 0; /* p 태그의 기본 여백 제거 */
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  gap: 60px; /* 버튼과 숫자 간 간격 */
+}
+
+.cart-summary .quantity p {
+  margin-right: 59px;
+}
+
+.quantity button {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0; /* 내부 여백 제거 */
+}
+
+.cart-total {
+  text-align: right;
+  margin-top: 40px;
+  font-size: 15px;
+}
+
+.cart-total > div {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.total-row {
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.cart-buttons {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkout-btn,
+.continue-btn {
+  padding: 12px;
+  font-weight: bold;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.continue-btn {
+  background: transparent;
+  border: 1px solid black;
+  color: black;
+}
