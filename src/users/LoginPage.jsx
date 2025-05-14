@@ -40,13 +40,16 @@ const LoginPage = () => {
         return;
       }
 
-      const { token, id, role } = resData.result;
+      const { token, email, id, role, phone, address } = resData.result;
 
       localStorage.setItem('ACCESS_TOKEN', token);
+      localStorage.setItem('LOGIN_ID', email);
       localStorage.setItem('LOGIN_ID', id);
       localStorage.setItem('ROLE', role);
+      localStorage.setItem('PHONE', phone);
+      localStorage.setItem('ADDRESS', address);
 
-      onLogin({ token, id, role });
+      onLogin({ token, email, id, role, phone, address });
 
       alert('로그인 성공!');
       navigate('/');

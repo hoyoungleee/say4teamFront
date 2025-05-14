@@ -3,6 +3,7 @@ import axios from 'axios';
 import './ProductGrid.css';
 import { API_BASE_URL, PROD } from '../configs/host-config';
 import { throttle } from 'lodash';
+import { useNavigate } from 'react-router-dom';
 
 const ProductGrid = ({ categoryId }) => {
   const [sortType, setSortType] = useState('');
@@ -11,6 +12,7 @@ const ProductGrid = ({ categoryId }) => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
   const observer = useRef();
+  const navigate = useNavigate();
 
   const fetchProducts = useCallback(
     async (targetPage = 0, reset = false) => {
@@ -79,6 +81,10 @@ const ProductGrid = ({ categoryId }) => {
     setSortType(newSort);
   };
 
+  const handleProductClick = (productId) => {
+    navigate(`/product/detail/${productId}`);
+  };
+
   return (
     <>
       <div className='ProductListHeader'>
@@ -109,6 +115,7 @@ const ProductGrid = ({ categoryId }) => {
               className='product-card'
               key={product.id}
               ref={isLast ? lastProductRef : null}
+              onClick={() => handleProductClick(product.id)}
             >
               <div className='image-wrapper'>
                 <img

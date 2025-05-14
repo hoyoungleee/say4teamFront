@@ -22,6 +22,7 @@
   background-color: #f4f4f4;
   position: relative;
   overflow: hidden; /* 텍스트가 넘치는 부분은 보이지 않도록 */
+  border-bottom: 1px solid black;
 }
 
 .marquee-wrapper {
