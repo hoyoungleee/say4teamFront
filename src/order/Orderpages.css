@@ -16,6 +16,22 @@
   margin-top: 70px;
 }
 
+.radio-row {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  white-space: nowrap; /* 줄바꿈 방지 */
+}
+
 .afterbox {
   margin-left: 20px;
 }
@@ -100,6 +116,49 @@
   display: flex;
   gap: 5px;
   align-items: center;
+}
+
+.checkbox-confirm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 25px;
+  font-size: 15px;
+  font-weight: 500;
+  margin-left: 10px;
+  margin-right: -90px;
+}
+
+.checkbox-confirm input[type='checkbox'] {
+  margin-right: -420px; /* 체크박스와 텍스트 간의 간격 */
+  margin-top: 6px;
+  transform: scale(1.2); /* 체크박스 크기 조정 (원하는 크기로 조정 가능) */
+}
+
+.checkbox-confirm span {
+  line-height: 1.5; /* 텍스트 줄 간격 조정 */
+}
+
+.order-submit-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 두 요소를 양쪽 끝으로 배치 */
+  margin-top: 20px;
+  margin-left: 660px;
+}
+
+button[type='submit'] {
+  margin-left: 10px; /* 체크박스와 버튼 간의 간격 추가 */
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type='submit']:hover {
+  background-color: #45a049;
 }
 
 .ordertotalbox {

@@ -64,11 +64,19 @@
 .cart-summary .price {
   display: flex; /* 가로로 배치 */
   align-items: center; /* 세로 가운데 정렬 */
-  gap: 230px; /* p 태그와 가격 간 간격 */
+  justify-content: space-between; /* 양 끝으로 정렬 */
+  width: 100%; /* 100% 너비 설정 */
 }
 
 .cart-summary .price p {
   margin: 0; /* p 태그의 기본 여백 제거 */
+  white-space: nowrap; /* 긴 텍스트가 줄 바꿈되지 않도록 설정 */
+}
+
+.cart-summary .price span {
+  font-size: 18px; /* 가격의 폰트 크기 지정 */
+  font-weight: bold;
+  text-align: right; /* 오른쪽 정렬 */
 }
 
 .quantity {

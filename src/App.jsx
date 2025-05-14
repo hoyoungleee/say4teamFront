@@ -16,6 +16,7 @@ import ProductDetail from './Shop/ProductDetail';
 
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
+import OrderCheck from './order/OrderCheck';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
         <Route path='/cart' element={<CartPage />} />
         <Route path='/order' element={<Orderpages />} />
         <Route path='/shop' element={<SHOP />} />
-
+        <Route path='/ordercheck' element={<OrderCheck />} />'
         {/* 헤더 푸터 필요하면 여기 */}
         <Route
           path='*'
