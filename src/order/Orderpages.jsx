@@ -72,21 +72,28 @@ const Orderpages = () => {
       <div className='orderbigpage'>
         <p>Order</p>
         <form className='formbox' onSubmit={handleSubmit}>
-          <input
-            type='radio'
-            name='inputadd'
-            value='회원정보와동일시'
-            onChange={handleRadioChange}
-          />
-          회원 정보와 동일
-          <input
-            type='radio'
-            name='inputadd'
-            value='새로운배송지'
-            className='afterbox'
-            onChange={handleRadioChange}
-          />
-          새로운 배송지
+          <div className='radio-row'>
+            <label className='radio-option'>
+              <input
+                type='radio'
+                name='inputadd'
+                value='회원정보와동일시'
+                onChange={handleRadioChange}
+                required
+              />
+              <span>회원 정보와 동일</span>
+            </label>
+
+            <label className='radio-option'>
+              <input
+                type='radio'
+                name='inputadd'
+                value='새로운배송지'
+                onChange={handleRadioChange}
+              />
+              <span>새로운 배송지</span>
+            </label>
+          </div>
           <div className='ordernamemain'>
             <label htmlFor='emailAddress'>이메일</label>
             <input
@@ -146,9 +153,13 @@ const Orderpages = () => {
               </div>
             </div>
           </div>
-          <input type='checkbox' required /> 결제정보를 확인하였으며, 구매진행에
-          동의합니다.
-          <button type='submit'>결제하기</button>
+          <div className='checkbox-confirm'>
+            <input type='checkbox' required />
+            <span>결제정보를 확인하였으며, 구매진행에 동의합니다.</span>
+          </div>
+          <div className='order-submit-wrapper'>
+            <button type='submit'>결제하기</button>
+          </div>
         </form>
       </div>
       <Footer />

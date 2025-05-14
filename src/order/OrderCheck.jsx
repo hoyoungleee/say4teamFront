@@ -11,6 +11,24 @@ const OrderCheck = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // 주문 상태를 한글로 변환하는 함수
+  const getOrderStatusLabel = (status) => {
+    switch (status) {
+      case 'ORDERED':
+        return '주문완료';
+      case 'SHIPPED':
+        return '배송중';
+      case 'DELIVERED':
+        return '배송완료';
+      case 'CANCELLED':
+        return '주문취소';
+      case 'RETURNED':
+        return '반품완료';
+      default:
+        return status;
+    }
+  };
+
   // 주문 내역 불러오기
   useEffect(() => {
     const fetchOrders = async () => {
@@ -94,7 +112,8 @@ const OrderCheck = () => {
                         {new Date(order.orderedAt).toLocaleDateString()}
                       </p>
                       <p>
-                        <strong>주문 상태:</strong> {order.orderStatus}
+                        <strong>주문 상태:</strong>{' '}
+                        {getOrderStatusLabel(order.orderStatus)}
                       </p>
                       <p>
                         <strong>총 금액:</strong>{' '}
