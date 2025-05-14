@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import axios from 'axios';
+import { AuthContextProvider } from './context/UserContext';
 
 axios.interceptors.request.use(
   (config) => {
@@ -67,7 +68,9 @@ axios.interceptors.response.use(
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );

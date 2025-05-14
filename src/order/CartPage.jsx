@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { axiosInstance } from '../configs/axios-config';
+import axiosInstance from '../configs/axios-config';
 import { API_BASE_URL, CART } from '../configs/host-config';
 import './CartPage.css';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import CartItem from './CartItem';
+import CartTotal from './CartTotal';
 
 const CartPage = () => {
   const [cart, setCart] = useState(null);
@@ -10,7 +14,6 @@ const CartPage = () => {
   const fetchCart = async () => {
     try {
       const res = await axiosInstance.get(`${API_BASE_URL}${CART}/details`);
-      console.log('Received Cart:', res.data);
       setCart(res.data);
     } catch (err) {
       console.error('장바구니 조회 실패:', err);
@@ -27,35 +30,23 @@ const CartPage = () => {
 
   if (!cart || !cart.items || cart.items.length === 0) {
     return (
-      <div className='cart-container empty-cart'>
-        <h2>Your Cart</h2>
-        <hr />
-        <div className='empty-message'> Your Cart is Empty!</div>
-        <hr />
-      </div>
+      <>
+        <Header />
+        <div className='cart-container empty-cart'>
+          <h2>Your Cart</h2>
+          <hr />
+          <div className='empty-message'> Your Cart is Empty!</div>
+          <hr />
+        </div>
+        <Footer />
+      </>
     );
   }
 
-  const handleDelete = async (productId) => {
-    try {
-      await axiosInstance.delete(`${API_BASE_URL}${CART}/items/${productId}`);
-      setCart((prevCart) => ({
-        ...prevCart,
-        items: prevCart.items.filter((item) => item.productId !== productId),
-      }));
-    } catch (err) {
-      console.error('상품 삭제 실패:', err);
-    }
-  };
-
-  const handleQuantityChange = async (productId, delta) => {
-    const item = cart.items.find((item) => item.productId === productId);
-    if (!item) return;
-
-    const newQuantity = item.quantity + delta;
-
+  // 수량 변경 시 서버에 반영
+  const handleItemQuantityChange = async (productId, newQuantity) => {
     if (newQuantity <= 0) {
-      await handleDelete(productId);
+      await handleDelete(productId); // 수량이 0 이하이면 삭제
       return;
     }
 
@@ -67,10 +58,10 @@ const CartPage = () => {
 
       setCart((prevCart) => ({
         ...prevCart,
-        items: prevCart.items.map((cartItem) =>
-          cartItem.productId === productId
-            ? { ...cartItem, quantity: newQuantity }
-            : cartItem,
+        items: prevCart.items.map((item) =>
+          item.productId === productId
+            ? { ...item, quantity: newQuantity }
+            : item,
         ),
       }));
     } catch (err) {
@@ -79,67 +70,38 @@ const CartPage = () => {
     }
   };
 
-  const totalPrice = cart.items.reduce(
-    (sum, item) => sum + item.unitPrice * item.quantity,
-    0,
-  );
+  // 상품 삭제 시 서버에 반영
+  const handleDelete = async (productId) => {
+    try {
+      await axiosInstance.delete(`${API_BASE_URL}${CART}/items/${productId}`);
+
+      setCart((prevCart) => ({
+        ...prevCart,
+        items: prevCart.items.filter((item) => item.productId !== productId),
+      }));
+    } catch (err) {
+      console.error('상품 삭제 실패:', err);
+    }
+  };
 
   return (
-    <div className='cart-container'>
-      <h2>Your Cart</h2>
-
-      {cart.items.map((item) => (
-        <div className='cart-item' key={item.productId}>
-          <img
-            src={item.imageUrl}
-            alt={item.productName}
-            className='cart-img'
+    <>
+      <Header />
+      <div className='cart-container'>
+        <h2>Your Cart</h2>
+        {cart.items.map((item) => (
+          <CartItem
+            key={item.productId}
+            item={item}
+            onQuantityChange={handleItemQuantityChange}
+            onDelete={handleDelete}
           />
-          <div className='cart-details'>
-            <h3>{item.productName}</h3>
-            <button
-              onClick={() => handleDelete(item.productId)}
-              className='delete-link'
-            >
-              Delete
-            </button>
-          </div>
-          <div className='cart-summary'>
-            <div className='quantity'>
-              <p>Quantity</p>
-              <button onClick={() => handleQuantityChange(item.productId, -1)}>
-                -
-              </button>
-              <span>{item.quantity}</span>
-              <button onClick={() => handleQuantityChange(item.productId, 1)}>
-                +
-              </button>
-            </div>
-            <div className='price'>
-              <p>Price</p>
-              {(item.unitPrice * item.quantity).toLocaleString()}원
-            </div>
-          </div>
-        </div>
-      ))}
-
-      <hr />
-
-      <div className='cart-total'>
-        <div>
-          <div>Price</div>
-          <div>{totalPrice.toLocaleString()}원</div>
-        </div>
-        <div className='total-row'>
-          <div>Total</div>
-          <div>{totalPrice.toLocaleString()}원</div>
-        </div>
+        ))}
+        <hr />
+        <CartTotal cart={cart} />
+        <Footer />
       </div>
-
-      <div className='cart-buttons'>
-        <button className='checkout-btn'>Check out</button>
-      </div>
-    </div>
+    </>
   );
 };
 

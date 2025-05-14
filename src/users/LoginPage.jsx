@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LoginPage.css';
+import AuthContext from '../context/UserContext';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { onLogin } = useContext(AuthContext);
 
   const [form, setForm] = useState({
     email: '',
@@ -18,6 +20,10 @@ const LoginPage = () => {
       ...form,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleJoin = () => {
+    navigate('/member/join');
   };
 
   const handleLogin = async () => {
@@ -40,8 +46,10 @@ const LoginPage = () => {
       localStorage.setItem('LOGIN_ID', id);
       localStorage.setItem('ROLE', role);
 
+      onLogin({ token, id, role });
+
       alert('로그인 성공!');
-      navigate('/mypage');
+      navigate('/');
     } catch (error) {
       console.error('로그인 실패:', error);
       alert('이메일 또는 비밀번호가 올바르지 않습니다.');
@@ -83,7 +91,9 @@ const LoginPage = () => {
 
         <div className='login-links'>
           <a href='#'>FORGOT ID / PW</a>
-          <a href='#'>JOIN</a>
+          <a href='#' onClick={handleJoin}>
+            JOIN
+          </a>
           <a href='#'>비회원 주문조회</a>
         </div>
 
