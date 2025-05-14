@@ -10,6 +10,7 @@ import SHOP from './Shop/SHOP';
 import COMPANY from './Company/COMPANY';
 import StorePage from './Store/StorePage';
 import Contact from './Contact/Contact';
+import ProductDetail from './Shop/ProductDetail';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Route path='/company' element={<COMPANY />} />
       <Route path='/store' element={<StorePage />} />
       <Route path='/contact' element={<Contact />} />
+      <Route path='/product/detail/:id' element={<ProductDetail />} />
     </Routes>
     // {/* </BrowserRouter> */}
   );

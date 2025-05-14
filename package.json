@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.1.0",
+    "@mui/material": "^7.1.0",
     "axios": "^1.9.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -22,7 +26,8 @@
     "react-slick": "^0.30.3",
     "sass": "^1.86.3",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^6.1.18"
+    "styled-components": "^6.1.18",
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
