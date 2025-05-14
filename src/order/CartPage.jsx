@@ -11,6 +11,7 @@ const CartPage = () => {
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // 장바구니 정보 가져오는 함수
   const fetchCart = async () => {
     try {
       const res = await axiosInstance.get(`${API_BASE_URL}${CART}/details`);
@@ -22,10 +23,12 @@ const CartPage = () => {
     }
   };
 
+  // 페이지 로드 시 장바구니 정보 fetch
   useEffect(() => {
     fetchCart();
-  }, []);
+  }, []); // 첫 번째 렌더링 시에만 호출
 
+  // 장바구니가 비어 있을 경우 메시지 표시
   if (loading) return <div>Loading...</div>;
 
   if (!cart || !cart.items || cart.items.length === 0) {
@@ -56,6 +59,7 @@ const CartPage = () => {
         { quantity: newQuantity },
       );
 
+      // 장바구니 상태 업데이트
       setCart((prevCart) => ({
         ...prevCart,
         items: prevCart.items.map((item) =>
@@ -75,6 +79,7 @@ const CartPage = () => {
     try {
       await axiosInstance.delete(`${API_BASE_URL}${CART}/items/${productId}`);
 
+      // 장바구니 상태 업데이트
       setCart((prevCart) => ({
         ...prevCart,
         items: prevCart.items.filter((item) => item.productId !== productId),
@@ -84,6 +89,7 @@ const CartPage = () => {
     }
   };
 
+  // 장바구니 페이지 렌더링
   return (
     <>
       <Header />

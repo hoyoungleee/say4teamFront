@@ -40,7 +40,7 @@ const CartItem = ({ item, onQuantityChange, onDelete }) => {
         </div>
         <div className='price'>
           <p>Price</p>
-          {(item.unitPrice * item.quantity).toLocaleString()}원
+          <span>{(item.unitPrice * item.quantity).toLocaleString()}원</span>
         </div>
       </div>
     </div>
