@@ -48,28 +48,28 @@ const Main = () => {
                 <img src={img12} />
                 <div>
                   <p className='fivetext'>Liquified Persian Rug Green</p>
-                  <p className='fivetext'>170,000원</p>
+                  <p className='fivetext'>{t('main2')}</p>
                 </div>
               </div>
               <div className='item'>
                 <img src={img13} />
                 <div>
-                  <p className='fivetext'>Liquified Persian Rug Green</p>
-                  <p className='fivetext'>170,000원</p>
+                  <p className='fivetext'>Liquified Persian Rug Black</p>
+                  <p className='fivetext'>{t('main2')}</p>
                 </div>
               </div>
               <div className='item'>
                 <img src={img14} />
                 <div>
-                  <p className='fivetext'>Liquified Persian Rug Green</p>
-                  <p className='fivetext'>170,000원</p>
+                  <p className='fivetext'>Liquified Gradient Rug Yellow</p>
+                  <p className='fivetext'>{t('main2')}</p>
                 </div>
               </div>
               <div className='item'>
                 <img src={img15} />
                 <div>
-                  <p className='fivetex'>Liquified Persian Rug Green</p>
-                  <p className='fivetext'>170,000원</p>
+                  <p className='fivetex'>Liquified Persian Mouse Pad</p>
+                  <p className='fivetext'>{t('main2')}</p>
                 </div>
               </div>
             </div>
@@ -80,13 +80,8 @@ const Main = () => {
           <br />
           <div className='sixmain'>
             <p className='sixmaintittle'>JAGAE COLLECTION</p>
-            <p className='sixmainser'>
-              국내산 백자개를 엄선하여, 40년 이상 경력을 지닌 장인의 손끝에서
-            </p>
-            <p className='sixmainsersecond'>
-              한 조각씩 절삭되고 정성스럽게 붙여지는 섬세한 공정과 정교한 마감을
-              거쳐 완성되는 자개 컬렉션.
-            </p>
+            <p className='sixmainser'>{t('maintext1')}</p>
+            <p className='sixmainsersecond'>{t('maintext2')}</p>
           </div>
         </div>
         <div className='sevenbigmain'>
@@ -100,19 +95,19 @@ const Main = () => {
 
           <div className='eightmain'>
             <div>
-              <p className='eighttext'>#MD'S PICK #MD픽</p>
+              <p className='eighttext'>{t('keyword1')}</p>
               <img src={img17} />
             </div>
             <div>
-              <p className='eighttext'>#GIFT #기프트</p>
+              <p className='eighttext'>{t('keyword2')}</p>
               <img src={img18} />
             </div>
             <div>
-              <p className='eighttext'>#BLACK #블랙아이템</p>
+              <p className='eighttext'>{t('keyword3')}</p>
               <img src={img19} />
             </div>
             <div>
-              <p className='eighttext'>#DESKTERIOR #데스크테리어</p>
+              <p className='eighttext'>{t('keyword4')}</p>
               <img src={img20} />
             </div>
           </div>

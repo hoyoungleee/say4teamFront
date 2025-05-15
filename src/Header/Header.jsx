@@ -60,8 +60,8 @@ const Header = () => {
             <p className='lang' onClick={toggleLangMenu}>language</p>
             {showLangMenu && (
               <div className='language-dropdown'>
-                <button onClick={() => i18n.changeLanguage('ko')}>KO</button>
-                <button onClick={() => i18n.changeLanguage('en')}>EN</button>
+                <button onClick={() => i18n.changeLanguage('ko')}>KOR</button>
+                <button onClick={() => i18n.changeLanguage('en')}>ENG</button>
               </div>
             )}
           </div>

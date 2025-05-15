@@ -7,7 +7,6 @@ const StorePage = () => {
   return (
     <>
     <Header/>
-    {/* 위쪽에 있는 슬라이더*/}
     <StoreSlider/>
     <Storetextone/>
     <Footer/>
