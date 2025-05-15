@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import axiosInstance from '../configs/axios-config';
 import { API_BASE_URL, PROD, REVIEW } from '../configs/host-config';
 import ReviewModal from './ReviewModal';
-import { API_BASE_URL, PROD } from '../configs/host-config';
 import { useNavigate } from 'react-router-dom';
 
 const RecommendedSlider = ({ productId }) => {
@@ -195,7 +194,6 @@ const RecommendedSlider = ({ productId }) => {
               style={{ cursor: 'pointer' }}
             >
               <img
-                src={item.thumbnailPath || item.imgUrl}
                 src={item.thumbnailPath || item.imgUrl}
                 alt={item.name}
                 className='recommended-image'
