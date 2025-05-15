@@ -6,10 +6,9 @@ if (clientHostName === 'localhost') {
   backendHostName = 'http://localhost:8000';
 } else if (
   clientHostName ===
-  'playdata-orderservice4908.s3-website.ap-northeast-2.amazonaws.com'
+  'http://orderservice-prod-image31145.s3-website.ap-northeast-2.amazonaws.com'
 ) {
-  backendHostName =
-    'https://playdata-orderservice4908.s3-website.ap-northeast-2.amazonaws.com';
+  backendHostName = 'http://3.38.153.241:8000';
 }
 
 export const API_BASE_URL = backendHostName;
