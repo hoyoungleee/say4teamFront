@@ -17,10 +17,12 @@ import ProductDetail from './Shop/ProductDetail';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import OrderCheck from './order/OrderCheck';
+import ScrollToTop from './ScrollToTop';
 
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         {/* 헤더 푸터 필요없으면 여기 */}
         <Route path='/member/join-complete' element={<JoinComplete />} />

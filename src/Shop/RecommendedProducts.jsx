@@ -7,9 +7,11 @@ import './RecommendedProducts.css';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../configs/axios-config';
 import { API_BASE_URL, PROD } from '../configs/host-config';
+import { useNavigate } from 'react-router-dom';
 
 const RecommendedSlider = () => {
   const [recommendedItems, setRecommendedItems] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecommended = async () => {
@@ -31,6 +33,10 @@ const RecommendedSlider = () => {
     fetchRecommended();
   }, []);
 
+  const handleClick = (id) => {
+    navigate(`/product/detail/${id}`);
+  };
+
   return (
     <div className='recommended-wrapper' style={{ marginTop: '50px' }}>
       <h3 className='recommended-title'>추천 상품</h3>
@@ -46,9 +52,13 @@ const RecommendedSlider = () => {
       >
         {recommendedItems.map((item) => (
           <SwiperSlide key={item.id}>
-            <div className='recommended-card'>
+            <div
+              className='recommended-card'
+              onClick={() => handleClick(item.id)}
+              style={{ cursor: 'pointer' }}
+            >
               <img
-                src={item.thumbnailPath || item.imgUrl} // 서버에서 오는 경로로 조정
+                src={item.thumbnailPath || item.imgUrl}
                 alt={item.name}
                 className='recommended-image'
               />
