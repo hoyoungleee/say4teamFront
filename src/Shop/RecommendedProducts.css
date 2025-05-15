@@ -1,0 +1,261 @@
+.recommended-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.recommended-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 32px;
+  padding-left: 60px;
+}
+
+.recommended-swiper {
+  position: relative;
+}
+
+/* 슬라이드 카드 */
+.recommended-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.recommended-image {
+  width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.recommended-name {
+  font-size: 14px;
+  color: #111;
+}
+
+.recommended-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+}
+
+/* Swiper 버튼 위치 조정 */
+.swiper-button-prev {
+  left: -8px;
+}
+
+.swiper-button-next {
+  right: -8px;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 20px;
+  color: #333;
+}
+
+/* 페이지네이션 점 커스터마이징 */
+.swiper-pagination {
+  margin-top: 30px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  margin: 0 6px;
+  background: #ccc;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: #000;
+}
+
+.review-section {
+  margin-top: 30px;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid black;
+}
+
+.review-title {
+  font-size: 23px;
+}
+
+.review-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.review-button {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.review-button:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  color: #ccc;
+}
+
+.review-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 40px;
+  line-height: 50px;
+  border-bottom: 0.7px solid gray;
+}
+
+.review-sort-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.review-sort-button {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 6px;
+  color: #333;
+}
+
+.review-sort-button .arrow {
+  font-size: 10px;
+  margin-left: 4px;
+}
+
+.review-sort-options {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  width: 160px;
+  z-index: 1000;
+}
+
+.review-sort-options li {
+  list-style: none;
+  padding: 0 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.review-sort-options li:hover {
+  background-color: #f6f6f6;
+}
+
+.review-sort-options li.active {
+  font-weight: bold;
+  color: #000;
+}
+
+.review-sort-options li.disabled {
+  color: #aaa;
+  font-size: 12px;
+  padding: 8px 14px;
+  cursor: default;
+}
+
+.review-search {
+  padding: 10px 14px;
+  width: 280px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.review-empty {
+  text-align: center;
+  color: #888;
+}
+.review-empty p {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+.review-empty strong {
+  font-size: 17px;
+}
+
+.review-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.review-item {
+  border-bottom: 1px solid #ddd;
+  padding: 24px 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-buttons {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.review-buttons button {
+  background: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 4px 6px;
+  transition: color 0.2s;
+}
+.review-buttons button:hover {
+  color: #ff4d4d;
+}
+
+.review-user {
+  position: absolute;
+  top: 38px;
+  right: 12px;
+  color: #888;
+  font-size: 13px;
+}
+
+.review-item > p {
+  font-size: 15px;
+  color: #222;
+  margin: 0;
+  padding-left: 10px;
+}
+
+.review-image {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-top: 10px;
+}

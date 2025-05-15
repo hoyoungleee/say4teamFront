@@ -1,0 +1,44 @@
+.mypage-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.mypage-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 60px;
+}
+
+.mypage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-color: white;
+}
+
+.mypage-cell {
+  padding: 50px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.mypage-cell::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: -32px;
+  width: 65px;
+  height: 1px;
+  background-color: #cdcdcd;
+  transform: rotate(-50deg);
+}
+
+.mypage-cell:nth-child(3)::after,
+.mypage-cell:nth-child(6)::after {
+  display: none;
+}

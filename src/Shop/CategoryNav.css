@@ -1,0 +1,20 @@
+.categorynav {
+    display: flex;
+    width: 100vw;
+    height: 45px;
+    justify-content: center;
+    border-bottom: 1px solid black;
+    gap: 50px
+}
+
+.categorynav > p {
+    color: #7F7F7F;
+    font-size: 14px;
+    text-align: center;
+    line-height: 15px;
+}
+
+.categorynav > p:hover {
+    font-size: 15.1px;
+    cursor: pointer;
+}

@@ -33,6 +33,7 @@
   width: 400px;
   margin-left: 10px;
   border: 1px solid black;
+  height: 35px;
 }
 
 .topbutton:hover {
@@ -57,52 +58,45 @@
 }
 
 .secondbottonpage {
-    color: black;
-    font-size: 14px;
+  color: black;
+  font-size: 14px;
 }
 
 .firstbottonpage {
-    color: black;
-    display:inline-flex;
+  color: black;
+  display: inline-flex;
 }
 
 .companynum {
-    font-weight: 600;
-    color: black;
+  font-weight: 600;
+  color: black;
 }
 
 .maillink {
-    color: #1B72E7;
+  color: #1b72e7;
 }
 
 .maillink:hover {
-    text-decoration: underline;
-    cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .icons {
-    margin: 0 40px;
+  margin: 0 40px;
 }
 
 .instagramicon {
-    margin-right: 25px;
+  margin-right: 25px;
 }
 
-
 .agrees {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .agree {
-    margin-right: 15px;
+  margin-right: 15px;
 }
 
 .company {
-    line-height: 3px;
+  line-height: 3px;
 }
-
-
-
-
-
-

@@ -1,0 +1,36 @@
+.topLogouttitle {
+    color: black;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 450;
+    height: 140px;
+    width: 100vw;
+    line-height: 100px;
+}
+
+.middleLogouttitle {
+    color: black;
+    text-align: center;
+    height: 350px;
+    line-height: 350px;
+    font-size: 21px;
+    font-weight: 400;
+}
+.bottonbutton {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.bottonbutton > button {
+    border-radius: 0%;
+    width: 450px;
+    letter-spacing: 0.2px;
+}
+
+.bottonbutton > button:hover {
+    background-color: white;
+    color: black;
+    border-radius: 0%;
+}
+

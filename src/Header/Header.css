@@ -1,14 +1,16 @@
 @font-face {
-    font-family: 'Cafe24Lovingu';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Lovingu.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Cafe24Lovingu';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Lovingu.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .topheader {
   background-color: #194d28;
   height: 40px;
   line-height: 40px;
+  color: white;
 }
 
 .topheadertitle {
@@ -20,6 +22,7 @@
   background-color: #f4f4f4;
   position: relative;
   overflow: hidden; /* 텍스트가 넘치는 부분은 보이지 않도록 */
+  border-bottom: 1px solid black;
 }
 
 .marquee-wrapper {
@@ -51,23 +54,19 @@
   }
 }
 
-/* .nav {
+.nav {
   display: flex;
   position: sticky;
-  top: 0px;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
   border-bottom: 1px solid black;
-} */
+  height: 60px;
+}
 
-.nav {
-    display: flex;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: white;
-    border-bottom: 1px solid black;
-    height: 60px;
-  }
-  
+.nav a {
+  text-decoration: none;
+}
 
 .navone {
   display: flex;
@@ -88,6 +87,10 @@
   bottom: 55px;
 }
 
+.navtwo:hover {
+  cursor: pointer;
+}
+
 .navthree {
   display: flex;
   color: black;
@@ -98,6 +101,14 @@
   align-items: center;
 }
 
+.sayt {
+  color: black;
+  line-height: 170px;
+}
+
+.sayt:hover {
+  color: black;
+}
 
 .comp:hover::before,
 .arch:hover::before,
@@ -121,7 +132,46 @@
 .lang:hover,
 .cont:hover,
 .cart:hover,
-.logn:hover{
-    font-weight: 700;
-    cursor: pointer;
+.logn:hover {
+  font-weight: 700;
+  cursor: pointer;
+  color: black;
+}
+
+.comp,
+.arch,
+.shop,
+.stor,
+.lang,
+.cont,
+.cart,
+.logn {
+  color: black;
+}
+
+.language-container {
+  position: relative;
+}
+
+.language-dropdown {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 4px;
+  margin-top: 4px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.language-dropdown button {
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.language-dropdown button:hover {
+  background-color: #f0f0f0;
 }
