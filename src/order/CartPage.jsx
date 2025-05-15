@@ -101,8 +101,8 @@ const CartPage = () => {
         ))}
         <hr />
         <CartTotal cart={cart} />
-        <Footer />
       </div>
+      <Footer />
     </>
   );
 };
