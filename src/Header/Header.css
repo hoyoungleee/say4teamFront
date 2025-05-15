@@ -148,3 +148,30 @@
 .logn {
   color: black;
 }
+
+.language-container {
+  position: relative;
+}
+
+.language-dropdown {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 4px;
+  margin-top: 4px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.language-dropdown button {
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.language-dropdown button:hover {
+  background-color: #f0f0f0;
+}

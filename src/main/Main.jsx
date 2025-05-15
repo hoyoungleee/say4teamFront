@@ -15,9 +15,11 @@ import img19 from '../assets/19.jpg';
 import img20 from '../assets/20.jpg';
 import img21 from '../assets/21.png';
 import { NavLink } from 'react-router-dom';
-
+import { useTranslation } from 'react-i18next';
 
 const Main = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className='main-custom'>
@@ -34,10 +36,7 @@ const Main = () => {
         <br />
         <div className='fourmain'>
           <p className='fourmaintittle'>LIQUIFIED COLLECTION</p>
-          <p className='foursertittle'>
-            전통적인 페르시안 패턴을 세이투셰만의 형태감으로 재해석한 시그니처
-            컬렉션
-          </p>
+          <p className='foursertittle'>{t('main1')}</p>
         </div>
         <div>
           <div className='fivemain'>
@@ -95,47 +94,45 @@ const Main = () => {
         </div>
 
         <div className='seveneighttitle'>
-        <div>
-          <p className='seventittle'>MD KEYWORD</p>
-        </div>
+          <div>
+            <p className='seventittle'>MD KEYWORD</p>
+          </div>
 
-        <div className='eightmain'>
-          <div>
-            <p className='eighttext'>#MD'S PICK #MD픽</p>
-            <img src={img17} />
+          <div className='eightmain'>
+            <div>
+              <p className='eighttext'>#MD'S PICK #MD픽</p>
+              <img src={img17} />
+            </div>
+            <div>
+              <p className='eighttext'>#GIFT #기프트</p>
+              <img src={img18} />
+            </div>
+            <div>
+              <p className='eighttext'>#BLACK #블랙아이템</p>
+              <img src={img19} />
+            </div>
+            <div>
+              <p className='eighttext'>#DESKTERIOR #데스크테리어</p>
+              <img src={img20} />
+            </div>
           </div>
-          <div>
-            <p className='eighttext'>#GIFT #기프트</p>
-            <img src={img18} />
-          </div>
-          <div>
-            <p className='eighttext'>#BLACK #블랙아이템</p>
-            <img src={img19} />
-          </div>
-          <div>
-            <p className='eighttext'>#DESKTERIOR #데스크테리어</p>
-            <img src={img20} />
-          </div>
-        </div>
         </div>
 
         <div className='ninemain'>
           <NavLink to='/store'>
             <button className='ninebutton'>VISIT STORE</button>
-            </NavLink>
+          </NavLink>
         </div>
 
         <div className='ten'>
-            <div className='tenimg'>
-            <img src={img21}/>
-            </div>
-            <div className='tentext'>
-                <p>서울특별시 용산구 녹사평대로32길 53</p>
-                <p>53, NOKSAPYEONG-DAERO 32-GIL, YONGSAN-GU, SEOUL</p>
-            </div>
+          <div className='tenimg'>
+            <img src={img21} />
+          </div>
+          <div className='tentext'>
+            <p>서울특별시 용산구 녹사평대로32길 53</p>
+            <p>53, NOKSAPYEONG-DAERO 32-GIL, YONGSAN-GU, SEOUL</p>
+          </div>
         </div>
-
-
       </div>
     </>
   );

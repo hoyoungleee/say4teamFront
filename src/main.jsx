@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import axios from 'axios';
 import { AuthContextProvider } from './context/UserContext';
+import './i18n';
+
 
 axios.interceptors.request.use(
   (config) => {
