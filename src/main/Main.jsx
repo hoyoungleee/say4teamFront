@@ -15,9 +15,12 @@ import axios from 'axios';
 import { API_BASE_URL, PROD } from '../configs/host-config';
 
 const Main = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+
+  // 환율(원 → 달러) 예시 값
+  const USD_KRW_RATE = 1300;
 
   useEffect(() => {
     axios
@@ -39,6 +42,23 @@ const Main = () => {
 
   const handleClick = (productId) => {
     navigate(`/product/detail/${productId}`);
+  };
+
+  // 언어가 영어면 USD, 아니면 KRW로 처리
+  const currency = i18n.language === 'en' ? 'USD' : 'KRW';
+
+  // 가격 포맷 함수
+  const formatPrice = (price, currency) => {
+    if (currency === 'USD') {
+      const dollarPrice = price / USD_KRW_RATE;
+      return dollarPrice.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+      });
+    } else {
+      return price.toLocaleString('ko-KR') + '원';
+    }
   };
 
   const filledProducts = [...products];
@@ -83,7 +103,7 @@ const Main = () => {
                     <div>
                       <p className='fivetext'>{product.name}</p>
                       <p className='fivetext'>
-                        {product.price.toLocaleString()}원
+                        {formatPrice(product.price, currency)}
                       </p>
                     </div>
                   </>
