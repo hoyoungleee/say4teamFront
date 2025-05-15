@@ -1,97 +1,117 @@
-// main 화면입니다.
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Main.css';
 import TopSlider from './TopSlider';
 import SecondSlider from './SecondSlider';
 import img11 from '../assets/11.jpg';
-import img12 from '../assets/12.jpg';
-import img13 from '../assets/13.jpg';
-import img14 from '../assets/14.jpg';
-import img15 from '../assets/15.jpg';
 import img16 from '../assets/16.jpg';
 import img17 from '../assets/17.jpeg';
 import img18 from '../assets/18.jpg';
 import img19 from '../assets/19.jpg';
 import img20 from '../assets/20.jpg';
 import img21 from '../assets/21.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import { API_BASE_URL, PROD } from '../configs/host-config';
 
 const Main = () => {
   const { t } = useTranslation();
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(`${API_BASE_URL}${PROD}/list`, {
+        params: {
+          sort: 'productId,DESC',
+          page: 0,
+          size: 4,
+          searchType: 1,
+        },
+      })
+      .then((res) => {
+        setProducts(res.data.result);
+      })
+      .catch((err) => {
+        console.error('메인 상품 불러오기 실패', err);
+      });
+  }, []);
+
+  const handleClick = (productId) => {
+    navigate(`/product/detail/${productId}`);
+  };
+
+  const filledProducts = [...products];
+  while (filledProducts.length < 4) {
+    filledProducts.push(null);
+  }
 
   return (
     <>
       <div className='main-custom'>
-        <div>
-          <TopSlider />
-        </div>
-        <div>
-          <p className='mainsecondtitle'>TOUCHÉ Fragrance</p>
-        </div>
-        <div>
-          <SecondSlider />
-        </div>
+        <TopSlider />
+
+        <p className='mainsecondtitle'>TOUCHÉ Fragrance</p>
+        <SecondSlider />
+
         <br />
         <br />
         <div className='fourmain'>
           <p className='fourmaintittle'>LIQUIFIED COLLECTION</p>
           <p className='foursertittle'>{t('main1')}</p>
         </div>
-        <div>
-          <div className='fivemain'>
-            <div>
-              <img src={img11} className='fiveserone' />
-            </div>
-            <div className='fivesertwo'>
-              <div className='item'>
-                <img src={img12} />
-                <div>
-                  <p className='fivetext'>Liquified Persian Rug Green</p>
-                  <p className='fivetext'>{t('main2')}</p>
-                </div>
-              </div>
-              <div className='item'>
-                <img src={img13} />
-                <div>
-                  <p className='fivetext'>Liquified Persian Rug Black</p>
-                  <p className='fivetext'>{t('main2')}</p>
-                </div>
-              </div>
-              <div className='item'>
-                <img src={img14} />
-                <div>
-                  <p className='fivetext'>Liquified Gradient Rug Yellow</p>
-                  <p className='fivetext'>{t('main2')}</p>
-                </div>
-              </div>
-              <div className='item'>
-                <img src={img15} />
-                <div>
-                  <p className='fivetex'>Liquified Persian Mouse Pad</p>
-                  <p className='fivetext'>{t('main2')}</p>
-                </div>
-              </div>
-            </div>
+
+        <div className='fivemain'>
+          <div>
+            <img src={img11} className='fiveserone' />
           </div>
-          <br />
-          <br />
-          <br />
-          <br />
-          <div className='sixmain'>
-            <p className='sixmaintittle'>JAGAE COLLECTION</p>
-            <p className='sixmainser'>{t('maintext1')}</p>
-            <p className='sixmainsersecond'>{t('maintext2')}</p>
+
+          <div className='fivesertwo'>
+            {filledProducts.map((product, index) => (
+              <div
+                className='item'
+                key={product?.id ?? `empty-${index}`}
+                onClick={() => product && handleClick(product.id)}
+                style={{
+                  cursor: product ? 'pointer' : 'default',
+                  opacity: product ? 1 : 0,
+                }}
+              >
+                {product ? (
+                  <>
+                    <img src={product.thumbnailPath} alt={product.name} />
+                    <div>
+                      <p className='fivetext'>{product.name}</p>
+                      <p className='fivetext'>
+                        {product.price.toLocaleString()}원
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <div style={{ width: '25vw', height: '25vw' }}></div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
+
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <div className='sixmain'>
+          <p className='sixmaintittle'>JAGAE COLLECTION</p>
+          <p className='sixmainser'>{t('maintext1')}</p>
+          <p className='sixmainsersecond'>{t('maintext2')}</p>
+        </div>
+
         <div className='sevenbigmain'>
           <img src={img16} className='sevenmain' />
         </div>
 
         <div className='seveneighttitle'>
-          <div>
-            <p className='seventittle'>MD KEYWORD</p>
-          </div>
+          <p className='seventittle'>MD KEYWORD</p>
 
           <div className='eightmain'>
             <div>
