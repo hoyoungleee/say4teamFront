@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LoginPage.css';
+import { API_BASE_URL, USER } from '../configs/host-config';
 import AuthContext from '../context/UserContext';
 
 const LoginPage = () => {
@@ -28,7 +29,7 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('/user-service/user/doLogin', {
+      const response = await axios.post(`${API_BASE_URL}${USER}/doLogin`, {
         email: form.email,
         password: form.password,
       });

@@ -38,12 +38,6 @@
   transform: rotate(-50deg);
 }
 
-.mypage-cell:nth-child(1),
-.mypage-cell:nth-child(2),
-.mypage-cell:nth-child(4),
-.mypage-cell:nth-child(5) {
-}
-
 .mypage-cell:nth-child(3)::after,
 .mypage-cell:nth-child(6)::after {
   display: none;

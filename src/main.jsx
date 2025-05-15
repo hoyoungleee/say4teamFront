@@ -33,7 +33,6 @@ axios.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // 만료된 Access Token일 경우
     if (
       error.response &&
       error.response.status === 401 &&
@@ -47,16 +46,14 @@ axios.interceptors.response.use(
 
         const newToken = res.data.data.token;
 
-        // 새 토큰 저장
         localStorage.setItem('token', newToken);
 
-        // Authorization 헤더 업데이트 후 원래 요청 재시도
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return axios(originalRequest);
       } catch (refreshErr) {
         console.error('토큰 재발급 실패', refreshErr);
         localStorage.removeItem('token');
-        window.location.href = '/login'; // 로그인 페이지로 이동
+        window.location.href = '/login';
         return Promise.reject(refreshErr);
       }
     }

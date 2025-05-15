@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import './ProfilePage.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL, USER } from '../configs/host-config';
 import AuthContext from '../context/UserContext';
 
 const ProfilePage = () => {
@@ -31,7 +32,7 @@ const ProfilePage = () => {
     if (!window.confirm('정말 탈퇴하시겠습니까?')) return;
 
     axios
-      .delete(`/user-service/user/delete/${userId}`, {
+      .delete(`${API_BASE_URL}${USER}/delete/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -75,7 +76,7 @@ const ProfilePage = () => {
     }
 
     axios
-      .get(`http://localhost:8000/user-service/user/profile/${userId}`, {
+      .get(`${API_BASE_URL}${USER}/profile/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -115,14 +116,14 @@ const ProfilePage = () => {
     const token = localStorage.getItem('ACCESS_TOKEN');
 
     axios
-      .put(`/user-service/user/update/${userId}`, form, {
+      .put(`${API_BASE_URL}${USER}/update/${userId}`, form, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then(() => {
         return axios.patch(
-          `/user-service/user/address/${userId}`,
+          `${API_BASE_URL}${USER}/address/${userId}`,
           { address: form.address },
           {
             headers: {

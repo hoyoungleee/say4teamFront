@@ -27,7 +27,7 @@ const ProductDetail = () => {
     fetchDetail();
   }, [id]);
 
-  // ✅ 스크롤 감지 이벤트
+  // 스크롤 감지 이벤트
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
@@ -208,7 +208,7 @@ const ProductDetail = () => {
           />
         ))}
       </div>
-      <RecommendedProducts />
+      <RecommendedProducts productId={product.id} />
 
       {/* 맨 위로 버튼 */}
       {showScrollTop && (
