@@ -17,7 +17,6 @@ const CartPage = () => {
       const res = await axiosInstance.get(`${API_BASE_URL}${CART}/details`);
       setCart(res.data);
     } catch (err) {
-      console.error('장바구니 조회 실패:', err);
     } finally {
       setLoading(false);
     }
@@ -28,8 +27,8 @@ const CartPage = () => {
     fetchCart();
   }, []); // 첫 번째 렌더링 시에만 호출
 
-  // 장바구니가 비어 있을 경우 메시지 표시
-  if (loading) return <div>Loading...</div>;
+  // // 장바구니가 비어 있을 경우 메시지 표시
+  // if (loading) return <div>Loading...</div>;
 
   if (!cart || !cart.items || cart.items.length === 0) {
     return (
@@ -69,7 +68,6 @@ const CartPage = () => {
         ),
       }));
     } catch (err) {
-      console.error('수량 변경 실패:', err);
       alert('수량 변경에 실패했습니다.');
     }
   };
@@ -84,9 +82,7 @@ const CartPage = () => {
         ...prevCart,
         items: prevCart.items.filter((item) => item.productId !== productId),
       }));
-    } catch (err) {
-      console.error('상품 삭제 실패:', err);
-    }
+    } catch (err) {}
   };
 
   // 장바구니 페이지 렌더링

@@ -2,9 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import './OrderCheck.css';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import AuthContext from '../context/UserContext'; // 사용자 정보 Context
+import AuthContext from '../context/UserContext';
 import axiosInstance from '../configs/axios-config';
-import { API_BASE_URL, ORDER } from '../configs/host-config'; // API 기본 URL
+import { API_BASE_URL, ORDER } from '../configs/host-config';
 
 const OrderCheck = () => {
   const { userInfo, isInit } = useContext(AuthContext);

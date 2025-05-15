@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // react-router-dom에서 useNavigate 훅 import
+import { useNavigate } from 'react-router-dom';
 import './CartPage.css';
 
 const CartTotal = ({ cart }) => {
   const [totalPrice, setTotalPrice] = useState(0);
-  const navigate = useNavigate(); // 페이지 이동을 위한 navigate 함수
+  const navigate = useNavigate();
 
   // 총 합계 계산
   useEffect(() => {
