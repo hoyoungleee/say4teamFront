@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+// main 화면입니다.
+import React from 'react';
 import './Main.css';
 import TopSlider from './TopSlider';
 import SecondSlider from './SecondSlider';
-import { NavLink, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { API_BASE_URL, PROD } from '../configs/host-config';
-
 import img11 from '../assets/11.jpg';
+import img12 from '../assets/12.jpg';
+import img13 from '../assets/13.jpg';
+import img14 from '../assets/14.jpg';
+import img15 from '../assets/15.jpg';
 import img16 from '../assets/16.jpg';
 import img17 from '../assets/17.jpeg';
 import img18 from '../assets/18.jpg';
@@ -20,27 +21,10 @@ const Main = () => {
   const { t } = useTranslation();
 
   return (
-    <div className='main-custom'>
-      <TopSlider />
-
-      <p className='mainsecondtitle'>TOUCHÉ Fragrance</p>
-
-      <SecondSlider />
-
-      <br />
-      <br />
-
-      <div className='fourmain'>
-        <p className='fourmaintittle'>LIQUIFIED COLLECTION</p>
-        <p className='foursertittle'>
-          전통적인 페르시안 패턴을 세이투셰만의 형태감으로 재해석한 시그니처
-          컬렉션
-        </p>
-      </div>
-
-      <div className='fivemain'>
+    <>
+      <div className='main-custom'>
         <div>
-          <img src={img11} className='fiveserone' alt='Liquified Collection' />
+          <TopSlider />
         </div>
         <div>
           <p className='mainsecondtitle'>TOUCHÉ Fragrance</p>
@@ -100,7 +84,9 @@ const Main = () => {
             <p className='sixmainsersecond'>{t('maintext2')}</p>
           </div>
         </div>
-      </div>
+        <div className='sevenbigmain'>
+          <img src={img16} className='sevenmain' />
+        </div>
 
         <div className='seveneighttitle'>
           <div>
@@ -143,7 +129,7 @@ const Main = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
