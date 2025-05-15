@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './Orderpages.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import AuthContext from '../context/UserContext'; // 경로 확인
+import AuthContext from '../context/UserContext';
 import axiosInstance from '../configs/axios-config';
-import { API_BASE_URL, ORDER } from '../configs/host-config'; // 추가: API 상수 불러오기
+import { API_BASE_URL, ORDER } from '../configs/host-config';
 
 const Orderpages = () => {
   const { userInfo, isInit } = useContext(AuthContext);
@@ -19,7 +19,7 @@ const Orderpages = () => {
   // userInfo 변경 시 자동으로 값 설정
   useEffect(() => {
     if (isInit && userInfo) {
-      console.log('userInfo.address:', userInfo.address); // 이거 추가해보세요
+      console.log('userInfo.address:', userInfo.address);
       setEmailAddress(userInfo.email || '');
       setAddress1(userInfo.address || '');
     }
@@ -39,11 +39,10 @@ const Orderpages = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 결제 확인 메시지 띄우기
     const isConfirmed = window.confirm('결제 하시겠습니까?');
 
     if (!isConfirmed) {
-      return; // 사용자가 취소하면 아무 일도 일어나지 않음
+      return; // 취소시 변화 x
     }
 
     try {
@@ -56,7 +55,6 @@ const Orderpages = () => {
           address1,
         },
       );
-      console.log('주문 생성 성공:', response.data);
 
       // 결제 완료 후 알림창 띄우고, 확인 누르면 메인 페이지로 이동
       alert('결제가 완료되었습니다.');

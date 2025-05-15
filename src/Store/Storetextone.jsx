@@ -1,7 +1,12 @@
 import React from 'react';
 import './storetextone.css';
+import { useTranslation } from 'react-i18next';
+
 
 const Storetextone = () => {
+
+  const { t } = useTranslation();
+
   return (
     <div className='storemain'>
       <div>
@@ -13,7 +18,7 @@ const Storetextone = () => {
           <p className='shorttext'>
             53, NOKSAPYEONG-DAERO 32-GIL, YONGSAN-GU, SEOUL
           </p>
-          <p className='shorttext'>서울시 용산구 녹사평대로32길 53</p>
+          <p className='shorttext'>{t('store1')}</p>
         </div>
         <br />
         <p className='bigsertitle'>HOURS</p>
@@ -33,43 +38,43 @@ const Storetextone = () => {
             <p className='storename'>BOONTHESHOP</p>
             <p className='storetext'>02-2056-1234</p>
             <p className='storetext'>21, APGUJEONG-RO 60-GIL, GANGNAM-GU, SEOUL</p>
-            <p className='storetext'>서울특별시 강남구 압구정로 60길 21</p>
+            <p className='storetext'>{t('store2')}</p>
             <br />
             <br />
             <p className='storename'>KASINA 1997</p>
             <p className='storetext'>02-3444-6458</p>
             <p className='storetext'>13, Eonju-ro 164-gil, Gangnam-gu, Seoul</p>
-            <p className='storetext'>강남구 언주로164길 13</p>
+            <p className='storetext'>{t('store3')}</p>
             <br />
             <br />
             <p className='storename'>KASINA SEONGSU</p>
             <p className='storetext'>070-7777-1771</p>
             <p className='storetext'>41, Seongsui-ro 7-gil, Seongdong-gu, Seoul</p>
-            <p className='storetext'>서울특별시 성동구 성수이로7길 41</p>
+            <p className='storetext'>{t('store4')}</p>
             <br />
             <br />
             <p className='storename'>KASINA HANNAM</p>
             <p className='storetext'>02-790-2660</p>
             <p className='storetext'>266, Itaewon-ro, Yongsan-gu, Seoul</p>
-            <p className='storetext'>서울특별시 용산구 이태원로 266</p>
+            <p className='storetext'>{t('store5')}</p>
             <br />
             <br />
             <p className='storename'>KASINA ANANTI</p>
             <p className='storetext'>051-724-0717</p>
             <p className='storetext'>267-7, Gijanghaean-ro, Gijang-eup, Gijang-gun, Busan</p>
-            <p className='storetext'>부산광역시 기장군 기장읍 기장해안로 267-7</p>
+            <p className='storetext'>{t('store6')}</p>
             <br />
             <br />
             <p className='storename'>NICE WEATHER MARKET</p>
             <p className='storetext'>02-547-0073</p>
             <p className='storetext'>1F, 35, Gangnam-daero 162-gil, Gangnam-gu, Seoul</p>
-            <p className='storetext'>서울특별시 강남구 강남대로 162길 35, 1층</p>
+            <p className='storetext'>{t('store7')}</p>
             <br />
             <br />
             <p className='storename'>NICE WEATHER THE HYUNDAI SEOUL</p>
             <p className='storetext'>02-547-0073</p>
             <p className='storetext'>1F, 35, Gangnam-daero 162-gil, Gangnam-gu, Seoul</p>
-            <p className='storetext'>서울특별시 강남구 강남대로 162길 35, 1층</p>
+            <p className='storetext'>{t('store8')}</p>
           </div>
           <div>
             <p className='bigtitle'>ONLINE</p>
@@ -98,7 +103,7 @@ const Storetextone = () => {
             </a>
             <br />
             <br />
-            <p className='storename'>오늘의집 Binaryshop</p>
+            <p className='storename'>{t('storetitle1')}</p>
             <p className='storetext'>1670-0876</p>
             <a
               className='storelink'
@@ -109,7 +114,7 @@ const Storetextone = () => {
             </a>
             <br />
             <br />
-            <p className='storename'>카카오톡 선물하기</p>
+            <p className='storename'>{t('storetitle2')}</p>
             <p className='storetext'>1544-2431</p>
             <a
               className='storelink'
@@ -120,7 +125,7 @@ const Storetextone = () => {
             </a>
             <br />
             <br />
-            <p className='storename'>현대카드 M몰</p>
+            <p className='storename'>{t('storetitle3')}</p>
             <p className='storetext'>1577-5141</p>
             <a
               className='storelink'

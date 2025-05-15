@@ -12,7 +12,7 @@ const CartItem = ({ item, onQuantityChange, onDelete }) => {
   };
 
   const handleDelete = () => {
-    // 삭제 확인을 위한 confirm 창
+    // 삭제 확인
     const isConfirmed = window.confirm(
       `${item.productName} 상품을 삭제하시겠습니까?`,
     );

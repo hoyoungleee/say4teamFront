@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 import axiosInstance from '../configs/axios-config';
 import { API_BASE_URL, PROD, REVIEW } from '../configs/host-config';
 import ReviewModal from './ReviewModal';
+import { API_BASE_URL, PROD } from '../configs/host-config';
+import { useNavigate } from 'react-router-dom';
 
 const RecommendedSlider = ({ productId }) => {
   const [recommendedItems, setRecommendedItems] = useState([]);
@@ -21,6 +23,7 @@ const RecommendedSlider = ({ productId }) => {
   const [keyword, setKeyword] = useState('');
 
   const isLoggedIn = !!localStorage.getItem('ACCESS_TOKEN');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecommended = async () => {
@@ -186,8 +189,13 @@ const RecommendedSlider = ({ productId }) => {
       >
         {recommendedItems.map((item) => (
           <SwiperSlide key={item.id}>
-            <div className='recommended-card'>
+            <div
+              className='recommended-card'
+              onClick={() => handleClick(item.id)}
+              style={{ cursor: 'pointer' }}
+            >
               <img
+                src={item.thumbnailPath || item.imgUrl}
                 src={item.thumbnailPath || item.imgUrl}
                 alt={item.name}
                 className='recommended-image'
