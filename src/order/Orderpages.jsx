@@ -10,16 +10,14 @@ import { API_BASE_URL, ORDER } from '../configs/host-config';
 const Orderpages = () => {
   const { userInfo, isInit } = useContext(AuthContext);
   const location = useLocation();
-  const { cartItems, totalPrice } = location.state || {};
+  const { cartItems, totalPrice, cartItemIds } = location.state || {};
 
   const [emailAddress, setEmailAddress] = useState('');
   const [address1, setAddress1] = useState('');
   const navigate = useNavigate();
 
-  // userInfo 변경 시 자동으로 값 설정
   useEffect(() => {
     if (isInit && userInfo) {
-      console.log('userInfo.address:', userInfo.address);
       setEmailAddress(userInfo.email || '');
       setAddress1(userInfo.address || '');
     }
@@ -40,27 +38,18 @@ const Orderpages = () => {
     e.preventDefault();
 
     const isConfirmed = window.confirm('결제 하시겠습니까?');
-
-    if (!isConfirmed) {
-      return; // 취소시 변화 x
-    }
+    if (!isConfirmed) return;
 
     try {
-      const response = await axiosInstance.post(
-        `${API_BASE_URL}${ORDER}/create`,
-        {
-          cartItems,
-          totalPrice,
-          emailAddress,
-          address1,
-        },
-      );
+      await axiosInstance.post(`${API_BASE_URL}${ORDER}/create`, {
+        cartItemIds, // ✅ 이것만 전송
+      });
 
-      // 결제 완료 후 알림창 띄우고, 확인 누르면 메인 페이지로 이동
       alert('결제가 완료되었습니다.');
       navigate('/');
     } catch (err) {
       console.error('주문 생성 실패:', err);
+      alert('주문 중 오류가 발생했습니다.');
     }
   };
 
@@ -81,7 +70,6 @@ const Orderpages = () => {
               />
               <span>회원 정보와 동일</span>
             </label>
-
             <label className='radio-option'>
               <input
                 type='radio'
@@ -92,29 +80,30 @@ const Orderpages = () => {
               <span>새로운 배송지</span>
             </label>
           </div>
+
           <div className='ordernamemain'>
             <label htmlFor='emailAddress'>이메일</label>
             <input
               type='email'
               id='emailAddress'
-              name='emailAddress'
               value={emailAddress}
               onChange={(e) => setEmailAddress(e.target.value)}
               required
             />
           </div>
+
           <div className='ordernummain'>
             <label htmlFor='address1'>주소</label>
             <input
               type='text'
               id='address1'
-              name='address1'
               placeholder='기본 주소 (직접 입력)'
               value={address1}
               onChange={(e) => setAddress1(e.target.value)}
               required
             />
           </div>
+
           <div className='ordertotalbox'>
             <p>주문 상품</p>
             {cartItems?.map((item, index) => (
@@ -135,6 +124,7 @@ const Orderpages = () => {
               </div>
             ))}
           </div>
+
           <div className='ordertotalbox'>
             <p className='totalordertitle'>결제 정보</p>
             <div className='totalordertitleser'>
@@ -151,10 +141,12 @@ const Orderpages = () => {
               </div>
             </div>
           </div>
+
           <div className='checkbox-confirm'>
             <input type='checkbox' required />
             <span>결제정보를 확인하였으며, 구매진행에 동의합니다.</span>
           </div>
+
           <div className='order-submit-wrapper'>
             <button type='submit'>결제하기</button>
           </div>

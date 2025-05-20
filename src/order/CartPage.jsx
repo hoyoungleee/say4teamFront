@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../configs/axios-config';
 import { API_BASE_URL, CART } from '../configs/host-config';
 import './CartPage.css';
@@ -10,45 +11,41 @@ import CartTotal from './CartTotal';
 const CartPage = () => {
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [selectedItems, setSelectedItems] = useState({}); // { productId: true }
 
-  // 장바구니 정보 가져오는 함수
+  const navigate = useNavigate();
+
   const fetchCart = async () => {
     try {
       const res = await axiosInstance.get(`${API_BASE_URL}${CART}/details`);
       setCart(res.data);
+
+      const initialSelected = {};
+      res.data.items.forEach((item) => {
+        initialSelected[item.productId] = true;
+      });
+      setSelectedItems(initialSelected);
     } catch (err) {
+      console.error('장바구니 조회 실패', err);
     } finally {
       setLoading(false);
     }
   };
 
-  // 페이지 로드 시 장바구니 정보 fetch
   useEffect(() => {
     fetchCart();
-  }, []); // 첫 번째 렌더링 시에만 호출
+  }, []);
 
-  // // 장바구니가 비어 있을 경우 메시지 표시
-  // if (loading) return <div>Loading...</div>;
+  const handleSelect = (productId, checked) => {
+    setSelectedItems((prev) => ({
+      ...prev,
+      [productId]: checked,
+    }));
+  };
 
-  if (!cart || !cart.items || cart.items.length === 0) {
-    return (
-      <>
-        <Header />
-        <div className='cart-container empty-cart'>
-          <h2>Your Cart</h2>
-          <hr />
-          <div className='empty-message'> Your Cart is Empty!</div>
-          <hr />
-        </div>
-        <Footer />
-      </>
-    );
-  }
-
-  // 수량 변경 시 서버에 반영
   const handleItemQuantityChange = async (productId, newQuantity) => {
     if (newQuantity <= 0) {
-      await handleDelete(productId); // 수량이 0 이하이면 삭제
+      await handleDelete(productId);
       return;
     }
 
@@ -58,7 +55,6 @@ const CartPage = () => {
         { quantity: newQuantity },
       );
 
-      // 장바구니 상태 업데이트
       setCart((prevCart) => ({
         ...prevCart,
         items: prevCart.items.map((item) =>
@@ -72,20 +68,70 @@ const CartPage = () => {
     }
   };
 
-  // 상품 삭제 시 서버에 반영
   const handleDelete = async (productId) => {
     try {
       await axiosInstance.delete(`${API_BASE_URL}${CART}/items/${productId}`);
 
-      // 장바구니 상태 업데이트
       setCart((prevCart) => ({
         ...prevCart,
         items: prevCart.items.filter((item) => item.productId !== productId),
       }));
-    } catch (err) {}
+
+      setSelectedItems((prev) => {
+        const copy = { ...prev };
+        delete copy[productId];
+        return copy;
+      });
+    } catch (err) {
+      alert('삭제 실패했습니다.');
+    }
   };
 
-  // 장바구니 페이지 렌더링
+  const getSelectedCartItems = () => {
+    if (!cart || !cart.items) return [];
+    return cart.items.filter((item) => selectedItems[item.productId]);
+  };
+
+  const handleCheckout = () => {
+    const selected = getSelectedCartItems();
+    if (selected.length === 0) {
+      alert('주문할 상품을 선택해주세요.');
+      return;
+    }
+
+    const totalPrice = selected.reduce(
+      (sum, item) => sum + item.unitPrice * item.quantity,
+      0,
+    );
+
+    const cartItemIds = selected.map((item) => item.cartItemId);
+
+    navigate('/order', {
+      state: {
+        cartItems: selected,
+        totalPrice,
+        cartItemIds,
+      },
+    });
+  };
+
+  if (loading) return <div>Loading...</div>;
+
+  if (!cart || !cart.items || cart.items.length === 0) {
+    return (
+      <>
+        <Header />
+        <div className='cart-container empty-cart'>
+          <h2>Your Cart</h2>
+          <hr />
+          <div className='empty-message'>Your Cart is Empty!</div>
+          <hr />
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
   return (
     <>
       <Header />
@@ -97,10 +143,15 @@ const CartPage = () => {
             item={item}
             onQuantityChange={handleItemQuantityChange}
             onDelete={handleDelete}
+            onSelect={handleSelect}
+            isSelected={!!selectedItems[item.productId]}
           />
         ))}
         <hr />
-        <CartTotal cart={cart} />
+        <CartTotal
+          cart={{ items: getSelectedCartItems() }}
+          onCheckout={handleCheckout}
+        />
       </div>
       <Footer />
     </>
