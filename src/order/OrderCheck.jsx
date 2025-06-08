@@ -29,6 +29,26 @@ const OrderCheck = () => {
     }
   };
 
+  // 주문 취소 처리
+  const handleCancelOrder = async (orderId) => {
+    const confirmCancel = window.confirm('정말 주문을 취소하시겠습니까?');
+    if (!confirmCancel) return;
+
+     try {
+      await axiosInstance.delete(`${API_BASE_URL}${ORDER}/${orderId}/cancel`);
+      alert('주문이 취소되었습니다.');
+      
+      // 최신 주문 내역 다시 불러오기
+      const response = await axiosInstance.get(
+        `${API_BASE_URL}${ORDER}/userOrder?email=${userInfo.email}`,
+      );
+      setOrders(response.data);
+    } catch (error) {
+      console.error('주문 취소 실패:', error);
+      alert('주문 취소에 실패했습니다.');
+    }
+  };
+
   // 주문 내역 불러오기
   useEffect(() => {
     const fetchOrders = async () => {
@@ -119,6 +139,15 @@ const OrderCheck = () => {
                         <strong>총 금액:</strong>{' '}
                         {order.totalPrice.toLocaleString()}원
                       </p>
+                      {/* 주문 취소 버튼 */}
+                      {order.orderStatus === 'ORDERED' && (
+                        <button
+                          className='cancel-order-btn'
+                          onClick={() => handleCancelOrder(order.orderId)}
+                        >
+                          주문 취소
+                        </button>
+                      )}
                     </div>
 
                     <div className='order-products'>
@@ -136,7 +165,9 @@ const OrderCheck = () => {
                             <div className='order-item-info'>
                               <p className='product-name'>{item.productName}</p>
                               <p>수량: {item.quantity}</p>
-                              <p>단가: {item.unitPrice.toLocaleString()}원</p>
+                              <p>
+                                단가: {item.unitPrice.toLocaleString()}원
+                              </p>
                             </div>
                           </div>
                         ))

@@ -121,6 +121,20 @@
   margin-bottom: 5px;
 }
 
+.cancel-order-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.cancel-order-btn:hover {
+  background-color: #d9363e;
+}
+
 /* 반응형 대응 */
 @media (min-width: 0px) and (max-width: 767px) {
   .checkdays {
