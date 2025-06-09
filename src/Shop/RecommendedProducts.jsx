@@ -86,7 +86,6 @@ const RecommendedSlider = ({ productId }) => {
 
     try {
       if (editingReview) {
-        // 수정
         await axiosInstance.patch(
           `${API_BASE_URL}${REVIEW}/update/${editingReview.reviewId}`,
           formData,
@@ -103,7 +102,6 @@ const RecommendedSlider = ({ productId }) => {
         setShowForm(false);
         setEditingReview(null);
       } else {
-        // 작성
         await axiosInstance.post(`${API_BASE_URL}${REVIEW}/create`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -113,7 +111,6 @@ const RecommendedSlider = ({ productId }) => {
         alert('리뷰가 작성되었습니다.');
       }
 
-      // 초기화
       setContent('');
       setImage(null);
       setEditingReview(null);
