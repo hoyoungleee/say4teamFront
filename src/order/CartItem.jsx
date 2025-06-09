@@ -32,18 +32,22 @@ const CartItem = ({
 
   return (
     <div className='cart-item'>
-      <input
-        type='checkbox'
-        checked={isSelected}
-        onChange={handleSelectChange}
-      />
-      <img src={item.imageUrl} alt={item.productName} className='cart-img' />
+      <div className='cart-check-img'>
+        <input
+          type='checkbox'
+          checked={isSelected}
+          onChange={handleSelectChange}
+        />
+        <img src={item.imageUrl} alt={item.productName} className='cart-img' />
+      </div>
+
       <div className='cart-details'>
         <h3>{item.productName}</h3>
         <button onClick={handleDelete} className='delete-link'>
           Delete
         </button>
       </div>
+
       <div className='cart-summary'>
         <div className='quantity'>
           <p>Quantity</p>
