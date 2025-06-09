@@ -121,18 +121,34 @@
   margin-bottom: 5px;
 }
 
-.cancel-order-btn {
-  background-color: #ff4d4f;
+/* 통합된 취소 버튼 스타일 */
+.cancel-order-btn,
+.cancel-item-btn {
   color: white;
   border: none;
-  padding: 6px 12px;
+  padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 8px;
+  margin-top: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-order-btn {
+  background-color: #555555;
 }
 
 .cancel-order-btn:hover {
-  background-color: #d9363e;
+  background-color: #333333;
+}
+
+.cancel-item-btn {
+  background-color: #f44336;
+  padding: 6px 12px;
+  margin-top: 8px;
+}
+
+.cancel-item-btn:hover {
+  background-color: #d32f2f;
 }
 
 /* 반응형 대응 */

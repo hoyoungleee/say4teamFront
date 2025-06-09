@@ -11,7 +11,6 @@ const OrderCheck = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 주문 상태를 한글로 변환하는 함수
   const getOrderStatusLabel = (status) => {
     switch (status) {
       case 'ORDERED':
@@ -20,7 +19,7 @@ const OrderCheck = () => {
         return '배송중';
       case 'DELIVERED':
         return '배송완료';
-      case 'CANCELLED':
+      case 'CANCELED':
         return '주문취소';
       case 'RETURNED':
         return '반품완료';
@@ -29,45 +28,67 @@ const OrderCheck = () => {
     }
   };
 
-  // 주문 취소 처리
+  // 전체 주문 취소
   const handleCancelOrder = async (orderId) => {
     const confirmCancel = window.confirm('정말 주문을 취소하시겠습니까?');
     if (!confirmCancel) return;
 
-     try {
+    try {
       await axiosInstance.delete(`${API_BASE_URL}${ORDER}/${orderId}/cancel`);
       alert('주문이 취소되었습니다.');
-      
-      // 최신 주문 내역 다시 불러오기
-      const response = await axiosInstance.get(
-        `${API_BASE_URL}${ORDER}/userOrder?email=${userInfo.email}`,
-      );
-      setOrders(response.data);
+      fetchOrders();
     } catch (error) {
       console.error('주문 취소 실패:', error);
       alert('주문 취소에 실패했습니다.');
     }
   };
 
-  // 주문 내역 불러오기
-  useEffect(() => {
-    const fetchOrders = async () => {
-      if (isInit && userInfo?.email) {
-        try {
-          const response = await axiosInstance.get(
-            `${API_BASE_URL}${ORDER}/userOrder?email=${userInfo.email}`,
-          );
-          setOrders(response.data);
-        } catch (error) {
-          console.error('주문 내역 조회 실패:', error);
-        } finally {
-          setLoading(false);
-        }
-      } else {
+  // 개별 상품 취소
+  const handleCancelOrderItem = async (orderItemId) => {
+    const confirmCancel = window.confirm('주문을 취소하시겠습니까?');
+    if (!confirmCancel) return;
+
+    try {
+      await axiosInstance.put(
+        `${API_BASE_URL}${ORDER}/items/${orderItemId}/status?status=CANCELED`,
+      );
+      alert('상품이 취소되었습니다.');
+
+      // 로컬 상태에서 해당 상품의 상태만 'CANCELED'로 변경
+      setOrders((prevOrders) =>
+        prevOrders.map((order) => ({
+          ...order,
+          orderItems: order.orderItems.map((item) =>
+            item.orderItemId === orderItemId
+              ? { ...item, orderStatus: 'CANCELED' }
+              : item,
+          ),
+        })),
+      );
+    } catch (error) {
+      console.error('상품 취소 실패:', error);
+      alert('상품 취소에 실패했습니다.');
+    }
+  };
+
+  const fetchOrders = async () => {
+    if (isInit && userInfo?.email) {
+      try {
+        const response = await axiosInstance.get(
+          `${API_BASE_URL}${ORDER}/userOrder?email=${userInfo.email}`,
+        );
+        setOrders(response.data);
+      } catch (error) {
+        console.error('주문 내역 조회 실패:', error);
+      } finally {
         setLoading(false);
       }
-    };
+    } else {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchOrders();
   }, [userInfo, isInit]);
 
@@ -132,20 +153,16 @@ const OrderCheck = () => {
                         {new Date(order.orderedAt).toLocaleDateString()}
                       </p>
                       <p>
-                        <strong>주문 상태:</strong>{' '}
-                        {getOrderStatusLabel(order.orderStatus)}
-                      </p>
-                      <p>
                         <strong>총 금액:</strong>{' '}
                         {order.totalPrice.toLocaleString()}원
                       </p>
-                      {/* 주문 취소 버튼 */}
+
                       {order.orderStatus === 'ORDERED' && (
                         <button
                           className='cancel-order-btn'
                           onClick={() => handleCancelOrder(order.orderId)}
                         >
-                          주문 취소
+                          주문 전체 취소
                         </button>
                       )}
                     </div>
@@ -154,7 +171,7 @@ const OrderCheck = () => {
                       {order.orderItems && order.orderItems.length > 0 ? (
                         order.orderItems.map((item) => (
                           <div
-                            key={item.productId}
+                            key={item.orderItemId}
                             className='order-item-detail'
                           >
                             <img
@@ -165,9 +182,23 @@ const OrderCheck = () => {
                             <div className='order-item-info'>
                               <p className='product-name'>{item.productName}</p>
                               <p>수량: {item.quantity}</p>
+                              <p>단가: {item.unitPrice.toLocaleString()}원</p>
+
                               <p>
-                                단가: {item.unitPrice.toLocaleString()}원
+                                <strong>상품 상태:</strong>{' '}
+                                {getOrderStatusLabel(item.orderStatus)}
                               </p>
+
+                              {item.orderStatus === 'ORDERED' && (
+                                <button
+                                  className='cancel-item-btn'
+                                  onClick={() =>
+                                    handleCancelOrderItem(item.orderItemId)
+                                  }
+                                >
+                                  주문 취소
+                                </button>
+                              )}
                             </div>
                           </div>
                         ))
