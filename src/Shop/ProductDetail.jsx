@@ -15,7 +15,7 @@ const ProductDetail = () => {
   const [activeTab, setActiveTab] = useState('DETAIL');
   const { id } = useParams();
 
-  const [showScrollTop, setShowScrollTop] = useState(false); // ✅ 상태 추가
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -124,7 +124,6 @@ const ProductDetail = () => {
           />
         </div>
 
-        {/* 오른쪽: 정보 및 버튼 영역 */}
         <div className='product-info-section'>
           <h1 className='product-title'>{product.name}</h1>
           <p className='product-price'>{product.price?.toLocaleString()}원</p>

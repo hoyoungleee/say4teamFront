@@ -24,6 +24,11 @@ const RecommendedSlider = ({ productId }) => {
   const isLoggedIn = !!localStorage.getItem('ACCESS_TOKEN');
   const navigate = useNavigate();
 
+  // 클릭 시 상세페이지 이동 함수
+  const handleClick = (id) => {
+    navigate(`/product/detail/${id}`);
+  };
+
   useEffect(() => {
     const fetchRecommended = async () => {
       try {
@@ -99,7 +104,6 @@ const RecommendedSlider = ({ productId }) => {
         setEditingReview(null);
       } else {
         // 작성
-        formData.append('productId', productId);
         await axiosInstance.post(`${API_BASE_URL}${REVIEW}/create`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -162,7 +166,7 @@ const RecommendedSlider = ({ productId }) => {
     if (sortOrder === '최신순') {
       sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     } else if (sortOrder === '추천순') {
-      sorted.sort((a, b) => b.likes - a.likes); // likes가 없으면 삭제해도 됨
+      sorted.sort((a, b) => b.likes - a.likes); // likes 없으면 삭제 가능
     }
     return sorted;
   };
@@ -268,7 +272,6 @@ const RecommendedSlider = ({ productId }) => {
                   )}
                   <span className='review-user'>{review.name}</span>
 
-                  {/* 로그인한 유저의 글이면 보여줌 */}
                   {localStorage.getItem('USER_EMAIL')?.trim() ===
                     review.email?.trim() && (
                     <div className='review-buttons'>
