@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 import JoinPage from './users/JoinPage';
 import MyPage from './users/MyPage';
@@ -22,6 +22,11 @@ import ProductDetail from './Shop/ProductDetail';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import ScrollToTop from './ScrollToTop';
+
+import NotFoundPage from './errors/NotFoundPage';
+import ServerErrorPage from './errors/ServerErrorPage';
+import ForbiddenPage from './errors/ForbiddenPage';
+import UnauthorizedPage from './errors/UnauthorizedPage';
 
 function LoadingSpinner() {
   return (
@@ -58,12 +63,11 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // 경로가 바뀔 때마다 로딩 시작
     setLoading(true);
 
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 700); // 0.5초 후 로딩 종료
+    }, 700);
 
     return () => clearTimeout(timer);
   }, [location.pathname]);
@@ -84,7 +88,13 @@ function App() {
         <Route path='/order' element={<Orderpages />} />
         <Route path='/shop' element={<SHOP />} />
         <Route path='/ordercheck' element={<OrderCheck />} />
-        
+
+        {/* 에러 페이지 */}
+        <Route path='/error/404' element={<NotFoundPage />} />
+        <Route path='/error/500' element={<ServerErrorPage />} />
+        <Route path='/error/403' element={<ForbiddenPage />} />
+        <Route path='/error/401' element={<UnauthorizedPage />} />
+
         {/* 헤더/푸터 필요한 페이지 */}
         <Route
           path='*'
