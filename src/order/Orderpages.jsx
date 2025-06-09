@@ -42,7 +42,7 @@ const Orderpages = () => {
 
     try {
       await axiosInstance.post(`${API_BASE_URL}${ORDER}/create`, {
-        cartItemIds, 
+        cartItemIds,
       });
 
       alert('결제가 완료되었습니다.');
