@@ -50,7 +50,9 @@ const Header = () => {
           <NavLink to='/company' className='comp'>
             company
           </NavLink>
-          <p className='arch'>ARCHIVE</p>
+          <NavLink to='/acahive' className='arch' style={{ fontSize: 12.5 }}>
+            ARCHIVE
+          </NavLink>
           <NavLink to='/shop' className='shop'>
             shop
           </NavLink>

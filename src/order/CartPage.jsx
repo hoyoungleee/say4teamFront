@@ -11,13 +11,13 @@ import CartTotal from './CartTotal';
 const CartPage = () => {
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedItems, setSelectedItems] = useState({}); // { productId: true }
+  const [selectedItems, setSelectedItems] = useState({});
 
   const navigate = useNavigate();
 
   const fetchCart = async () => {
     try {
-      const res = await axiosInstance.get(`${API_BASE_URL}${CART}/details`);
+      const res = await axiosInstance.get(`${API_BASE_URL}${CART}/details`); // 사용자의 장바구니 조회
       setCart(res.data);
 
       const initialSelected = {};
@@ -51,7 +51,7 @@ const CartPage = () => {
 
     try {
       await axiosInstance.patch(
-        `${API_BASE_URL}${CART}/items/${productId}/quantity`,
+        `${API_BASE_URL}${CART}/items/${productId}/quantity`, // 사용자 -> 장바구니에서 상품 수량 수정
         { quantity: newQuantity },
       );
 
@@ -70,8 +70,7 @@ const CartPage = () => {
 
   const handleDelete = async (productId) => {
     try {
-      await axiosInstance.delete(`${API_BASE_URL}${CART}/items/${productId}`);
-
+      await axiosInstance.delete(`${API_BASE_URL}${CART}/items/${productId}`); // 사용자 -> 장바구니에서 상품 삭제
       setCart((prevCart) => ({
         ...prevCart,
         items: prevCart.items.filter((item) => item.productId !== productId),

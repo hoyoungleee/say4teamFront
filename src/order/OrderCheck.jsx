@@ -29,7 +29,18 @@ const OrderCheck = () => {
   };
 
   // 전체 주문 취소
-  const handleCancelOrder = async (orderId) => {
+  const handleCancelOrder = async (orderId, orderItems) => {
+    // orderItems 중 하나라도 ORDERED 상태가 아니면 취소 불가
+    const hasNonOrderedItem = orderItems.some(
+      (item) => item.orderStatus !== 'ORDERED',
+    );
+    if (hasNonOrderedItem) {
+      alert(
+        '주문 내 상품 중 처리 중이거나 완료된 항목이 있어 전체 취소할 수 없습니다.',
+      );
+      return;
+    }
+
     const confirmCancel = window.confirm('정말 주문을 취소하시겠습니까?');
     if (!confirmCancel) return;
 
@@ -71,6 +82,7 @@ const OrderCheck = () => {
     }
   };
 
+  // 사용자의 전체 주문 조회 (email로 조회)
   const fetchOrders = async () => {
     if (isInit && userInfo?.email) {
       try {
@@ -160,7 +172,9 @@ const OrderCheck = () => {
                       {order.orderStatus === 'ORDERED' && (
                         <button
                           className='cancel-order-btn'
-                          onClick={() => handleCancelOrder(order.orderId)}
+                          onClick={() =>
+                            handleCancelOrder(order.orderId, order.orderItems)
+                          }
                         >
                           주문 전체 취소
                         </button>

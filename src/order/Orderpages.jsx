@@ -42,6 +42,7 @@ const Orderpages = () => {
 
     try {
       await axiosInstance.post(`${API_BASE_URL}${ORDER}/create`, {
+        // 주문 생성
         cartItemIds,
       });
 
