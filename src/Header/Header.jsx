@@ -11,7 +11,7 @@ const Header = () => {
   const { t, i18n } = useTranslation();
 
   const toggleLangMenu = () => {
-    setShowLangMenu(prev => !prev);
+    setShowLangMenu((prev) => !prev);
   };
 
   const changeLanguage = (lng) => {
@@ -47,17 +47,27 @@ const Header = () => {
       {/* sticky nav */}
       <div className='nav'>
         <div className='navone'>
-          <NavLink to='/company' className='comp'>company</NavLink>
+          <NavLink to='/company' className='comp'>
+            company
+          </NavLink>
           <p className='arch'>ARCHIVE</p>
-          <NavLink to='/shop' className='shop'>shop</NavLink>
-          <NavLink to='/store' className='stor'>store</NavLink>
+          <NavLink to='/shop' className='shop'>
+            shop
+          </NavLink>
+          <NavLink to='/store' className='stor'>
+            store
+          </NavLink>
         </div>
         <div className='navtwo'>
-          <NavLink to='/' className='sayt'>Saytouche</NavLink>
+          <NavLink to='/' className='sayt'>
+            Saytouche
+          </NavLink>
         </div>
         <div className='navthree'>
           <div className='language-container'>
-            <p className='lang' onClick={toggleLangMenu}>language</p>
+            <p className='lang' onClick={toggleLangMenu}>
+              language
+            </p>
             {showLangMenu && (
               <div className='language-dropdown'>
                 <button onClick={() => i18n.changeLanguage('ko')}>KOR</button>
@@ -66,15 +76,23 @@ const Header = () => {
             )}
           </div>
 
-          <NavLink to='/contact' className='cont'>contact</NavLink>
+          <NavLink to='/contact' className='cont'>
+            contact
+          </NavLink>
           <div className='navfour'>
-            <NavLink to='/cart' className='cart'>cart</NavLink>
+            <NavLink to='/cart' className='cart'>
+              cart
+            </NavLink>
           </div>
           <nav>
             {!isInit ? null : isLoggedIn ? (
-              <p onClick={() => navigate('/mypage')} className='logn'>mypage</p>
+              <p onClick={() => navigate('/mypage')} className='logn'>
+                mypage
+              </p>
             ) : (
-              <p onClick={() => navigate('/login')} className='logn'>login</p>
+              <p onClick={() => navigate('/login')} className='logn'>
+                login
+              </p>
             )}
           </nav>
         </div>

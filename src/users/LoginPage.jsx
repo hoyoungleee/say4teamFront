@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LoginPage.css';
@@ -15,6 +15,42 @@ const LoginPage = () => {
     email: '',
     password: '',
   });
+
+  // 환경변수 가져오기
+  const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
+  const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
+
+  useEffect(() => {
+    const handleMessage = (e) => {
+      // origin (브라우저 호스트 주소)을 비교하여 이벤트 발생 상황 외에는 동작하지 않게
+      if (
+        e.origin !== 'http://localhost:8000' &&
+        e.origin !== window.location.origin
+      )
+        return;
+
+      if (e.data.type === 'OAUTH_SUCCESS') {
+        const { token, id, role, provider } = e.data;
+        alert('카카오 로그인 성공');
+        onLogin(e.data);
+        navigate('/');
+      }
+    };
+    // 브라우저에 이벤트 바인딩 -> 백엔드에서 postMessage를 통해 부모 창으로 데이터를 전송한다.
+    // 부모창에 message 를 수신하는 이벤트를 지정해서 해당 데이터를 읽어온다.
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [onLogin, navigate]);
+
+  const handleKakaoLogin = () => {
+    console.log('카카오 로그인 클릭!');
+    //로그인 팝업창 열기
+    const popup = window.open(
+      `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code&prompt=login`,
+      'kakao-login',
+      'width=500,height=600,scrollbars=yes,resizable=yes',
+    );
+  };
 
   const handleChange = (e) => {
     setForm({
@@ -104,7 +140,9 @@ const LoginPage = () => {
         <div className='sns-login'>
           <button className='naver'>N 네이버 간편로그인</button>
           <button className='google'>G Google 로그인</button>
-          <button className='kakao'>K 카카오톡 로그인</button>
+          <button className='kakao' onClick={handleKakaoLogin}>
+            K 카카오톡 로그인
+          </button>
         </div>
       </div>
     </div>
