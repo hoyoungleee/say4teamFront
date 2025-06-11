@@ -1,0 +1,31 @@
+.acahive-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+  font-family: sans-serif;
+  font-size: 48px;
+  gap: 60px;
+  color: black;
+}
+
+.acahive-item {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 10px 30px;
+  text-decoration: none;
+  color: black;
+}
+
+.acahive-item.blur {
+  filter: blur(3px);
+  opacity: 0.4;
+}
+
+.acahive-divider {
+  width: 1px;
+  height: 100px;
+  background-color: #ddd;
+  transform: rotate(30deg);
+}
