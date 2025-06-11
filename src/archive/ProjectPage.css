@@ -1,0 +1,14 @@
+.projectlist {
+    margin: 200px auto;
+    height: 300px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 1.4em;
+    list-style: none;
+    white-space: nowrap;
+    font-weight: 300;
+}
+
+.projectlist:hover {
+    cursor: pointer;
+}

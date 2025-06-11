@@ -48,7 +48,7 @@ const Header = () => {
       <div className='nav'>
         <div className='navone'>
           <NavLink to='/company' className='comp'>company</NavLink>
-          <p className='arch'>ARCHIVE</p>
+          <NavLink to='/acahive' className='arch' style={{fontSize:12.5}}>ARCHIVE</NavLink>
           <NavLink to='/shop' className='shop'>shop</NavLink>
           <NavLink to='/store' className='stor'>store</NavLink>
         </div>
