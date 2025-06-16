@@ -29,7 +29,7 @@ const Main = () => {
           sort: 'productId,DESC',
           page: 0,
           size: 4,
-          searchType: 9,
+          searchType: 8,
         },
       })
       .then((res) => {
