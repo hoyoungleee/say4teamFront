@@ -70,6 +70,7 @@
 .order-list-container {
   padding: 20px;
   box-sizing: border-box;
+  border: none;
 }
 
 .order-item {
@@ -97,7 +98,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 400px;
+  /* max-width: 400px; */
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 10px;
