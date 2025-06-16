@@ -11,6 +11,10 @@ const OrderCheck = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [editingAddressId, setEditingAddressId] = useState(null);
+  const [newAddress, setNewAddress] = useState('');
+
+  // 주문 상태 한글 표시 함수
   const getOrderStatusLabel = (status) => {
     switch (status) {
       case 'ORDERED':
@@ -28,9 +32,17 @@ const OrderCheck = () => {
     }
   };
 
-  // 전체 주문 취소
+  // 주문 전체 상태와 모든 상품 상태가 ORDERED여야 배송지 변경 가능
+  const canEditAddress = (order) => {
+    if (order.orderStatus?.trim().toUpperCase() !== 'ORDERED') return false;
+    if (!order.orderItems || order.orderItems.length === 0) return false;
+    return order.orderItems.every(
+      (item) => item.orderStatus?.trim().toUpperCase() === 'ORDERED',
+    );
+  };
+
+  // 주문 전체 취소 시, 상품 중 상태가 ORDERED 아닌 항목이 있으면 불가
   const handleCancelOrder = async (orderId, orderItems) => {
-    // orderItems 중 하나라도 ORDERED 상태가 아니면 취소 불가
     const hasNonOrderedItem = orderItems.some(
       (item) => item.orderStatus !== 'ORDERED',
     );
@@ -54,7 +66,7 @@ const OrderCheck = () => {
     }
   };
 
-  // 개별 상품 취소
+  // 개별 상품 주문 취소
   const handleCancelOrderItem = async (orderItemId) => {
     const confirmCancel = window.confirm('주문을 취소하시겠습니까?');
     if (!confirmCancel) return;
@@ -65,7 +77,6 @@ const OrderCheck = () => {
       );
       alert('상품이 취소되었습니다.');
 
-      // 로컬 상태에서 해당 상품의 상태만 'CANCELED'로 변경
       setOrders((prevOrders) =>
         prevOrders.map((order) => ({
           ...order,
@@ -82,7 +93,59 @@ const OrderCheck = () => {
     }
   };
 
-  // 사용자의 전체 주문 조회 (email로 조회)
+  // 배송지 수정 시작
+  const startEditingAddress = (orderId, currentAddress) => {
+    setEditingAddressId(orderId);
+    setNewAddress(currentAddress || '');
+  };
+
+  // 배송지 수정 취소
+  const cancelEditingAddress = () => {
+    setEditingAddressId(null);
+    setNewAddress('');
+  };
+
+  // 배송지 저장
+  const saveNewAddress = async (orderId) => {
+    if (!newAddress.trim()) {
+      alert('배송지를 입력해주세요.');
+      return;
+    }
+
+    try {
+      await axiosInstance.patch(`${API_BASE_URL}${ORDER}/${orderId}/address`, {
+        address: newAddress,
+      });
+      alert('배송지가 변경되었습니다.');
+
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order.orderId === orderId ? { ...order, address: newAddress } : order,
+        ),
+      );
+
+      cancelEditingAddress();
+    } catch (error) {
+      console.error('배송지 변경 실패:', error);
+
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        console.error('Response status:', error.response.status);
+        console.error('Response headers:', error.response.headers);
+        alert(
+          `배송지 변경 실패: ${error.response.data.message || '서버 오류'}`,
+        );
+      } else if (error.request) {
+        console.error('No response received:', error.request);
+        alert('배송지 변경 실패: 서버 응답이 없습니다.');
+      } else {
+        console.error('Error setting up request:', error.message);
+        alert(`배송지 변경 실패: ${error.message}`);
+      }
+    }
+  };
+
+  // 주문 목록 조회
   const fetchOrders = async () => {
     if (isInit && userInfo?.email) {
       try {
@@ -146,7 +209,6 @@ const OrderCheck = () => {
             </ul>
           </div>
 
-          {/* 주문 내역 리스트 */}
           <div className='thisischecklist'>
             {loading ? (
               <p>로딩 중...</p>
@@ -158,7 +220,7 @@ const OrderCheck = () => {
                   <div key={order.orderId} className='order-item'>
                     <div className='order-summary'>
                       <p>
-                        <strong>주문 ID:</strong> {order.orderId}
+                        <strong>주문 번호:</strong> {order.orderId}
                       </p>
                       <p>
                         <strong>주문 날짜:</strong>{' '}
@@ -168,9 +230,55 @@ const OrderCheck = () => {
                         <strong>총 금액:</strong>{' '}
                         {order.totalPrice.toLocaleString()}원
                       </p>
+                      <p>
+                        <strong>배송지:</strong>{' '}
+                        {editingAddressId === order.orderId ? (
+                          <>
+                            <input
+                              type='text'
+                              value={newAddress}
+                              onChange={(e) => setNewAddress(e.target.value)}
+                            />
+                            <button
+                              type='button'
+                              className='save-address-btn'
+                              onClick={() => saveNewAddress(order.orderId)}
+                            >
+                              저장
+                            </button>
+                            <button
+                              type='button'
+                              className='cancel-address-btn'
+                              onClick={cancelEditingAddress}
+                            >
+                              취소
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            {order.address || '배송지 정보 없음'}
+                            {canEditAddress(order) && (
+                              <button
+                                type='button'
+                                className='edit-address-btn'
+                                onClick={() =>
+                                  startEditingAddress(
+                                    order.orderId,
+                                    order.address,
+                                  )
+                                }
+                              >
+                                배송지 변경
+                              </button>
+                            )}
+                          </>
+                        )}
+                      </p>
 
-                      {order.orderStatus === 'ORDERED' && (
+                      {order.orderStatus?.trim().toUpperCase() ===
+                        'ORDERED' && (
                         <button
+                          type='button'
                           className='cancel-order-btn'
                           onClick={() =>
                             handleCancelOrder(order.orderId, order.orderItems)
@@ -205,6 +313,7 @@ const OrderCheck = () => {
 
                               {item.orderStatus === 'ORDERED' && (
                                 <button
+                                  type='button'
                                   className='cancel-item-btn'
                                   onClick={() =>
                                     handleCancelOrderItem(item.orderItemId)

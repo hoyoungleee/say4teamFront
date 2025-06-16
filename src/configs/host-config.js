@@ -17,3 +17,5 @@ export const PROD = '/product-service/product';
 export const REVIEW = '/product-service/review';
 export const ORDER = '/ordering-service/orders';
 export const CART = '/ordering-service/cart';
+
+export const CATEGORY = '/product-service/category';

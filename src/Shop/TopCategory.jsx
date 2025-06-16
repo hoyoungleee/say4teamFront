@@ -1,6 +1,8 @@
+// TopCategory.jsx
 import React from 'react';
 import './TopCategory.css';
 
+// onSelectCategory prop을 받도록 수정
 const TopCategory = ({ onSelectCategory }) => {
   return (
     <div className='category-wrapper'>
