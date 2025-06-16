@@ -14,23 +14,25 @@ const Orderpages = () => {
 
   const [emailAddress, setEmailAddress] = useState('');
   const [address1, setAddress1] = useState('');
+  const [selectedOption, setSelectedOption] = useState('회원정보와동일시'); // 기본값 설정
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isInit && userInfo) {
+    if (isInit && userInfo && selectedOption === '회원정보와동일시') {
       setEmailAddress(userInfo.email || '');
       setAddress1(userInfo.address || '');
     }
-  }, [userInfo, isInit]);
+  }, [userInfo, isInit, selectedOption]);
 
   const handleRadioChange = (e) => {
     const selected = e.target.value;
-    if (selected === '회원정보와동일시') {
-      setEmailAddress(userInfo?.email || '');
-      setAddress1(userInfo?.address || '');
-    } else {
-      setEmailAddress('');
-      setAddress1('');
+    setSelectedOption(selected);
+
+    if (userInfo) {
+      setEmailAddress(userInfo.email || '');
+      setAddress1(
+        selected === '회원정보와동일시' ? userInfo.address || '' : '',
+      );
     }
   };
 
@@ -42,8 +44,9 @@ const Orderpages = () => {
 
     try {
       await axiosInstance.post(`${API_BASE_URL}${ORDER}/create`, {
-        // 주문 생성
         cartItemIds,
+        // 새로운 배송지 선택 시 주소 전달, 아니면 빈 문자열 전달
+        address: selectedOption === '새로운배송지' ? address1 : '',
       });
 
       alert('결제가 완료되었습니다.');
@@ -66,6 +69,7 @@ const Orderpages = () => {
                 type='radio'
                 name='inputadd'
                 value='회원정보와동일시'
+                checked={selectedOption === '회원정보와동일시'}
                 onChange={handleRadioChange}
                 required
               />
@@ -76,6 +80,7 @@ const Orderpages = () => {
                 type='radio'
                 name='inputadd'
                 value='새로운배송지'
+                checked={selectedOption === '새로운배송지'}
                 onChange={handleRadioChange}
               />
               <span>새로운 배송지</span>

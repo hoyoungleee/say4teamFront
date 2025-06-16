@@ -158,7 +158,7 @@ const OrderCheck = () => {
                   <div key={order.orderId} className='order-item'>
                     <div className='order-summary'>
                       <p>
-                        <strong>주문 ID:</strong> {order.orderId}
+                        <strong>주문 번호:</strong> {order.orderId}
                       </p>
                       <p>
                         <strong>주문 날짜:</strong>{' '}
@@ -167,6 +167,10 @@ const OrderCheck = () => {
                       <p>
                         <strong>총 금액:</strong>{' '}
                         {order.totalPrice.toLocaleString()}원
+                      </p>
+                      <p>
+                        <strong>배송지:</strong>{' '}
+                        {order.address || '배송지 정보 없음'}
                       </p>
 
                       {order.orderStatus === 'ORDERED' && (
