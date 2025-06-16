@@ -84,8 +84,10 @@
 
 .order-summary {
   margin-bottom: 15px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid black;
   padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .order-products {
@@ -99,22 +101,25 @@
   align-items: center;
   width: 100%;
   /* max-width: 400px; */
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
+  /* border: 1px solid #ccc; */
+  border-bottom: 1px solid black;
+  padding: 30px;
   background-color: #fff;
 }
 
 .order-item-image {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 250px;
   object-fit: cover;
-  margin-right: 15px;
+  margin-right: 40px;
   border-radius: 8px;
 }
 
 .order-item-info {
   flex: 1;
+  display: flex;
+  justify-content: space-around;
+  line-height: 10px;
 }
 
 .product-name {
@@ -135,11 +140,11 @@
 }
 
 .cancel-order-btn {
-  background-color: #555555;
+  background-color: #f44336;
 }
 
 .cancel-order-btn:hover {
-  background-color: #333333;
+  background-color: #d32f2f;
 }
 
 .cancel-item-btn {
@@ -156,17 +161,17 @@
 .edit-address-btn {
   margin-left: 10px;
   padding: 6px 14px;
-  background-color: #007bff;
-  color: white;
+  background-color: rgb(1, 241, 105);
+  color: black;
   font-weight: 600;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .edit-address-btn:hover {
-  background-color: #0056b3;
+  background-color: rgb(30, 177, 94);
 }
 
 .address-change-container {

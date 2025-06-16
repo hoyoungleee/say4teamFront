@@ -219,74 +219,78 @@ const OrderCheck = () => {
                 {orders.map((order) => (
                   <div key={order.orderId} className='order-item'>
                     <div className='order-summary'>
-                      <p>
-                        <strong>주문 번호:</strong> {order.orderId}
-                      </p>
-                      <p>
-                        <strong>주문 날짜:</strong>{' '}
-                        {new Date(order.orderedAt).toLocaleDateString()}
-                      </p>
-                      <p>
-                        <strong>총 금액:</strong>{' '}
-                        {order.totalPrice.toLocaleString()}원
-                      </p>
-                      <p>
-                        <strong>배송지:</strong>{' '}
-                        {editingAddressId === order.orderId ? (
-                          <>
-                            <input
-                              type='text'
-                              value={newAddress}
-                              onChange={(e) => setNewAddress(e.target.value)}
-                            />
-                            <button
-                              type='button'
-                              className='save-address-btn'
-                              onClick={() => saveNewAddress(order.orderId)}
-                            >
-                              저장
-                            </button>
-                            <button
-                              type='button'
-                              className='cancel-address-btn'
-                              onClick={cancelEditingAddress}
-                            >
-                              취소
-                            </button>
-                          </>
-                        ) : (
-                          <>
-                            {order.address || '배송지 정보 없음'}
-                            {canEditAddress(order) && (
+                      <div>
+                        <p>
+                          <strong>주문 번호:</strong> {order.orderId}
+                        </p>
+                        <p>
+                          <strong>주문 날짜:</strong>{' '}
+                          {new Date(order.orderedAt).toLocaleDateString()}
+                        </p>
+                        <p>
+                          <strong>총 금액:</strong>{' '}
+                          {order.totalPrice.toLocaleString()}원
+                        </p>
+                        <p>
+                          <strong>배송지:</strong>{' '}
+                          {editingAddressId === order.orderId ? (
+                            <>
+                              <input
+                                type='text'
+                                value={newAddress}
+                                onChange={(e) => setNewAddress(e.target.value)}
+                              />
                               <button
                                 type='button'
-                                className='edit-address-btn'
-                                onClick={() =>
-                                  startEditingAddress(
-                                    order.orderId,
-                                    order.address,
-                                  )
-                                }
+                                className='save-address-btn'
+                                onClick={() => saveNewAddress(order.orderId)}
                               >
-                                배송지 변경
+                                저장
                               </button>
-                            )}
-                          </>
-                        )}
-                      </p>
+                              <button
+                                type='button'
+                                className='cancel-address-btn'
+                                onClick={cancelEditingAddress}
+                              >
+                                취소
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              {order.address || '배송지 정보 없음'}
+                              {canEditAddress(order) && (
+                                <button
+                                  type='button'
+                                  className='edit-address-btn'
+                                  onClick={() =>
+                                    startEditingAddress(
+                                      order.orderId,
+                                      order.address,
+                                    )
+                                  }
+                                >
+                                  변경
+                                </button>
+                              )}
+                            </>
+                          )}
+                        </p>
+                      </div>
 
-                      {order.orderStatus?.trim().toUpperCase() ===
-                        'ORDERED' && (
-                        <button
-                          type='button'
-                          className='cancel-order-btn'
-                          onClick={() =>
-                            handleCancelOrder(order.orderId, order.orderItems)
-                          }
-                        >
-                          주문 전체 취소
-                        </button>
-                      )}
+                      <div>
+                        {order.orderStatus?.trim().toUpperCase() ===
+                          'ORDERED' && (
+                          <button
+                            type='button'
+                            className='cancel-order-btn'
+                            onClick={() =>
+                              handleCancelOrder(order.orderId, order.orderItems)
+                            }
+                          >
+                            주문 전체 취소
+                          </button>
+                        )}
+                      </div>
                     </div>
 
                     <div className='order-products'>
@@ -301,27 +305,34 @@ const OrderCheck = () => {
                               alt={item.productName}
                               className='order-item-image'
                             />
+
                             <div className='order-item-info'>
-                              <p className='product-name'>{item.productName}</p>
-                              <p>수량: {item.quantity}</p>
-                              <p>단가: {item.unitPrice.toLocaleString()}원</p>
+                              <div>
+                                <p className='product-name'>
+                                  {item.productName}
+                                </p>
+                                <p>수량: {item.quantity}</p>
+                                <p>단가: {item.unitPrice.toLocaleString()}원</p>
+                              </div>
 
-                              <p>
-                                <strong>상품 상태:</strong>{' '}
-                                {getOrderStatusLabel(item.orderStatus)}
-                              </p>
+                              <div>
+                                <p>
+                                  <strong>상품 상태:</strong>{' '}
+                                  {getOrderStatusLabel(item.orderStatus)}
+                                </p>
 
-                              {item.orderStatus === 'ORDERED' && (
-                                <button
-                                  type='button'
-                                  className='cancel-item-btn'
-                                  onClick={() =>
-                                    handleCancelOrderItem(item.orderItemId)
-                                  }
-                                >
-                                  주문 취소
-                                </button>
-                              )}
+                                {item.orderStatus === 'ORDERED' && (
+                                  <button
+                                    type='button'
+                                    className='cancel-item-btn'
+                                    onClick={() =>
+                                      handleCancelOrderItem(item.orderItemId)
+                                    }
+                                  >
+                                    주문 취소
+                                  </button>
+                                )}
+                              </div>
                             </div>
                           </div>
                         ))

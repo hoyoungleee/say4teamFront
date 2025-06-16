@@ -19,15 +19,18 @@ const ProductDetail = () => {
 
   useEffect(() => {
     const fetchDetail = async () => {
-      const res = await axiosInstance.get(
-        `${API_BASE_URL}${PROD}/detail/${id}`,
-      );
-      setProduct(res.data.result);
+      try {
+        const res = await axiosInstance.get(
+          `${API_BASE_URL}${PROD}/detail/${id}`,
+        );
+        setProduct(res.data.result);
+      } catch (error) {
+        console.error('상품 정보 불러오기 실패:', error);
+      }
     };
     fetchDetail();
   }, [id]);
 
-  // 스크롤 감지 이벤트
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
@@ -40,65 +43,59 @@ const ProductDetail = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleBuyClick = async (productId) => {
-    if (!isLoggedIn) {
-      alert('회원가입이나 로그인 후 진행하세요!');
-      return;
-    }
+  // 장바구니에 아이템 추가 공통 함수
+  const addToCart = async (productId) => {
     try {
       const cartItem = {
         productId,
         quantity: 1,
       };
-
-      const res = await axiosInstance.post(
-        `${API_BASE_URL}${CART}/items`,
-        cartItem,
-      );
-      if (res) {
-        const carts = await axiosInstance.get(`${API_BASE_URL}${CART}/details`);
-        console.log(carts.data);
-
-        if (carts) {
-          const totalPrice = carts.data.totalPrice;
-          console.log(carts.data.items);
-          console.log(carts.data.totalPrice);
-
-          navigate('/order', {
-            state: { cartItems: carts.data.items, totalPrice },
-          }); // 상품 정보와 총 가격을 state로 전달
-        }
-      }
-    } catch (e) {
-      console.error('장바구니 넣기 실패:', e);
-      alert('장바구니 넣기 실패!');
+      return await axiosInstance.post(`${API_BASE_URL}${CART}/items`, cartItem);
+    } catch (error) {
+      console.error('장바구니 추가 실패:', error);
+      throw error;
     }
   };
 
-  const handleCartClick = async (productId) => {
+  // 바로 구매 클릭 시
+  const handleBuyClick = async () => {
     if (!isLoggedIn) {
       alert('회원가입이나 로그인 후 진행하세요!');
       return;
     }
     try {
-      const cartItem = {
-        productId,
-        quantity: 1,
-      };
+      // 1) 장바구니에 넣는 API 호출 (필요에 따라)
+      await addToCart(product.id);
 
-      const res = await axiosInstance.post(
-        `${API_BASE_URL}${CART}/items`,
-        cartItem,
-      );
-      if (res) {
-        alert('장바구니 추가 성공');
-        // 성공 후 추가 작업 (ex: alert, 상태 업데이트, 이동)
-        if (window.confirm('장바구니로 이동하시겠습니까?')) {
-          navigate('/cart');
-        }
+      // 2) navigate로 주문 페이지 이동 시 바로구매 정보 state 전달
+      navigate('/order', {
+        state: {
+          isDirectPurchase: true,
+          directProductId: product.id,
+          quantity: 1,
+          unitPrice: product.price,
+          productName: product.name,
+          imageUrl: product.thumbnailPath,
+        },
+      });
+    } catch {
+      alert('바로구매 처리 실패');
+    }
+  };
+
+  // 장바구니 담기 클릭 시
+  const handleCartClick = async () => {
+    if (!isLoggedIn) {
+      alert('회원가입이나 로그인 후 진행하세요!');
+      return;
+    }
+    try {
+      await addToCart(product.id);
+      alert('장바구니 추가 성공');
+      if (window.confirm('장바구니로 이동하시겠습니까?')) {
+        navigate('/cart');
       }
-    } catch (e) {
-      console.error('장바구니 요청 실패:', e);
+    } catch {
       alert('장바구니 넣기 실패!');
     }
   };
@@ -115,7 +112,6 @@ const ProductDetail = () => {
   return (
     <div className='product-detail-container'>
       <div className='product-detail-top'>
-        {/* 왼쪽: 이미지 영역 */}
         <div className='product-image-section'>
           <img
             src={product.thumbnailPath}
@@ -148,11 +144,11 @@ const ProductDetail = () => {
               <p style={{ whiteSpace: 'pre-line' }}>{product.description}</p>
             ) : (
               <div className='shipping-returns'>
+                {/* 배송 및 교환/반품 안내 텍스트 */}
                 <p>
                   <strong>배송기간 안내</strong>
                   <br />- 영업일 기준 5~10일 (도서 산간 지역 배송지연 발생가능)
                 </p>
-
                 <p>
                   <strong>교환 및 반품이 가능한 경우</strong>
                 </p>
@@ -161,7 +157,6 @@ const ProductDetail = () => {
                   <li>표시/광고 내용과 다르거나 계약 내용과 다를 경우 등...</li>
                   <li>제품 하자가 있는 경우 반드시 사진 첨부 필요</li>
                 </ul>
-
                 <p>
                   <strong>교환 및 반품이 불가능한 경우</strong>
                 </p>
@@ -169,7 +164,6 @@ const ProductDetail = () => {
                   <li>단순변심으로 인한 요청이 수령일로부터 7일이 지난 경우</li>
                   <li>포장 훼손, 제품 사용 흔적, 구성품 누락 등</li>
                 </ul>
-
                 <p>
                   <strong>교환/환불 유의사항</strong>
                 </p>
@@ -183,13 +177,10 @@ const ProductDetail = () => {
           </div>
 
           <div className='product-buttons'>
-            <button className='btn buy-now' onClick={() => handleBuyClick(id)}>
+            <button className='btn buy-now' onClick={handleBuyClick}>
               BUY NOW
             </button>
-            <button
-              className='btn add-to-cart'
-              onClick={() => handleCartClick(id)}
-            >
+            <button className='btn add-to-cart' onClick={handleCartClick}>
               ADD TO CART
             </button>
           </div>
@@ -209,7 +200,6 @@ const ProductDetail = () => {
       </div>
       <RecommendedProducts productId={product.id} />
 
-      {/* 맨 위로 버튼 */}
       {showScrollTop && (
         <button className='scroll-top-button' onClick={scrollToTop}>
           <KeyboardArrowUpIcon />

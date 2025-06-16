@@ -10,12 +10,23 @@ import { API_BASE_URL, ORDER } from '../configs/host-config';
 const Orderpages = () => {
   const { userInfo, isInit } = useContext(AuthContext);
   const location = useLocation();
-  const { cartItems, totalPrice, cartItemIds } = location.state || {};
+  const navigate = useNavigate();
+
+  const {
+    cartItems = [],
+    totalPrice = 0,
+    cartItemIds = [],
+    directProductId = null,
+    quantity = 0,
+    isDirectPurchase = false,
+    productName = '',
+    unitPrice = 0,
+    imageUrl = '',
+  } = location.state || {};
 
   const [emailAddress, setEmailAddress] = useState('');
   const [address1, setAddress1] = useState('');
-  const [selectedOption, setSelectedOption] = useState('회원정보와동일시'); // 기본값 설정
-  const navigate = useNavigate();
+  const [selectedOption, setSelectedOption] = useState('회원정보와동일시');
 
   useEffect(() => {
     if (isInit && userInfo && selectedOption === '회원정보와동일시') {
@@ -27,7 +38,6 @@ const Orderpages = () => {
   const handleRadioChange = (e) => {
     const selected = e.target.value;
     setSelectedOption(selected);
-
     if (userInfo) {
       setEmailAddress(userInfo.email || '');
       setAddress1(
@@ -43,11 +53,37 @@ const Orderpages = () => {
     if (!isConfirmed) return;
 
     try {
-      await axiosInstance.post(`${API_BASE_URL}${ORDER}/create`, {
-        cartItemIds,
-        // 새로운 배송지 선택 시 주소 전달, 아니면 빈 문자열 전달
-        address: selectedOption === '새로운배송지' ? address1 : '',
-      });
+      const orderData = {
+        address: address1,
+      };
+
+      if (isDirectPurchase) {
+        if (directProductId && quantity > 0) {
+          orderData.directProductId = directProductId;
+          orderData.quantity = quantity;
+        } else {
+          alert('주문할 상품 정보가 없습니다.');
+          return;
+        }
+      } else {
+        const derivedCartItemIds =
+          cartItemIds && cartItemIds.length > 0
+            ? cartItemIds
+            : cartItems.map(
+                (item) => item.cartItemId || item.id || item.productId,
+              );
+
+        if (derivedCartItemIds.length === 0) {
+          alert('주문할 상품 정보가 없습니다.');
+          return;
+        }
+
+        orderData.cartItemIds = derivedCartItemIds;
+      }
+
+      console.log('주문 요청 데이터:', orderData);
+
+      await axiosInstance.post(`${API_BASE_URL}${ORDER}/create`, orderData);
 
       alert('결제가 완료되었습니다.');
       navigate('/');
@@ -112,23 +148,48 @@ const Orderpages = () => {
 
           <div className='ordertotalbox'>
             <p>주문 상품</p>
-            {cartItems?.map((item, index) => (
-              <div key={index} className='cart-item'>
-                <img
-                  src={item.imageUrl}
-                  alt={item.productName}
-                  className='cart-img'
-                />
-                <div className='cart-item-details'>
-                  <p>{item.productName}</p>
-                  <p>수량: {item.quantity}개</p>
-                  <p>단가: {item.unitPrice.toLocaleString()}원</p>
-                  <p>
-                    총액: {(item.unitPrice * item.quantity).toLocaleString()}원
-                  </p>
+            {isDirectPurchase ? (
+              directProductId && quantity > 0 ? (
+                <div className='cart-item'>
+                  {imageUrl && (
+                    <img
+                      src={imageUrl}
+                      alt={productName}
+                      className='cart-img'
+                    />
+                  )}
+                  <div className='cart-item-details'>
+                    <p>{productName}</p>
+                    <p>수량: {quantity}개</p>
+                    <p>단가: {unitPrice.toLocaleString()}원</p>
+                    <p>총액: {(unitPrice * quantity).toLocaleString()}원</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ) : (
+                <p>주문할 상품 정보가 없습니다.</p>
+              )
+            ) : cartItems.length > 0 ? (
+              cartItems.map((item, index) => (
+                <div key={index} className='cart-item'>
+                  <img
+                    src={item.imageUrl}
+                    alt={item.productName}
+                    className='cart-img'
+                  />
+                  <div className='cart-item-details'>
+                    <p>{item.productName}</p>
+                    <p>수량: {item.quantity}개</p>
+                    <p>단가: {item.unitPrice.toLocaleString()}원</p>
+                    <p>
+                      총액: {(item.unitPrice * item.quantity).toLocaleString()}
+                      원
+                    </p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>주문할 상품 정보가 없습니다.</p>
+            )}
           </div>
 
           <div className='ordertotalbox'>
@@ -136,14 +197,20 @@ const Orderpages = () => {
             <div className='totalordertitleser'>
               <p>결제금액</p>
               <div>
-                {cartItems?.map((item, index) => (
-                  <span key={index}>
-                    {(item.unitPrice * item.quantity).toLocaleString()}원
-                    {index < cartItems.length - 1 && ' + '}
-                  </span>
-                ))}
-                {' = '}
-                <strong>{totalPrice?.toLocaleString()}원</strong>
+                {isDirectPurchase ? (
+                  <strong>{(unitPrice * quantity).toLocaleString()}원</strong>
+                ) : (
+                  <>
+                    {cartItems.map((item, index) => (
+                      <span key={index}>
+                        {(item.unitPrice * item.quantity).toLocaleString()}원
+                        {index < cartItems.length - 1 && ' + '}
+                      </span>
+                    ))}
+                    {cartItems.length > 0 && ' = '}
+                    <strong>{totalPrice.toLocaleString()}원</strong>
+                  </>
+                )}
               </div>
             </div>
           </div>
