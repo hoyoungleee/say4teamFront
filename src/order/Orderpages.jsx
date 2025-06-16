@@ -61,6 +61,7 @@ const Orderpages = () => {
         if (directProductId && quantity > 0) {
           orderData.directProductId = directProductId;
           orderData.quantity = quantity;
+          // unitPrice, productName, imageUrl 절대 포함하지 않음
         } else {
           alert('주문할 상품 정보가 없습니다.');
           return;
@@ -197,8 +198,9 @@ const Orderpages = () => {
             <div className='totalordertitleser'>
               <p>결제금액</p>
               <div>
-                {cartItems?.length === 1 ? (
-                  // cartItems가 1개일 때
+                {isDirectPurchase ? (
+                  <strong>{(unitPrice * quantity).toLocaleString()}원</strong>
+                ) : cartItems?.length === 1 ? (
                   <strong>
                     {(
                       cartItems[0].unitPrice * cartItems[0].quantity
@@ -206,7 +208,6 @@ const Orderpages = () => {
                     원
                   </strong>
                 ) : (
-                  // cartItems가 여러 개일 때 (기존 로직 유지)
                   <>
                     {cartItems?.map((item, index) => (
                       <span key={index}>
