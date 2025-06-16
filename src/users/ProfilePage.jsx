@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import './ProfilePage.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -17,8 +17,9 @@ const ProfilePage = () => {
   });
 
   const navigate = useNavigate();
-  const { isLoggedIn, isInit } = useContext(AuthContext);
-  const { onLogout } = useContext(AuthContext);
+  const { isLoggedIn, isInit, onLogout, userInfo } = useContext(AuthContext);
+
+  const hasHandled = useRef(false); // 중복 방지 플래그
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,11 +67,24 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    const userId = localStorage.getItem('LOGIN_ID');
-    const token = localStorage.getItem('ACCESS_TOKEN');
+    if (!isInit || hasHandled.current) return;
 
-    if (!userId || !token) {
-      alert('로그인이 필요합니다.');
+    hasHandled.current = true;
+
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    console.log('TOKEN 확인:', token);
+
+    // 우선적으로 Context에서 userId 확인
+    const userId = userInfo?.id || localStorage.getItem('LOGIN_ID');
+
+    if (!userId || !token || !isLoggedIn) {
+      const justDeleted = sessionStorage.getItem('justDeleted');
+      if (justDeleted) {
+        sessionStorage.removeItem('justDeleted');
+        return;
+      }
+
+      alert('로그인한 회원만 접근 가능합니다.');
       navigate('/login');
       return;
     }
@@ -82,7 +96,7 @@ const ProfilePage = () => {
         },
       })
       .then((res) => {
-        const user = res.data;
+        const user = res.data?.result || res.data;
         setForm({
           userId: user.userId,
           email: user.email,
@@ -97,19 +111,7 @@ const ProfilePage = () => {
         console.error('회원 정보 조회 실패:', err);
         alert('회원 정보를 불러올 수 없습니다.');
       });
-  }, []);
-
-  useEffect(() => {
-    if (isInit && !isLoggedIn) {
-      const justDeleted = sessionStorage.getItem('justDeleted');
-      if (justDeleted) {
-        sessionStorage.removeItem('justDeleted');
-        return;
-      }
-      alert('로그인한 회원만 접근 가능합니다.');
-      navigate('/');
-    }
-  }, [isInit, isLoggedIn]);
+  }, [isInit, isLoggedIn, navigate]);
 
   const handleUpdate = () => {
     const userId = localStorage.getItem('LOGIN_ID');
@@ -161,7 +163,7 @@ const ProfilePage = () => {
 
         <label>주소</label>
         <input name='address' value={form.address} onChange={handleChange} />
-        <button type='button' onClick={openPostCode} className='postcode-btn'>
+        <button type='button' className='postcode-btn' onClick={openPostCode}>
           우편번호
         </button>
 

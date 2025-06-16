@@ -197,18 +197,25 @@ const Orderpages = () => {
             <div className='totalordertitleser'>
               <p>결제금액</p>
               <div>
-                {isDirectPurchase ? (
-                  <strong>{(unitPrice * quantity).toLocaleString()}원</strong>
+                {cartItems?.length === 1 ? (
+                  // cartItems가 1개일 때
+                  <strong>
+                    {(
+                      cartItems[0].unitPrice * cartItems[0].quantity
+                    ).toLocaleString()}
+                    원
+                  </strong>
                 ) : (
+                  // cartItems가 여러 개일 때 (기존 로직 유지)
                   <>
-                    {cartItems.map((item, index) => (
+                    {cartItems?.map((item, index) => (
                       <span key={index}>
                         {(item.unitPrice * item.quantity).toLocaleString()}원
                         {index < cartItems.length - 1 && ' + '}
                       </span>
                     ))}
-                    {cartItems.length > 0 && ' = '}
-                    <strong>{totalPrice.toLocaleString()}원</strong>
+                    {' = '}
+                    <strong>{totalPrice?.toLocaleString()}원</strong>
                   </>
                 )}
               </div>

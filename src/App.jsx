@@ -33,8 +33,8 @@ import Press from './archive/Press';
 
 function LoadingSpinner() {
   return (
-    <div className="loading-spinner">
-      <div className="spinner" />
+    <div className='loading-spinner'>
+      <div className='spinner' />
       <style>{`
         .loading-spinner {
           position: fixed;
@@ -89,14 +89,86 @@ function App() {
         <Route path='/member/join-complete' element={<JoinComplete />} />
 
         {/* 헤더/푸터 포함 페이지 */}
-        <Route path='/login' element={<><Header /><LoginPage /><Footer /></>} />
-        <Route path='/member/join' element={<><Header /><JoinPage /><Footer /></>} />
-        <Route path='/mypage' element={<><Header /><MyPage /><Footer /></>} />
-        <Route path='/mypage/profile' element={<><Header /><ProfilePage /><Footer /></>} />
-        <Route path='/product/detail/:id' element={<><Header /><ProductDetail /><Footer /></>} />
-        <Route path='/acahive' element={<><Header /><Acahive /><Footer /></>} />
-        <Route path='/project' element={<><Header /><ProjectPage /><Footer /></>} />
-        <Route path='/press' element={<><Header /><Press /><Footer /></>} />
+        <Route
+          path='/login'
+          element={
+            <>
+              <Header />
+              <LoginPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/member/join'
+          element={
+            <>
+              <Header />
+              <JoinPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/mypage'
+          element={
+            <>
+              <Header />
+              <MyPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/mypage/profile'
+          element={
+            <>
+              <Header />
+              <ProfilePage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/product/detail/:id'
+          element={
+            <>
+              <Header />
+              <ProductDetail />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/acahive'
+          element={
+            <>
+              <Header />
+              <Acahive />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/project'
+          element={
+            <>
+              <Header />
+              <ProjectPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/press'
+          element={
+            <>
+              <Header />
+              <Press />
+              <Footer />
+            </>
+          }
+        />
 
         {/* 에러 페이지 */}
         <Route path='/error/404' element={<NotFoundPage />} />

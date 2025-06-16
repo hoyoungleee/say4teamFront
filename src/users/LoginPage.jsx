@@ -30,10 +30,10 @@ const LoginPage = () => {
         return;
 
       if (e.data.type === 'OAUTH_SUCCESS') {
-        const { token, id, role, provider } = e.data;
+        const { token, id, email, role, provider } = e.data;
         alert('카카오 로그인 성공');
         onLogin(e.data);
-        navigate('/');
+        navigate('/member/join-complete');
       }
     };
     // 브라우저에 이벤트 바인딩 -> 백엔드에서 postMessage를 통해 부모 창으로 데이터를 전송한다.

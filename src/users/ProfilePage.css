@@ -67,7 +67,7 @@ select {
   margin-top: 8px;
   margin-bottom: 16px;
   padding: 8px 12px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+  background-color: white;
+  border: 1px solid black;
   cursor: pointer;
 }

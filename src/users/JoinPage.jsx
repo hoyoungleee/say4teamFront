@@ -14,10 +14,25 @@ const JoinPage = () => {
     phone2: '',
     phone3: '',
     email: '',
+    birthDate: '',
+    address: '',
     termsAgree: false,
     privacyAgree: false,
     allAgree: false,
+    marketingAgree: false,
   });
+
+  const openPostCode = () => {
+    new window.daum.Postcode({
+      oncomplete: function (data) {
+        const fullAddress = data.address;
+        setForm((prevForm) => ({
+          ...prevForm,
+          address: fullAddress,
+        }));
+      },
+    }).open();
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -132,6 +147,21 @@ const JoinPage = () => {
           </select>
           <input name='phone2' value={form.phone2} onChange={handleChange} />
           <input name='phone3' value={form.phone3} onChange={handleChange} />
+        </div>
+        <span>주소</span>
+        <div className='form-row address-row'>
+          <input
+            type='text'
+            name='address'
+            className='form-control'
+            value={form.address}
+            onChange={handleChange}
+            placeholder='주소를 입력하세요'
+            readOnly
+          />
+          <button type='button' className='postcode-btn' onClick={openPostCode}>
+            우편번호
+          </button>
         </div>
         <span>생년월일</span>
         <input
