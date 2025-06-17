@@ -122,7 +122,24 @@ const RecommendedSlider = ({ productId }) => {
       setReviews(response.data.result);
     } catch (err) {
       console.error('리뷰 등록/수정 실패', err);
-      alert('처리 실패');
+      // --- 여기를 수정합니다 ---
+      if (err.response && err.response.data) {
+        const errorMessage = err.response.data; // 백엔드에서 보낸 에러 메시지 (String)
+
+        if (errorMessage === '구매한 상품만 리뷰 작성 가능합니다.') {
+          alert('⚠️ 구매 이력이 있는 상품만 리뷰를 작성할 수 있습니다.');
+        } else if (
+          errorMessage === '배송 완료된 상품만 리뷰 작성 가능합니다.'
+        ) {
+          alert('⚠️ 배송이 완료된 상품에 대해서만 리뷰를 작성할 수 있습니다.');
+        } else {
+          // 그 외의 다른 400 Bad Request 에러나 알 수 없는 에러
+          alert(`리뷰 등록/수정 실패: ${errorMessage}`); // 상세 에러 메시지를 보여줄 수 있음
+        }
+      } else {
+        // 네트워크 오류, 서버 응답 없음 등 (err.response가 없을 때)
+        alert('리뷰 등록/수정 중 알 수 없는 오류가 발생했습니다.');
+      }
     }
   };
 
@@ -231,24 +248,9 @@ const RecommendedSlider = ({ productId }) => {
                 setImage={setImage}
               />
             )}
-            <span className='divider'>|</span>
-            <button className='review-button'>전체 상품 리뷰 보기</button>
           </div>
         </div>
-
-        <div className='review-toolbar'>
-          <ReviewSortDropdown
-            sortOrder={sortOrder}
-            setSortOrder={setSortOrder}
-          />
-          <input
-            type='text'
-            placeholder='리뷰 키워드 검색'
-            className='review-search'
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-          />
-        </div>
+        <h1></h1>
         <div className='review-empty'>
           {getFilteredReviews().length === 0 ? (
             <div className='review-empty'>
