@@ -4,6 +4,7 @@ import axios from 'axios';
 import './LoginPage.css';
 import { API_BASE_URL, USER } from '../configs/host-config';
 import AuthContext from '../context/UserContext';
+import kakaoLoginBtn from '../assets/kakaoLoginButton.png';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -32,6 +33,13 @@ const LoginPage = () => {
       if (e.data.type === 'OAUTH_SUCCESS') {
         const { token, id, email, role, provider } = e.data;
         alert('카카오 로그인 성공');
+
+        localStorage.setItem('ACCESS_TOKEN', token);
+        localStorage.setItem('EMAIL', email);
+        localStorage.setItem('USER_ID', id);
+        localStorage.setItem('ROLE', role);
+        localStorage.setItem('PROVIDER', provider);
+
         onLogin(e.data);
         navigate('/member/join-complete');
       }
@@ -77,16 +85,18 @@ const LoginPage = () => {
         return;
       }
 
-      const { token, email, id, role, phone, address } = resData.result;
+      const { token, email, id, role, phone, address, birthDate } =
+        resData.result;
 
       localStorage.setItem('ACCESS_TOKEN', token);
       localStorage.setItem('EMAIL', email);
-      localStorage.setItem('LOGIN_ID', id);
+      localStorage.setItem('USER_ID', id);
       localStorage.setItem('ROLE', role);
       localStorage.setItem('PHONE', phone);
       localStorage.setItem('ADDRESS', address);
+      localStorage.setItem('BIRTH_DATE', birthDate);
 
-      onLogin({ token, email, id, role, phone, address });
+      onLogin({ token, email, id, role, phone, address, birthDate });
 
       alert('로그인 성공!');
       navigate('/');
@@ -138,11 +148,11 @@ const LoginPage = () => {
         </div>
 
         <div className='sns-login'>
-          <button className='naver'>N 네이버 간편로그인</button>
-          <button className='google'>G Google 로그인</button>
-          <button className='kakao' onClick={handleKakaoLogin}>
-            K 카카오톡 로그인
-          </button>
+          <img
+            src={kakaoLoginBtn}
+            onClick={handleKakaoLogin}
+            className='kakao'
+          />
         </div>
       </div>
     </div>
