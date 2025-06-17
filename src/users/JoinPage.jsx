@@ -111,13 +111,10 @@ const JoinPage = () => {
       <h2>Join</h2>
       <div className='join-steps'>
         <span>정보입력</span>
+        <span> / </span>
         <span>가입완료</span>
       </div>
       <form className='join-form' onSubmit={handleSubmit}>
-        <div className='form-row'>
-          <label>본인인증</label>
-          <button type='button'>휴대폰인증</button>
-        </div>
         <span>이메일</span>
         <input name='email' value={form.email} onChange={handleChange} />
         <span>비밀번호</span>
