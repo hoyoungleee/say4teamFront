@@ -4,11 +4,9 @@ let backendHostName;
 
 if (clientHostName === 'localhost') {
   backendHostName = 'http://localhost:8000';
-} else if (
-  clientHostName ===
-  'http://orderservice-prod-image31145.s3-website.ap-northeast-2.amazonaws.com'
-) {
-  backendHostName = 'http://3.38.153.241:8000';
+} else if (clientHostName === 'say4team.shop') {
+  //나중에 배포서버 아이피로 바꿀것
+  backendHostName = 'http://localhost:8000';
 }
 
 export const API_BASE_URL = backendHostName;
