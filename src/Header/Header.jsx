@@ -24,7 +24,7 @@ const Header = () => {
       {/* 상단 알림 */}
       <div className='topheader'>
         <p className='topheadertitle'>
-          이 사이트는 학습용으로 클론코딩한 사이트 입니다.
+          이 사이트는 학습용으로 클론코딩한 사이트 입니다.!!
         </p>
       </div>
 
