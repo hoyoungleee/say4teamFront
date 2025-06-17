@@ -114,8 +114,15 @@ const ProfilePage = () => {
   }, [isInit, isLoggedIn, navigate]);
 
   const handleUpdate = () => {
-    const userId = localStorage.getItem('LOGIN_ID');
+    const userId = localStorage.getItem('USER_ID');
     const token = localStorage.getItem('ACCESS_TOKEN');
+
+    if (!userId || userId === 'null' || userId === 'undefined') {
+      alert('로그인 정보가 유효하지 않습니다. 다시 로그인 해주세요.');
+      onLogout();
+      navigate('/login');
+      return;
+    }
 
     axios
       .put(`${API_BASE_URL}${USER}/update/${userId}`, form, {
@@ -169,6 +176,7 @@ const ProfilePage = () => {
 
         <label>생년월일</label>
         <input
+          type='date'
           name='birthDate'
           value={form.birthDate}
           onChange={handleChange}
