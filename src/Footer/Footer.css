@@ -100,3 +100,33 @@
 .company {
   line-height: 3px;
 }
+
+@media screen and (max-width: 768px) {
+  .topblocks{
+    flex-direction: column;
+  }
+  .topbutton {
+    width: 630px;;
+  }
+   .firstbottonpage {
+    gap:200px
+  }
+  .bottomblocks {
+    margin-top: 70px;
+  }
+}
+
+@media screen and (max-width: 640px){
+  .topblocks{
+    flex-direction: column;
+  }
+  .topbutton {
+    width: 550px;;
+  }
+  .firstbottonpage {
+    gap:130px
+  }
+  .bottomblocks {
+    margin-top: 50px;
+  }
+}
