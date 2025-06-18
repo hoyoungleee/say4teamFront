@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'; // useRef 추가
 import { useNavigate } from 'react-router-dom';
 import './JoinPage.css';
 import axios from 'axios';
+import axiosInstance from '../configs/axios-config';
 
 const JoinPage = () => {
   const navigate = useNavigate();
@@ -216,7 +217,7 @@ const JoinPage = () => {
     const isValid = validateForm();
 
     if (isValid) {
-      axios
+      axiosInstance
         .post('/user-service/user/create', {
           email: form.email,
           password: form.password,
