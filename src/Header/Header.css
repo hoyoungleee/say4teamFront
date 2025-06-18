@@ -336,3 +336,20 @@ gap: 100px;
 gap: 100px;
 }
 }
+
+.searchbar {
+    padding: 15px;
+    width: 250px;
+    margin-top: -25px;
+}
+
+.searchtitle {
+    font-size: 15px;
+    font-weight:lighter;
+}
+
+.searchinput {
+    border: none;
+    border-bottom:1px solid black ;
+}
+

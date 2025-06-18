@@ -186,6 +186,10 @@ const Header = () => {
             </p>
           )}
         </div>
+        <div className='searchbar'>
+        <p className='searchtitle'>search</p>
+        <input type="text" className='searchinput'/>
+        </div>
       </div>
     </div>
   );
