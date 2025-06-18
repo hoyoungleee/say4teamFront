@@ -35,3 +35,18 @@
 .tt {
   margin-bottom: 90px;
 }
+
+@media screen and (max-width: 768px) {
+  .contactmain {
+    flex-direction: column;
+  }
+
+  .contactbutton {
+    width: 500px;
+  }
+
+  .contacttittle tt {
+    font-size: 13px;
+  }
+
+}
