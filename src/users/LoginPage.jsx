@@ -25,7 +25,7 @@ const LoginPage = () => {
     const handleMessage = (e) => {
       // origin (브라우저 호스트 주소)을 비교하여 이벤트 발생 상황 외에는 동작하지 않게
       if (
-        e.origin !== 'http://localhost:8000' &&
+        e.origin !== 'https://say4team.shop' &&
         e.origin !== window.location.origin
       )
         return;
