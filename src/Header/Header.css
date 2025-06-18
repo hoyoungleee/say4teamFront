@@ -1,122 +1,106 @@
 @font-face {
-  font-family: 'Cafe24Lovingu';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Lovingu.woff2')
-    format('woff2');
-  font-weight: normal;
-  font-style: normal;
+ font-family: 'Cafe24Lovingu';
+src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Lovingu.woff2')
+format('woff2');
+font-weight: normal;
+font-style: normal;
 }
-
 .topheader {
-  background-color: #194d28;
-  height: 40px;
-  line-height: 40px;
-  color: white;
+background-color: #194d28;
+height: 40px;
+line-height: 40px;
+color: white;
 }
-
 .topheadertitle {
-  text-align: center;
+text-align: center;
 }
-
 .custom-header {
-  text-align: center;
-  background-color: #f4f4f4;
-  position: relative;
-  overflow: hidden; /* 텍스트가 넘치는 부분은 보이지 않도록 */
-  border-bottom: 1px solid black;
+text-align: center;
+background-color: #f4f4f4;
+position: relative;
+overflow: hidden; /* 텍스트가 넘치는 부분은 보이지 않도록 */
+border-bottom: 1px solid black;
 }
-
 /* 기존 .marquee 스타일은 삭제하거나 변경 */
 .marquee-wrapper {
-  width: 100%; /* 부모에 꽉 채우기 */
-  display: flex;
-  flex-direction: row;
-  gap: 200px; /* 요소들 간의 간격은 유지 */
-  background-color: white;
-  border-bottom: 1px solid black;
-  /* overflow: hidden; */ /* 더 이상 필요 없을 수 있음, 필요 시 custom-header나 이곳에 유지 */
+width: 100%; /* 부모에 꽉 채우기 */
+display: flex;
+flex-direction: row;
+gap: 200px; /* 요소들 간의 간격은 유지 */
+background-color: white;
+border-bottom: 1px solid black;
+/* overflow: hidden; */ /* 더 이상 필요 없을 수 있음, 필요 시 custom-header나 이곳에 유지 */
 }
-
 /* 새로운 .marquee-content 클래스 추가 */
 /* 이 요소가 실제 움직이는 컨텐츠를 담고, 너비를 내용물에 맞춰 확장 */
 .marquee-content {
-  display: flex; /* 내부 span들을 가로로 나열 */
-  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-  animation: marquee 60s linear infinite; /* 애니메이션 시간 조정 (내용 길이에 따라) */
-  will-change: transform; /* 애니메이션 성능 최적화 */
-  gap: 200px; /* marquee-wrapper의 gap을 여기에 적용 (내부 요소 간 간격) */
+display: flex; /* 내부 span들을 가로로 나열 */
+white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+animation: marquee 60s linear infinite; /* 애니메이션 시간 조정 (내용 길이에 따라) */
+will-change: transform; /* 애니메이션 성능 최적화 */
+gap: 200px; /* marquee-wrapper의 gap을 여기에 적용 (내부 요소 간 간격) */
 }
-
 .marquee-content span {
-  font-size: 12px;
-  color: black;
-  flex-shrink: 0; /* 텍스트가 줄어들지 않도록 */
+font-size: 12px;
+color: black;
+flex-shrink: 0; /* 텍스트가 줄어들지 않도록 */
 }
-
 @keyframes marquee {
-  0% {
-    transform: translateX(0%); /* 처음 위치 */
-  }
-  100% {
-    transform: translateX(-50%); /* 전체 내용의 절반만큼 이동하여 반복 */
-  }
+0% {
+transform: translateX(0%); /* 처음 위치 */
+ }
+100% {
+transform: translateX(-50%); /* 전체 내용의 절반만큼 이동하여 반복 */
+ }
 }
-
 .nav {
-  display: flex;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: white;
-  border-bottom: 1px solid black;
-  height: 60px;
+display: flex;
+position: sticky;
+top: 0;
+z-index: 1000;
+background-color: white;
+border-bottom: 1px solid black;
+height: 60px;
 }
-
 .nav a {
-  text-decoration: none;
+text-decoration: none;
 }
-
 .navone {
-  display: flex;
-  color: black;
-  font-size: 15px;
-  gap: 30px;
-  margin-left: 50px;
-  align-items: center;
+display: flex;
+color: black;
+font-size: 15px;
+gap: 30px;
+margin-left: 50px;
+align-items: center;
 }
-
 .navtwo {
-  text-align: center;
-  color: black;
-  font-size: 50px;
-  font-family: 'Cafe24Lovingu', sans-serif;
-  margin: 0px auto;
-  position: relative;
-  bottom: 55px;
+text-align: center;
+color: black;
+font-size: 50px;
+font-family: 'Cafe24Lovingu', sans-serif;
+margin: 0px auto;
+position: relative;
+bottom: 55px;
 }
-
 .navtwo:hover {
-  cursor: pointer;
+cursor: pointer;
 }
-
 .navthree {
-  display: flex;
-  color: black;
-  font-size: 15px;
-  gap: 30px;
-  margin-right: 50px;
-  padding-bottom: 0;
-  align-items: center;
+display: flex;
+color: black;
+font-size: 15px;
+gap: 30px;
+margin-right: 50px;
+padding-bottom: 0;
+align-items: center;
 }
-
 .sayt {
-  color: black;
-  line-height: 170px;
+color: black;
+line-height: 170px;
 }
-
 .sayt:hover {
-  color: black;
+color: black;
 }
-
 .comp:hover::before,
 .arch:hover::before,
 .shop:hover::before,
@@ -125,13 +109,12 @@
 .cont:hover::before,
 .cart:hover::before,
 .logn:hover::before {
-  content: '🔴';
-  font-size: 0.6rem;
-  margin-right: 0.2rem;
-  position: relative;
-  bottom: 2px;
+content: '🔴';
+font-size: 0.6rem;
+margin-right: 0.2rem;
+position: relative;
+bottom: 2px;
 }
-
 .comp:hover,
 .arch:hover,
 .shop:hover,
@@ -140,11 +123,10 @@
 .cont:hover,
 .cart:hover,
 .logn:hover {
-  font-weight: 700;
-  cursor: pointer;
-  color: black;
+font-weight: 700;
+cursor: pointer;
+color: black;
 }
-
 .comp,
 .arch,
 .shop,
@@ -153,32 +135,204 @@
 .cont,
 .cart,
 .logn {
-  color: black;
+color: black;
 }
-
 .language-container {
-  position: relative;
+position: relative;
 }
-
 .language-dropdown {
-  position: absolute;
-  background: white;
-  border: 1px solid #ccc;
-  padding: 4px;
-  margin-top: 4px;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
+position: absolute;
+background: white;
+border: 1px solid #ccc;
+padding: 4px;
+margin-top: 4px;
+z-index: 10;
+display: flex;
+flex-direction: column;
 }
-
 .language-dropdown button {
-  background: none;
-  border: none;
-  padding: 4px 8px;
-  cursor: pointer;
-  text-align: left;
+background: none;
+border: none;
+padding: 4px 8px;
+cursor: pointer;
+text-align: left;
+}
+.language-dropdown button:hover {
+background-color: #f0f0f0;
 }
 
-.language-dropdown button:hover {
-  background-color: #f0f0f0;
+/* 햄버거 메뉴 스타일 */
+.hamburger-menu {
+display: none;
+flex-direction: column;
+cursor: pointer;
+padding: 10px;
+margin-right: 20px;
+}
+
+.hamburger-menu span {
+width: 25px;
+height: 3px;
+background-color: black;
+margin: 3px 0;
+transition: 0.3s;
+}
+
+/* 모바일 오버레이 */
+.mobile-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.4);
+z-index: 1500;
+}
+
+/* 모바일 메뉴 */
+.mobile-menu {
+position: fixed;
+top: 0;
+left: -300px;
+width: 300px;
+height: 100%;
+background-color: white;
+z-index: 2000;
+transition: left 0.3s ease;
+box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu.active {
+left: 0;
+}
+
+.mobile-menu-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px;
+border-bottom: 1px solid #eee;
+}
+
+.mobile-menu-header h3 {
+margin: 0;
+font-size: 18px;
+}
+
+.close-btn {
+background: none;
+border: none;
+font-size: 24px;
+cursor: pointer;
+padding: 0;
+width: 30px;
+height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.mobile-menu-content {
+padding: 20px;
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.mobile-link {
+color: black;
+text-decoration: none;
+font-size: 16px;
+padding: 10px 0;
+border-bottom: 1px solid black;
+cursor: pointer;
+font-weight: 100;
+}
+
+.mobile-link:hover {
+font-weight: 700;
+color: black;
+}
+
+.mobile-language-section {
+border-bottom: 1px solid #f0f0f0;
+padding-bottom: 10px;
+}
+
+.mobile-lang-title {
+font-size: 16px;
+margin: 0 0 10px 0;
+color: black;
+}
+
+.mobile-language-buttons {
+display: flex;
+gap: 10px;
+}
+
+.mobile-language-buttons button {
+background: none;
+border: 1px solid #ccc;
+padding: 8px 16px;
+cursor: pointer;
+border-radius: 4px;
+}
+
+.mobile-language-buttons button:hover {
+background-color: #f0f0f0;
+}
+
+/* 반응형 미디어 쿼리 */
+@media (max-width: 768px) {
+.navone,
+.navthree {
+display: none;
+}
+
+.hamburger-menu {
+display: flex;
+}
+
+.nav {
+position: relative;
+justify-content: center;
+}
+
+.hamburger-menu {
+position: absolute;
+left: 20px;
+top: 50%;
+transform: translateY(-50%);
+margin-right: 0;
+}
+
+.navtwo {
+position: static;
+margin: 0;
+bottom: 0;
+}
+
+.sayt {
+line-height: 60px;
+font-size: 40px;
+}
+}
+
+@media (max-width: 480px) {
+.mobile-menu {
+width: 250px;
+left: -250px;
+}
+
+.sayt {
+font-size: 35px;
+}
+
+.marquee-content {
+gap: 100px;
+}
+
+.marquee-wrapper {
+gap: 100px;
+}
 }

@@ -8,10 +8,19 @@ const Header = () => {
   const { isLoggedIn, isInit } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showLangMenu, setShowLangMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { t, i18n } = useTranslation();
 
   const toggleLangMenu = () => {
     setShowLangMenu((prev) => !prev);
+  };
+
+  const toggleMobileMenu = () => {
+    setShowMobileMenu((prev) => !prev);
+  };
+
+  const closeMobileMenu = () => {
+    setShowMobileMenu(false);
   };
 
   const changeLanguage = (lng) => {
@@ -119,6 +128,63 @@ const Header = () => {
               </p>
             )}
           </nav>
+        </div>
+
+        {/* 햄버거 메뉴 버튼 */}
+        <div className='hamburger-menu' onClick={toggleMobileMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      {/* 모바일 메뉴 오버레이 */}
+      {showMobileMenu && <div className='mobile-overlay' onClick={closeMobileMenu}></div>}
+
+      {/* 모바일 메뉴 */}
+      <div className={`mobile-menu ${showMobileMenu ? 'active' : ''}`}>
+        <div className='mobile-menu-header'>
+          <h3>Menu</h3>
+          <button className='close-btn' onClick={closeMobileMenu}>×</button>
+        </div>
+        <div className='mobile-menu-content'>
+          <NavLink to='/company' className='mobile-link' onClick={closeMobileMenu}>
+            company
+          </NavLink>
+          <NavLink to='/acahive' className='mobile-link' onClick={closeMobileMenu}>
+            ARCHIVE
+          </NavLink>
+          <NavLink to='/shop' className='mobile-link' onClick={closeMobileMenu}>
+            shop
+          </NavLink>
+          <NavLink to='/store' className='mobile-link' onClick={closeMobileMenu}>
+            store
+          </NavLink>
+          
+          <div className='mobile-language-section'>
+            <p className='mobile-lang-title'>Language</p>
+            <div className='mobile-language-buttons'>
+              <button onClick={() => { i18n.changeLanguage('ko'); closeMobileMenu(); }}>KOR</button>
+              <button onClick={() => { i18n.changeLanguage('en'); closeMobileMenu(); }}>ENG</button>
+            </div>
+          </div>
+
+          <NavLink to='/contact' className='mobile-link' onClick={closeMobileMenu}>
+            contact
+          </NavLink>
+          <NavLink to='/cart' className='mobile-link' onClick={closeMobileMenu}>
+            cart
+          </NavLink>
+          
+          {!isInit ? null : isLoggedIn ? (
+            <p onClick={() => { navigate('/mypage'); closeMobileMenu(); }} className='mobile-link'>
+              mypage
+            </p>
+          ) : (
+            <p onClick={() => { navigate('/login'); closeMobileMenu(); }} className='mobile-link'>
+              login
+            </p>
+          )}
         </div>
       </div>
     </div>
