@@ -21,6 +21,9 @@ const LoginPage = () => {
   const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
   const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
+  console.log(KAKAO_CLIENT_ID);
+  console.log(KAKAO_REDIRECT_URI);
+
   useEffect(() => {
     const handleMessage = (e) => {
       // origin (브라우저 호스트 주소)을 비교하여 이벤트 발생 상황 외에는 동작하지 않게
