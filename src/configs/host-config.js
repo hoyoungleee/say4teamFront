@@ -9,7 +9,7 @@ if (clientHostName === 'localhost') {
   backendHostName = 'https://api.say4team.shop';
 }
 
-export const API_BASE_URL = 'https://api.say4team.shop';
+export const API_BASE_URL = backendHostName;
 export const USER = '/user-service/user';
 export const PROD = '/product-service/product';
 export const REVIEW = '/product-service/review';
