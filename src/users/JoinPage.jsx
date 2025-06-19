@@ -4,7 +4,7 @@ import './JoinPage.css';
 import axios from 'axios';
 import axiosInstance from '../configs/axios-config';
 import { USER } from '../configs/host-config';
-import { API_BASE_URL } from '../configs/host-config';
+import { API_BASE_URL, USER } from '../configs/host-config';
 
 const JoinPage = () => {
   const navigate = useNavigate();
