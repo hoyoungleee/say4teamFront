@@ -12,7 +12,7 @@
 ### 주요 기능
 
 - 사용자 인증: JWT 기반 로그인/회원 가입/프로필 조회,수정,탈퇴
-- 상품 기능: 상품 등록, 목록 조회, 상세 조회
+- 상품 기능: 상품 등록, 목록 조회, 상세 조회, 상품 삭제
 - 장바구니: 상품 담기/삭제, 장바구니 리스트 조회
 - 주문 기능: 주문 생성 및 주문 내역 확인
 - 관리자 기능 (예정): 상품 승인, 사용자 정보 조회 등
@@ -20,12 +20,13 @@
 ***************
 
 ## 🗂️목차
-
+[메인 페이지](https://catkin-krypton-a30.notion.site/MSA-4-1f423e41e5498028a45ef8861f3722bc)<br><br>
 [1.프로젝트 기획서](https://catkin-krypton-a30.notion.site/1f423e41e54980fba312cabdce3e44ce)<br><br>
 [2.요구사항 정의서](https://catkin-krypton-a30.notion.site/1f423e41e5498097be9bc637319fd619)<br>   
 [3.인터페이스 설계서](https://catkin-krypton-a30.notion.site/1f423e41e54980babbfbd99028452682)<br>   
 [4.테스트 케이스](https://catkin-krypton-a30.notion.site/1f423e41e5498081b8cec04435dbd705)<br><br>
-[5.테스트케이스 결과서](https://catkin-krypton-a30.notion.site/1f423e41e549802981b7ecc8ae204b79)<br>
+[5.테스트케이스 결과서](https://catkin-krypton-a30.notion.site/1f423e41e549802981b7ecc8ae204b79)<br><br>
+[6.DevOps 단위 프로젝트 산출물](https://catkin-krypton-a30.notion.site/6-DevOps-21523e41e5498009b26dcf2e3db58cd5)<br>
 
 ***************
 
