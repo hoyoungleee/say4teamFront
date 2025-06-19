@@ -220,7 +220,7 @@ const JoinPage = () => {
     if (isValid) {
       axiosInstance
         // .post('/user-service/user/create', {
-        .post(`${API_BASE_URL}${USER}create`, {
+        .post(`${API_BASE_URL}${USER}/create`, {
           email: form.email,
           password: form.password,
           name: form.name,
