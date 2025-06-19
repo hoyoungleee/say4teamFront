@@ -152,8 +152,8 @@ const JoinPage = () => {
     if (!password) {
       newErrors.password = '비밀번호를 입력해주세요.';
       isValid = false;
-    } else if (password.length < 10 || password.length > 16) {
-      newErrors.password = '비밀번호는 10~16자여야 합니다.';
+    } else if (password.length < 8 || password.length > 16) {
+      newErrors.password = '비밀번호는 8~16자여야 합니다.';
       isValid = false;
     } else if (charTypeCount < 2) {
       newErrors.password =
