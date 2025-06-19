@@ -262,7 +262,7 @@ const JoinPage = () => {
         {/* 에러 메시지 */}
         <span>비밀번호</span>
         <span className='small'>
-          (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10~16자)
+          (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8~16자)
         </span>
         <input
           type='password'
