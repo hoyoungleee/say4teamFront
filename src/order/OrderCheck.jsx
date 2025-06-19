@@ -175,7 +175,6 @@ const OrderCheck = () => {
 
         <div className='topordertitle'>
           <p>주문내역 조회({orders.length}건)</p>
-          <p>취소/교환/반품 내역</p>
         </div>
 
         <div>
