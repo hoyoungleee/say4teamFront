@@ -217,7 +217,7 @@ const JoinPage = () => {
     const isValid = validateForm();
 
     if (isValid) {
-      axiosInstance
+      axios
         .post('/user-service/user/create', {
           email: form.email,
           password: form.password,
