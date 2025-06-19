@@ -4,11 +4,8 @@ let backendHostName;
 
 if (clientHostName === 'localhost') {
   backendHostName = 'http://localhost:8000';
-} else if (
-  clientHostName === 'say4team.shop' ||
-  clientHostName === 'say4teamadmin.shop'
-) {
-  // 배포서버 아이피
+} else if (clientHostName === 'say4team.shop') {
+  //나중에 배포서버 아이피로 바꿀것
   backendHostName = 'https://api.say4team.shop';
 }
 

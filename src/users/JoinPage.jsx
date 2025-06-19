@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './JoinPage.css';
 import axios from 'axios';
 import axiosInstance from '../configs/axios-config';
+import { USER } from '../configs/host-config';
 
 const JoinPage = () => {
   const navigate = useNavigate();
@@ -218,7 +219,8 @@ const JoinPage = () => {
 
     if (isValid) {
       axiosInstance
-        .post('/user-service/user/create', {
+        // .post('/user-service/user/create', {
+        .post(`${API_BASE_URL}${USER}create`, {
           email: form.email,
           password: form.password,
           name: form.name,
