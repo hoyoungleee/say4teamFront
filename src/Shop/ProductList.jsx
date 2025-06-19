@@ -4,6 +4,7 @@ import TopCategory from './TopCategory';
 import ProductGrid from './ProductGrid';
 
 // selectedCategoryId와 onSelectCategory prop을 받도록 수정
+// selectedCategoryId와 onSelectCategory prop을 받도록 수정
 const ProductList = ({ selectedCategoryId, onSelectCategory }) => {
   return (
     <>
